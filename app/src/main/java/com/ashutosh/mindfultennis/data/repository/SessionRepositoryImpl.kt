@@ -223,6 +223,15 @@ class SessionRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getPartnerRatingsForSessions(
+        sessionIds: List<String>,
+    ): Result<List<Rating>> = withContext(Dispatchers.IO) {
+        runCatching {
+            if (sessionIds.isEmpty()) return@runCatching emptyList()
+            partnerRatingDao.getForSessions(sessionIds).map { it.toDomain() }
+        }
+    }
+
     override suspend fun getSetScoresForSessions(
         sessionIds: List<String>,
     ): Result<List<SetScore>> = withContext(Dispatchers.IO) {

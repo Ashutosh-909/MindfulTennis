@@ -163,11 +163,10 @@ private fun HomeScreenContent(
                 item(key = "aspect_performance") {
                     AspectPerformanceCard(
                         aspectAverages = state.aspectAverages,
-                        opponents = state.opponents,
-                        selectedOpponentIds = state.selectedAspectOpponentIds,
-                        onOpponentFilterChanged = {
-                            onEvent(HomeUiEvent.AspectOpponentFilterChanged(it))
-                        },
+                        selectedDuration = state.selectedAspectDuration,
+                        onDurationSelected = { onEvent(HomeUiEvent.AspectDurationChanged(it)) },
+                        selectedRatingType = state.selectedAspectRatingType,
+                        onRatingTypeSelected = { onEvent(HomeUiEvent.AspectRatingTypeChanged(it)) },
                         isLoading = state.isLoading,
                         error = state.aspectError,
                         onRetry = { onEvent(HomeUiEvent.RetryClicked) },

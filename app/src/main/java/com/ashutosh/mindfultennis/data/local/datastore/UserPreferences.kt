@@ -23,6 +23,8 @@ class UserPreferences @Inject constructor(
         private val KEY_CACHED_USER_ID = stringPreferencesKey("cached_user_id")
         private val KEY_DURATION_FILTER = stringPreferencesKey("duration_filter")
         private val KEY_SELECTED_OPPONENT_IDS = stringPreferencesKey("selected_opponent_ids")
+        private val KEY_ASPECT_DURATION_FILTER = stringPreferencesKey("aspect_duration_filter")
+        private val KEY_ASPECT_RATING_TYPE = stringPreferencesKey("aspect_rating_type")
     }
 
     // ── Last Sync Timestamp ───────────────────────────────────────────
@@ -75,6 +77,30 @@ class UserPreferences @Inject constructor(
     suspend fun setSelectedOpponentIds(ids: Set<String>) {
         dataStore.edit { prefs ->
             prefs[KEY_SELECTED_OPPONENT_IDS] = ids.joinToString(",")
+        }
+    }
+
+    // ── Aspect Duration Filter ────────────────────────────────────────
+
+    val aspectDurationFilter: Flow<String> = dataStore.data.map { prefs ->
+        prefs[KEY_ASPECT_DURATION_FILTER] ?: "ONE_MONTH"
+    }
+
+    suspend fun setAspectDurationFilter(filter: String) {
+        dataStore.edit { prefs ->
+            prefs[KEY_ASPECT_DURATION_FILTER] = filter
+        }
+    }
+
+    // ── Aspect Rating Type ────────────────────────────────────────────
+
+    val aspectRatingType: Flow<String> = dataStore.data.map { prefs ->
+        prefs[KEY_ASPECT_RATING_TYPE] ?: "SELF"
+    }
+
+    suspend fun setAspectRatingType(ratingType: String) {
+        dataStore.edit { prefs ->
+            prefs[KEY_ASPECT_RATING_TYPE] = ratingType
         }
     }
 

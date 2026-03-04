@@ -12,6 +12,7 @@ import com.ashutosh.mindfultennis.data.repository.SessionRepository
 import com.ashutosh.mindfultennis.data.sync.SyncManager
 import com.ashutosh.mindfultennis.data.sync.SyncWorker
 import com.ashutosh.mindfultennis.domain.model.DurationFilter
+import com.ashutosh.mindfultennis.domain.model.RatingType
 import com.ashutosh.mindfultennis.domain.usecase.CancelSessionUseCase
 import com.ashutosh.mindfultennis.domain.usecase.GetAspectAveragesUseCase
 import com.ashutosh.mindfultennis.domain.usecase.GetPerformanceTrendUseCase
@@ -63,11 +64,19 @@ class HomeViewModel @Inject constructor(
             val duration = runCatching { DurationFilter.valueOf(savedFilter) }
                 .getOrDefault(DurationFilter.ONE_MONTH)
             val savedWinLossOpponents = userPreferences.selectedOpponentIds.first()
+            val savedAspectDuration = userPreferences.aspectDurationFilter.first()
+            val aspectDuration = runCatching { DurationFilter.valueOf(savedAspectDuration) }
+                .getOrDefault(DurationFilter.ONE_MONTH)
+            val savedAspectRatingType = userPreferences.aspectRatingType.first()
+            val aspectRatingType = runCatching { RatingType.valueOf(savedAspectRatingType) }
+                .getOrDefault(RatingType.SELF)
 
             _uiState.update {
                 it.copy(
                     selectedDuration = duration,
                     selectedWinLossOpponentIds = savedWinLossOpponents,
+                    selectedAspectDuration = aspectDuration,
+                    selectedAspectRatingType = aspectRatingType,
                 )
             }
 
@@ -100,6 +109,8 @@ class HomeViewModel @Inject constructor(
             is HomeUiEvent.DurationChanged -> onDurationChanged(event.duration)
             is HomeUiEvent.WinLossOpponentFilterChanged -> onWinLossOpponentFilterChanged(event.ids)
             is HomeUiEvent.AspectOpponentFilterChanged -> onAspectOpponentFilterChanged(event.ids)
+            is HomeUiEvent.AspectDurationChanged -> onAspectDurationChanged(event.duration)
+            is HomeUiEvent.AspectRatingTypeChanged -> onAspectRatingTypeChanged(event.ratingType)
             is HomeUiEvent.RetryClicked -> retry()
             is HomeUiEvent.RefreshClicked -> currentUserId?.let { performSync(it) }
             is HomeUiEvent.ErrorDismissed -> _uiState.update { it.copy(error = null) }
@@ -221,8 +232,9 @@ class HomeViewModel @Inject constructor(
         aspectJob = viewModelScope.launch {
             getAspectAveragesUseCase(
                 userId,
-                _uiState.value.selectedDuration,
+                _uiState.value.selectedAspectDuration,
                 _uiState.value.selectedAspectOpponentIds,
+                _uiState.value.selectedAspectRatingType,
             )
                 .catch { e ->
                     _uiState.update { it.copy(aspectError = e.message ?: "Failed to load aspects") }
@@ -241,8 +253,23 @@ class HomeViewModel @Inject constructor(
         currentUserId?.let { userId ->
             refreshTrend(userId)
             refreshWinLoss(userId)
-            refreshAspects(userId)
         }
+    }
+
+    private fun onAspectDurationChanged(duration: DurationFilter) {
+        _uiState.update { it.copy(selectedAspectDuration = duration) }
+        viewModelScope.launch {
+            userPreferences.setAspectDurationFilter(duration.name)
+        }
+        currentUserId?.let { refreshAspects(it) }
+    }
+
+    private fun onAspectRatingTypeChanged(ratingType: RatingType) {
+        _uiState.update { it.copy(selectedAspectRatingType = ratingType) }
+        viewModelScope.launch {
+            userPreferences.setAspectRatingType(ratingType.name)
+        }
+        currentUserId?.let { refreshAspects(it) }
     }
 
     private fun onWinLossOpponentFilterChanged(ids: Set<String>) {

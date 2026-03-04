@@ -28,6 +28,9 @@ interface PartnerRatingDao {
     @Query("UPDATE partner_ratings SET sync_status = :status WHERE session_id = :sessionId")
     suspend fun updateSyncStatusForSession(sessionId: String, status: String)
 
+    @Query("SELECT * FROM partner_ratings WHERE session_id IN (:sessionIds)")
+    suspend fun getForSessions(sessionIds: List<String>): List<PartnerRatingEntity>
+
     @Query("DELETE FROM partner_ratings WHERE session_id = :sessionId")
     suspend fun deleteForSession(sessionId: String)
 }

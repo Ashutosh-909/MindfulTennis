@@ -61,6 +61,8 @@ interface SessionRepository {
 
     suspend fun getSelfRatingsForSessions(sessionIds: List<String>): Result<List<Rating>>
 
+    suspend fun getPartnerRatingsForSessions(sessionIds: List<String>): Result<List<Rating>>
+
     suspend fun getSetScoresForSessions(sessionIds: List<String>): Result<List<SetScore>>
 
     // ── Bulk / Cleanup ────────────────────────────────────────────────
