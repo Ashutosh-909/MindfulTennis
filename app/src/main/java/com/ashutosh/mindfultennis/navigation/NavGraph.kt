@@ -9,6 +9,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.ashutosh.mindfultennis.ui.home.HomeScreen
+import com.ashutosh.mindfultennis.ui.home.HomeViewModel
 import com.ashutosh.mindfultennis.ui.login.LoginScreen
 import com.ashutosh.mindfultennis.ui.login.LoginViewModel
 
@@ -52,7 +54,19 @@ fun NavGraph(
         }
 
         composable(Route.Home.route) {
-            // TODO: HomeScreen (Milestone 4)
+            val viewModel: HomeViewModel = hiltViewModel()
+            HomeScreen(
+                viewModel = viewModel,
+                onStartSessionClicked = {
+                    navController.navigate(Route.StartSession.route)
+                },
+                onEndSessionClicked = { sessionId ->
+                    navController.navigate(Route.EndSession(sessionId).route)
+                },
+                onShowSessionsClicked = {
+                    navController.navigate(Route.SessionsList.route)
+                },
+            )
         }
 
         composable(Route.StartSession.route) {

@@ -212,6 +212,26 @@ class SessionRepositoryImpl @Inject constructor(
     override fun observeSetScores(sessionId: String): Flow<List<SetScore>> =
         setScoreDao.observeForSession(sessionId).map { list -> list.map { it.toDomain() } }
 
+    // ── Batch queries (for dashboard) ─────────────────────────────────
+
+    override suspend fun getSelfRatingsForSessions(
+        sessionIds: List<String>,
+    ): Result<List<Rating>> = withContext(Dispatchers.IO) {
+        runCatching {
+            if (sessionIds.isEmpty()) return@runCatching emptyList()
+            selfRatingDao.getForSessions(sessionIds).map { it.toDomain() }
+        }
+    }
+
+    override suspend fun getSetScoresForSessions(
+        sessionIds: List<String>,
+    ): Result<List<SetScore>> = withContext(Dispatchers.IO) {
+        runCatching {
+            if (sessionIds.isEmpty()) return@runCatching emptyList()
+            setScoreDao.getForSessions(sessionIds).map { it.toDomain() }
+        }
+    }
+
     // ── Bulk / Cleanup ────────────────────────────────────────────────
 
     override suspend fun deleteAllForUser(userId: String) = withContext(Dispatchers.IO) {

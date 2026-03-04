@@ -22,6 +22,9 @@ interface SetScoreDao {
     @Query("SELECT * FROM set_scores WHERE session_id = :sessionId ORDER BY set_number ASC")
     fun observeForSession(sessionId: String): Flow<List<SetScoreEntity>>
 
+    @Query("SELECT * FROM set_scores WHERE session_id IN (:sessionIds) ORDER BY set_number ASC")
+    suspend fun getForSessions(sessionIds: List<String>): List<SetScoreEntity>
+
     @Query("SELECT * FROM set_scores WHERE sync_status = :status")
     suspend fun getBySyncStatus(status: String): List<SetScoreEntity>
 

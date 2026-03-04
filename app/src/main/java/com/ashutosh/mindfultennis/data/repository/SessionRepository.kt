@@ -57,6 +57,12 @@ interface SessionRepository {
 
     fun observeSetScores(sessionId: String): Flow<List<SetScore>>
 
+    // ── Batch queries (for dashboard) ─────────────────────────────────
+
+    suspend fun getSelfRatingsForSessions(sessionIds: List<String>): Result<List<Rating>>
+
+    suspend fun getSetScoresForSessions(sessionIds: List<String>): Result<List<SetScore>>
+
     // ── Bulk / Cleanup ────────────────────────────────────────────────
 
     suspend fun deleteAllForUser(userId: String)

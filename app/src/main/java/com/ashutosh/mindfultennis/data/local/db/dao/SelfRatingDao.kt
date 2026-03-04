@@ -22,6 +22,9 @@ interface SelfRatingDao {
     @Query("SELECT * FROM self_ratings WHERE session_id = :sessionId")
     fun observeForSession(sessionId: String): Flow<List<SelfRatingEntity>>
 
+    @Query("SELECT * FROM self_ratings WHERE session_id IN (:sessionIds)")
+    suspend fun getForSessions(sessionIds: List<String>): List<SelfRatingEntity>
+
     @Query("SELECT * FROM self_ratings WHERE sync_status = :status")
     suspend fun getBySyncStatus(status: String): List<SelfRatingEntity>
 
