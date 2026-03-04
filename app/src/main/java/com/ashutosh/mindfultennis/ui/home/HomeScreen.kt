@@ -11,16 +11,22 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
@@ -32,6 +38,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ashutosh.mindfultennis.ui.home.components.AspectPerformanceCard
 import com.ashutosh.mindfultennis.ui.home.components.FocusPointsRow
@@ -252,42 +259,54 @@ private fun BottomButtonBar(
                 horizontal = Spacing.md,
                 vertical = Spacing.sm,
             ),
-        horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         OutlinedButton(
             onClick = onShowSessions,
-            modifier = Modifier.weight(1f),
         ) {
             Text("Show Sessions")
         }
 
         if (hasActiveSession) {
-            OutlinedButton(
-                onClick = onCancel,
-                modifier = Modifier.weight(1f),
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = MaterialTheme.colorScheme.error,
-                ),
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text("Cancel")
-            }
+                OutlinedButton(
+                    onClick = onCancel,
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        contentColor = MaterialTheme.colorScheme.error,
+                    ),
+                ) {
+                    Text("Cancel")
+                }
 
-            Button(
-                onClick = onStartOrEnd,
-                modifier = Modifier.weight(1f),
-                colors = ButtonDefaults.buttonColors(
+                // Stop square FAB for ending session
+                FloatingActionButton(
+                    onClick = onStartOrEnd,
                     containerColor = MaterialTheme.colorScheme.error,
                     contentColor = MaterialTheme.colorScheme.onError,
-                ),
-            ) {
-                Text("End Session")
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Stop,
+                        contentDescription = "End Session",
+                        modifier = Modifier.size(28.dp),
+                    )
+                }
             }
         } else {
-            Button(
+            // Plus FAB for new session
+            FloatingActionButton(
                 onClick = onStartOrEnd,
-                modifier = Modifier.weight(1f),
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
             ) {
-                Text("Start New Session")
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Start New Session",
+                    modifier = Modifier.size(28.dp),
+                )
             }
         }
     }

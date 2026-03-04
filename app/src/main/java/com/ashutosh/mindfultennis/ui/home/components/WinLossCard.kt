@@ -22,6 +22,7 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,7 +43,6 @@ import com.ashutosh.mindfultennis.ui.theme.SessionGood
 import com.ashutosh.mindfultennis.ui.theme.SessionPoor
 import com.ashutosh.mindfultennis.ui.theme.SessionUnrated
 import com.ashutosh.mindfultennis.ui.theme.Spacing
-import java.util.Locale
 
 /**
  * Win/Loss record card for the dashboard.
@@ -111,10 +111,10 @@ private fun WinLossContent(
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center,
     ) {
-        // Stats: W / L / D / Win%
+        // Stats: W / L / D
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(Spacing.md),
@@ -139,11 +139,17 @@ private fun WinLossContent(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
-            Text(
-                text = String.format(Locale.US, "(%.1f%%)", record.winPercentage),
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+        }
+
+        // Faint vertical divider
+        if (record.recentResults.isNotEmpty()) {
+            Spacer(modifier = Modifier.width(Spacing.md))
+            VerticalDivider(
+                modifier = Modifier.height(24.dp),
+                thickness = 1.dp,
+                color = MaterialTheme.colorScheme.outlineVariant,
             )
+            Spacer(modifier = Modifier.width(Spacing.md))
         }
 
         // Recent results domino strip
