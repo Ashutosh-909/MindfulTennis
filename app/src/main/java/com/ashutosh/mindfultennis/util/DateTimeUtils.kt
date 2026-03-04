@@ -22,6 +22,16 @@ object DateTimeUtils {
     }
 
     /**
+     * Formats epoch millis to a short date without year.
+     * e.g. "Mar 4" — used in chart axis labels and card headers.
+     */
+    fun formatShortDate(epochMs: Long, timeZoneId: String = TimeZone.getDefault().id): String {
+        val sdf = SimpleDateFormat("MMM d", Locale.getDefault())
+        sdf.timeZone = TimeZone.getTimeZone(timeZoneId)
+        return sdf.format(Date(epochMs))
+    }
+
+    /**
      * Formats epoch millis to a time string.
      * e.g. "3:45 PM"
      */

@@ -1,5 +1,6 @@
 package com.ashutosh.mindfultennis.ui.home.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material3.DropdownMenu
@@ -28,12 +30,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.ashutosh.mindfultennis.domain.model.GameResult
 import com.ashutosh.mindfultennis.domain.model.Opponent
 import com.ashutosh.mindfultennis.domain.model.WinLossRecord
 import com.ashutosh.mindfultennis.ui.components.ErrorRetryCard
 import com.ashutosh.mindfultennis.ui.components.LoadingShimmer
+import com.ashutosh.mindfultennis.ui.theme.SessionGood
+import com.ashutosh.mindfultennis.ui.theme.SessionPoor
+import com.ashutosh.mindfultennis.ui.theme.SessionUnrated
 import com.ashutosh.mindfultennis.ui.theme.Spacing
 import java.util.Locale
 
@@ -104,33 +111,88 @@ private fun WinLossContent(
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
+        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        // Stats: W / L / D / Win%
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(Spacing.md),
+        ) {
             Text(
                 text = "W: ${record.wins}",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary,
             )
-        }
-        Spacer(modifier = Modifier.width(Spacing.lg))
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 text = "L: ${record.losses}",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.error,
             )
-        }
-        Spacer(modifier = Modifier.width(Spacing.lg))
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            if (record.draws > 0) {
+                Text(
+                    text = "D: ${record.draws}",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
             Text(
                 text = String.format(Locale.US, "(%.1f%%)", record.winPercentage),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
+        }
+
+        // Recent results domino strip
+        if (record.recentResults.isNotEmpty()) {
+            RecentResultsDominos(results = record.recentResults)
+        }
+    }
+}
+
+/**
+ * A row of colored tiles/dominos representing recent game results.
+ * Green = Win, Red = Loss, Grey = Draw.
+ */
+@Composable
+private fun RecentResultsDominos(
+    results: List<GameResult>,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        results.forEach { result ->
+            val color = when (result) {
+                GameResult.WIN -> SessionGood
+                GameResult.LOSS -> SessionPoor
+                GameResult.DRAW -> SessionUnrated
+            }
+            val label = when (result) {
+                GameResult.WIN -> "W"
+                GameResult.LOSS -> "L"
+                GameResult.DRAW -> "D"
+            }
+            Box(
+                modifier = Modifier
+                    .width(28.dp)
+                    .height(20.dp)
+                    .clip(RoundedCornerShape(4.dp))
+                    .background(color),
+                contentAlignment = Alignment.Center,
+            ) {
+                Text(
+                    text = label,
+                    style = MaterialTheme.typography.labelSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = androidx.compose.ui.graphics.Color.White,
+                )
+            }
         }
     }
 }

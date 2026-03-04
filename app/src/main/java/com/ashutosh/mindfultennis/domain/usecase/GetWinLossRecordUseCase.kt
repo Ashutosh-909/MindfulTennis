@@ -2,6 +2,7 @@ package com.ashutosh.mindfultennis.domain.usecase
 
 import com.ashutosh.mindfultennis.data.repository.SessionRepository
 import com.ashutosh.mindfultennis.domain.model.DurationFilter
+import com.ashutosh.mindfultennis.domain.model.GameResult
 import com.ashutosh.mindfultennis.domain.model.Session
 import com.ashutosh.mindfultennis.domain.model.WinLossRecord
 import com.ashutosh.mindfultennis.util.ScoreCalculator
@@ -44,14 +45,46 @@ class GetWinLossRecordUseCase @Inject constructor(
 
         var wins = 0
         var losses = 0
+        var draws = 0
 
-        for (session in sessions) {
+        // Ordered list of (session, result) — chronological
+        val orderedResults = mutableListOf<GameResult>()
+
+        // Use sessions sorted by startedAt so recentResults is chronological
+        val sorted = sessions.sortedBy { it.startedAt }
+
+        for (session in sorted) {
             val scores = scoresBySession[session.id] ?: continue
-            val result = ScoreCalculator.isWin(scores)
-            if (result == true) wins++ else if (result == false) losses++
+            if (scores.isEmpty()) continue
+
+            val userSetsWon = scores.count { it.userScore > it.opponentScore }
+            val opponentSetsWon = scores.count { it.opponentScore > it.userScore }
+
+            val result = when {
+                userSetsWon > opponentSetsWon -> GameResult.WIN
+                opponentSetsWon > userSetsWon -> GameResult.LOSS
+                else -> GameResult.DRAW
+            }
+
+            when (result) {
+                GameResult.WIN -> wins++
+                GameResult.LOSS -> losses++
+                GameResult.DRAW -> draws++
+            }
+            orderedResults.add(result)
         }
 
-        return WinLossRecord(wins = wins, losses = losses)
+        return WinLossRecord(
+            wins = wins,
+            losses = losses,
+            draws = draws,
+            recentResults = orderedResults.takeLast(RECENT_GAMES_COUNT),
+        )
+    }
+
+    companion object {
+        /** Maximum number of recent game results shown in the domino strip. */
+        const val RECENT_GAMES_COUNT = 5
     }
 
     private fun filterByOpponents(
