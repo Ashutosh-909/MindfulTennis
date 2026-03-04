@@ -4,7 +4,16 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.room.Room
 import com.ashutosh.mindfultennis.BuildConfig
+import com.ashutosh.mindfultennis.data.local.db.MindfulDatabase
+import com.ashutosh.mindfultennis.data.local.db.dao.FocusPointDao
+import com.ashutosh.mindfultennis.data.local.db.dao.OpponentDao
+import com.ashutosh.mindfultennis.data.local.db.dao.PartnerDao
+import com.ashutosh.mindfultennis.data.local.db.dao.PartnerRatingDao
+import com.ashutosh.mindfultennis.data.local.db.dao.SelfRatingDao
+import com.ashutosh.mindfultennis.data.local.db.dao.SessionDao
+import com.ashutosh.mindfultennis.data.local.db.dao.SetScoreDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,4 +54,41 @@ object AppModule {
     fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
         return context.dataStore
     }
+
+    // ── Room Database ─────────────────────────────────────────────────
+
+    @Provides
+    @Singleton
+    fun provideMindfulDatabase(@ApplicationContext context: Context): MindfulDatabase {
+        return Room.databaseBuilder(
+            context,
+            MindfulDatabase::class.java,
+            MindfulDatabase.DATABASE_NAME,
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    // ── DAOs ──────────────────────────────────────────────────────────
+
+    @Provides
+    fun provideSessionDao(database: MindfulDatabase): SessionDao = database.sessionDao()
+
+    @Provides
+    fun provideSelfRatingDao(database: MindfulDatabase): SelfRatingDao = database.selfRatingDao()
+
+    @Provides
+    fun providePartnerRatingDao(database: MindfulDatabase): PartnerRatingDao = database.partnerRatingDao()
+
+    @Provides
+    fun provideFocusPointDao(database: MindfulDatabase): FocusPointDao = database.focusPointDao()
+
+    @Provides
+    fun provideOpponentDao(database: MindfulDatabase): OpponentDao = database.opponentDao()
+
+    @Provides
+    fun providePartnerDao(database: MindfulDatabase): PartnerDao = database.partnerDao()
+
+    @Provides
+    fun provideSetScoreDao(database: MindfulDatabase): SetScoreDao = database.setScoreDao()
 }
