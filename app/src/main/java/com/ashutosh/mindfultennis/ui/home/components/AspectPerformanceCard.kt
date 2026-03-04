@@ -1,6 +1,7 @@
 package com.ashutosh.mindfultennis.ui.home.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -163,20 +164,20 @@ private fun AspectOpponentFilter(
 ) {
     var expanded by remember { mutableStateOf(false) }
 
-    IconButton(
-        onClick = { expanded = true },
-        modifier = modifier,
-    ) {
-        Icon(
-            imageVector = Icons.Default.FilterList,
-            contentDescription = "Filter by opponent",
-        )
-    }
+    Box(modifier = modifier) {
+        IconButton(
+            onClick = { expanded = true },
+        ) {
+            Icon(
+                imageVector = Icons.Default.FilterList,
+                contentDescription = "Filter by opponent",
+            )
+        }
 
-    DropdownMenu(
-        expanded = expanded,
-        onDismissRequest = { expanded = false },
-    ) {
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+        ) {
         if (opponents.isEmpty()) {
             DropdownMenuItem(
                 text = { Text("No opponents recorded yet.") },
@@ -215,6 +216,7 @@ private fun AspectOpponentFilter(
                     },
                 )
             }
+        }
         }
     }
 }
