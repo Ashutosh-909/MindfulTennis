@@ -170,7 +170,8 @@ private fun HomeScreenContent(
                 // Aspect Performance Card
                 item(key = "aspect_performance") {
                     AspectPerformanceCard(
-                        aspectAverages = state.aspectAverages,
+                        selfAspectAverages = state.selfAspectAverages,
+                        partnerAspectAverages = state.partnerAspectAverages,
                         selectedRatingType = state.selectedAspectRatingType,
                         onRatingTypeSelected = { onEvent(HomeUiEvent.AspectRatingTypeChanged(it)) },
                         isLoading = state.isLoading,

@@ -26,6 +26,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
@@ -227,17 +228,22 @@ class HomeViewModel @Inject constructor(
     private fun refreshAspects(userId: String) {
         aspectJob?.cancel()
         aspectJob = viewModelScope.launch {
-            getAspectAveragesUseCase(
-                userId,
-                _uiState.value.selectedDuration,
-                _uiState.value.selectedAspectOpponentIds,
-                _uiState.value.selectedAspectRatingType,
-            )
+            val duration = _uiState.value.selectedDuration
+            val opponentIds = _uiState.value.selectedAspectOpponentIds
+            val selfFlow = getAspectAveragesUseCase(userId, duration, opponentIds, RatingType.SELF)
+            val partnerFlow = getAspectAveragesUseCase(userId, duration, opponentIds, RatingType.PARTNER)
+            combine(selfFlow, partnerFlow) { self, partner -> self to partner }
                 .catch { e ->
                     _uiState.update { it.copy(aspectError = e.message ?: "Failed to load aspects") }
                 }
-                .collectLatest { averages ->
-                    _uiState.update { it.copy(aspectAverages = averages, aspectError = null) }
+                .collectLatest { (selfAvg, partnerAvg) ->
+                    _uiState.update {
+                        it.copy(
+                            selfAspectAverages = selfAvg,
+                            partnerAspectAverages = partnerAvg,
+                            aspectError = null,
+                        )
+                    }
                 }
         }
     }
