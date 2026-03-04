@@ -3,6 +3,7 @@ package com.ashutosh.mindfultennis
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
+import com.ashutosh.mindfultennis.notification.SessionNotificationManager
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -11,6 +12,15 @@ class MindfulTennisApp : Application(), Configuration.Provider {
 
     @Inject
     lateinit var workerFactory: HiltWorkerFactory
+
+    @Inject
+    lateinit var sessionNotificationManager: SessionNotificationManager
+
+    override fun onCreate() {
+        super.onCreate()
+        // Create the notification channel as early as possible
+        sessionNotificationManager.createNotificationChannel()
+    }
 
     override val workManagerConfiguration: Configuration
         get() = Configuration.Builder()
