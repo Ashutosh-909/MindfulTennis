@@ -12,9 +12,11 @@ import com.ashutosh.mindfultennis.data.repository.SessionRepository
 import com.ashutosh.mindfultennis.data.sync.SyncManager
 import com.ashutosh.mindfultennis.data.sync.SyncWorker
 import com.ashutosh.mindfultennis.domain.model.DurationFilter
+import com.ashutosh.mindfultennis.domain.usecase.CancelSessionUseCase
 import com.ashutosh.mindfultennis.domain.usecase.GetAspectAveragesUseCase
 import com.ashutosh.mindfultennis.domain.usecase.GetPerformanceTrendUseCase
 import com.ashutosh.mindfultennis.domain.usecase.GetWinLossRecordUseCase
+import com.ashutosh.mindfultennis.service.ActiveSessionService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -38,6 +40,7 @@ class HomeViewModel @Inject constructor(
     private val opponentRepository: OpponentRepository,
     private val userPreferences: UserPreferences,
     private val syncManager: SyncManager,
+    private val cancelSessionUseCase: CancelSessionUseCase,
     private val getPerformanceTrendUseCase: GetPerformanceTrendUseCase,
     private val getWinLossRecordUseCase: GetWinLossRecordUseCase,
     private val getAspectAveragesUseCase: GetAspectAveragesUseCase,
@@ -100,6 +103,13 @@ class HomeViewModel @Inject constructor(
             is HomeUiEvent.RetryClicked -> retry()
             is HomeUiEvent.RefreshClicked -> currentUserId?.let { performSync(it) }
             is HomeUiEvent.ErrorDismissed -> _uiState.update { it.copy(error = null) }
+            is HomeUiEvent.CancelSessionClicked -> {
+                _uiState.update { it.copy(showCancelSessionDialog = true) }
+            }
+            is HomeUiEvent.CancelSessionDismissed -> {
+                _uiState.update { it.copy(showCancelSessionDialog = false) }
+            }
+            is HomeUiEvent.CancelSessionConfirmed -> cancelActiveSession()
             // Navigation events handled by screen
             is HomeUiEvent.StartSessionClicked,
             is HomeUiEvent.EndSessionClicked,
@@ -254,6 +264,29 @@ class HomeViewModel @Inject constructor(
                 it.copy(trendError = null, winLossError = null, aspectError = null, error = null)
             }
             loadAllData(userId)
+        }
+    }
+
+    private fun cancelActiveSession() {
+        val session = _uiState.value.activeSession ?: return
+        _uiState.update { it.copy(showCancelSessionDialog = false, isCancellingSession = true) }
+
+        viewModelScope.launch {
+            val result = cancelSessionUseCase(session.id)
+            result.fold(
+                onSuccess = {
+                    ActiveSessionService.stop(application)
+                    _uiState.update { it.copy(isCancellingSession = false) }
+                },
+                onFailure = { e ->
+                    _uiState.update {
+                        it.copy(
+                            isCancellingSession = false,
+                            error = e.message ?: "Failed to cancel session",
+                        )
+                    }
+                },
+            )
         }
     }
 }

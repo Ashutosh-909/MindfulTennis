@@ -75,6 +75,18 @@ class SessionNotificationManager @Inject constructor(
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
 
+        // "Cancel Session" action → discard the session
+        val cancelSessionIntent = PendingIntent.getActivity(
+            context,
+            REQUEST_CODE_CANCEL_SESSION,
+            Intent(context, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                action = ACTION_CANCEL_SESSION
+                putExtra(EXTRA_SESSION_ID, sessionId)
+            },
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
+
         val elapsedText = DateTimeUtils.formatDuration(elapsedMs)
 
         return NotificationCompat.Builder(context, CHANNEL_ID)
@@ -89,6 +101,11 @@ class SessionNotificationManager @Inject constructor(
                 R.drawable.ic_notification_stop,
                 "End Session",
                 endSessionIntent,
+            )
+            .addAction(
+                R.drawable.ic_notification_stop,
+                "Cancel",
+                cancelSessionIntent,
             )
             .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
             .build()
@@ -116,9 +133,11 @@ class SessionNotificationManager @Inject constructor(
         const val NOTIFICATION_ID = 1001
 
         const val ACTION_END_SESSION = "com.ashutosh.mindfultennis.ACTION_END_SESSION"
+        const val ACTION_CANCEL_SESSION = "com.ashutosh.mindfultennis.ACTION_CANCEL_SESSION"
         const val EXTRA_SESSION_ID = "extra_session_id"
 
         private const val REQUEST_CODE_CONTENT = 100
         private const val REQUEST_CODE_END_SESSION = 101
+        private const val REQUEST_CODE_CANCEL_SESSION = 102
     }
 }

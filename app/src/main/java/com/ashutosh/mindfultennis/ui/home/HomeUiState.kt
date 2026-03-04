@@ -26,6 +26,8 @@ data class HomeUiState(
     val selectedAspectOpponentIds: Set<String> = emptySet(),
     val activeSession: Session? = null,
     val activeSessionElapsedMs: Long = 0L,
+    val showCancelSessionDialog: Boolean = false,
+    val isCancellingSession: Boolean = false,
     val trendError: String? = null,
     val winLossError: String? = null,
     val aspectError: String? = null,
@@ -41,6 +43,9 @@ sealed interface HomeUiEvent {
     data class AspectOpponentFilterChanged(val ids: Set<String>) : HomeUiEvent
     data object StartSessionClicked : HomeUiEvent
     data object EndSessionClicked : HomeUiEvent
+    data object CancelSessionClicked : HomeUiEvent
+    data object CancelSessionConfirmed : HomeUiEvent
+    data object CancelSessionDismissed : HomeUiEvent
     data object ShowSessionsClicked : HomeUiEvent
     data object RetryClicked : HomeUiEvent
     data object RefreshClicked : HomeUiEvent

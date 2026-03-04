@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,6 +25,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -62,6 +64,9 @@ fun HomeScreen(
                     uiState.activeSession?.let { onEndSessionClicked(it.id) }
                 }
                 is HomeUiEvent.ShowSessionsClicked -> onShowSessionsClicked()
+                is HomeUiEvent.CancelSessionClicked,
+                is HomeUiEvent.CancelSessionConfirmed,
+                is HomeUiEvent.CancelSessionDismissed -> viewModel.onEvent(event)
                 else -> viewModel.onEvent(event)
             }
         },
@@ -181,6 +186,15 @@ private fun HomeScreenContent(
                         onEvent(HomeUiEvent.StartSessionClicked)
                     }
                 },
+                onCancel = { onEvent(HomeUiEvent.CancelSessionClicked) },
+            )
+        }
+
+        // Cancel session confirmation dialog
+        if (state.showCancelSessionDialog) {
+            CancelSessionDialog(
+                onConfirm = { onEvent(HomeUiEvent.CancelSessionConfirmed) },
+                onDismiss = { onEvent(HomeUiEvent.CancelSessionDismissed) },
             )
         }
     }
@@ -222,6 +236,7 @@ private fun BottomButtonBar(
     hasActiveSession: Boolean,
     onShowSessions: () -> Unit,
     onStartOrEnd: () -> Unit,
+    onCancel: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -241,6 +256,16 @@ private fun BottomButtonBar(
         }
 
         if (hasActiveSession) {
+            OutlinedButton(
+                onClick = onCancel,
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = MaterialTheme.colorScheme.error,
+                ),
+            ) {
+                Text("Cancel")
+            }
+
             Button(
                 onClick = onStartOrEnd,
                 modifier = Modifier.weight(1f),
@@ -260,4 +285,33 @@ private fun BottomButtonBar(
             }
         }
     }
+}
+
+@Composable
+private fun CancelSessionDialog(
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit,
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Cancel Session?") },
+        text = {
+            Text("This will discard the current session and all its data. This action cannot be undone.")
+        },
+        confirmButton = {
+            TextButton(
+                onClick = onConfirm,
+                colors = ButtonDefaults.textButtonColors(
+                    contentColor = MaterialTheme.colorScheme.error,
+                ),
+            ) {
+                Text("Cancel Session")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Keep Playing")
+            }
+        },
+    )
 }

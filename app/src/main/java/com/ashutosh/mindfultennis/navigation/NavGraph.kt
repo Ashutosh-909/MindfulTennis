@@ -12,6 +12,7 @@ import androidx.navigation.navArgument
 import com.ashutosh.mindfultennis.ui.endsession.EndSessionScreen
 import com.ashutosh.mindfultennis.ui.endsession.EndSessionViewModel
 import com.ashutosh.mindfultennis.ui.home.HomeScreen
+import com.ashutosh.mindfultennis.ui.home.HomeUiEvent
 import com.ashutosh.mindfultennis.ui.home.HomeViewModel
 import com.ashutosh.mindfultennis.ui.login.LoginScreen
 import com.ashutosh.mindfultennis.ui.login.LoginViewModel
@@ -26,6 +27,7 @@ import com.ashutosh.mindfultennis.ui.startsession.StartSessionViewModel
 fun NavGraph(
     navController: NavHostController,
     isAuthenticated: Boolean,
+    pendingCancelSessionId: String? = null,
     modifier: Modifier = Modifier,
 ) {
     val startDestination = if (isAuthenticated) Route.Home.route else Route.Login.route
@@ -63,6 +65,14 @@ fun NavGraph(
 
         composable(Route.Home.route) {
             val viewModel: HomeViewModel = hiltViewModel()
+
+            // Handle cancel session from notification action
+            if (pendingCancelSessionId != null) {
+                LaunchedEffect(pendingCancelSessionId) {
+                    viewModel.onEvent(HomeUiEvent.CancelSessionClicked)
+                }
+            }
+
             HomeScreen(
                 viewModel = viewModel,
                 onStartSessionClicked = {

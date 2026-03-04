@@ -34,6 +34,9 @@ class MainActivity : ComponentActivity() {
     /** Pending "End Session" navigation from notification action, consumed by NavGraph setup. */
     private var pendingEndSessionId: String? = null
 
+    /** Pending "Cancel Session" from notification action, consumed by NavGraph setup. */
+    private var pendingCancelSessionId: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -43,6 +46,9 @@ class MainActivity : ComponentActivity() {
 
         // Check if launched from "End Session" notification action
         pendingEndSessionId = extractEndSessionId(intent)
+
+        // Check if launched from "Cancel Session" notification action
+        pendingCancelSessionId = extractCancelSessionId(intent)
 
         setContent {
             MindfulTennisTheme {
@@ -65,10 +71,18 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
+                // Handle cancel session from notification action
+                val cancelSessionId = pendingCancelSessionId
+                if (cancelSessionId != null && isAuthenticated) {
+                    pendingCancelSessionId = null
+                    // Navigate to Home — the cancel will be triggered via NavGraph parameter
+                }
+
                 Surface(modifier = Modifier.fillMaxSize()) {
                     NavGraph(
                         navController = navController,
                         isAuthenticated = isAuthenticated,
+                        pendingCancelSessionId = cancelSessionId?.takeIf { isAuthenticated },
                     )
                 }
             }
@@ -87,6 +101,13 @@ class MainActivity : ComponentActivity() {
             // Recreate to trigger the LaunchedEffect
             recreate()
         }
+
+        // Handle "Cancel Session" notification action when app is already running
+        val cancelId = extractCancelSessionId(intent)
+        if (cancelId != null) {
+            pendingCancelSessionId = cancelId
+            recreate()
+        }
     }
 
     private fun handleDeepLink(intent: Intent?) {
@@ -103,6 +124,14 @@ class MainActivity : ComponentActivity() {
      */
     private fun extractEndSessionId(intent: Intent?): String? {
         if (intent?.action != SessionNotificationManager.ACTION_END_SESSION) return null
+        return intent.getStringExtra(SessionNotificationManager.EXTRA_SESSION_ID)
+    }
+
+    /**
+     * Extracts the session ID from a "Cancel Session" notification action intent.
+     */
+    private fun extractCancelSessionId(intent: Intent?): String? {
+        if (intent?.action != SessionNotificationManager.ACTION_CANCEL_SESSION) return null
         return intent.getStringExtra(SessionNotificationManager.EXTRA_SESSION_ID)
     }
 }
