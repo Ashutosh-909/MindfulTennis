@@ -1,12 +1,16 @@
 package com.ashutosh.mindfultennis.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.ashutosh.mindfultennis.ui.login.LoginScreen
+import com.ashutosh.mindfultennis.ui.login.LoginViewModel
 
 @Composable
 fun NavGraph(
@@ -16,13 +20,35 @@ fun NavGraph(
 ) {
     val startDestination = if (isAuthenticated) Route.Home.route else Route.Login.route
 
+    // Auth guard: redirect to login if unauthenticated, or to home if authenticated
+    LaunchedEffect(isAuthenticated) {
+        val currentRoute = navController.currentDestination?.route
+        if (!isAuthenticated && currentRoute != Route.Login.route) {
+            navController.navigate(Route.Login.route) {
+                popUpTo(0) { inclusive = true }
+            }
+        } else if (isAuthenticated && currentRoute == Route.Login.route) {
+            navController.navigate(Route.Home.route) {
+                popUpTo(Route.Login.route) { inclusive = true }
+            }
+        }
+    }
+
     NavHost(
         navController = navController,
         startDestination = startDestination,
         modifier = modifier,
     ) {
         composable(Route.Login.route) {
-            // TODO: LoginScreen (Milestone 2)
+            val viewModel: LoginViewModel = hiltViewModel()
+            LoginScreen(
+                viewModel = viewModel,
+                onSignedIn = {
+                    navController.navigate(Route.Home.route) {
+                        popUpTo(Route.Login.route) { inclusive = true }
+                    }
+                },
+            )
         }
 
         composable(Route.Home.route) {
