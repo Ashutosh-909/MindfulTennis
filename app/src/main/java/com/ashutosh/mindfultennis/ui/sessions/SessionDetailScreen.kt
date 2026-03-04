@@ -174,7 +174,7 @@ private fun SessionDetailContent(
                     if (state.partnerRatings.isNotEmpty()) {
                         item(key = "partner_ratings") {
                             RatingsCard(
-                                title = "Partner Ratings",
+                                title = "Partner's Feedback",
                                 ratings = state.partnerRatings,
                             )
                         }

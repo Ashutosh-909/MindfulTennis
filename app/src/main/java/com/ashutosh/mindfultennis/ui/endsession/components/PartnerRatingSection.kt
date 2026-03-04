@@ -35,8 +35,8 @@ import com.ashutosh.mindfultennis.ui.components.StarRatingBar
 import com.ashutosh.mindfultennis.ui.theme.Spacing
 
 /**
- * Section that shows an "+ Add Partner Ratings" button, or a summary card with edit/remove
- * if partner ratings have been saved.
+ * Section that shows an "+ Add Partner's Feedback" button, or a summary card with edit/remove
+ * if partner's feedback has been saved. Partner's feedback = your partner's opinion on YOUR game.
  */
 @Composable
 fun PartnerRatingSection(
@@ -49,7 +49,7 @@ fun PartnerRatingSection(
 
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
-            text = "Partner Ratings (optional)",
+            text = "Partner's Feedback (optional)",
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurface,
         )
@@ -71,7 +71,7 @@ fun PartnerRatingSection(
             ) {
                 Icon(Icons.Default.Add, contentDescription = null)
                 Spacer(Modifier.width(Spacing.sm))
-                Text("Add Partner Ratings")
+                Text("Ask Your Partner for Feedback")
             }
         }
     }
@@ -103,13 +103,13 @@ private fun PartnerRatingSummaryCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "Partner Ratings",
+                    text = "Partner's Feedback",
                     style = MaterialTheme.typography.titleSmall,
                 )
                 Row {
                     TextButton(onClick = onEdit) { Text("Edit") }
                     IconButton(onClick = onClear) {
-                        Icon(Icons.Default.Close, contentDescription = "Clear partner ratings")
+                        Icon(Icons.Default.Close, contentDescription = "Clear partner's feedback")
                     }
                 }
             }
@@ -157,7 +157,7 @@ private fun PartnerRatingDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Rate Your Partner") },
+        title = { Text("Partner's Feedback") },
         confirmButton = {
             Button(
                 onClick = {
@@ -173,7 +173,7 @@ private fun PartnerRatingDialog(
         text = {
             Column(
                 modifier = Modifier.semantics {
-                    contentDescription = "Rate Your Partner dialog"
+                    contentDescription = "Partner's Feedback dialog"
                 },
             ) {
                 Aspect.entries.forEach { aspect ->
