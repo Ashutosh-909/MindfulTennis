@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +23,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.ashutosh.mindfultennis.domain.model.Aspect
 import com.ashutosh.mindfultennis.domain.model.RatingType
@@ -108,6 +111,10 @@ fun AspectPerformanceCard(
                             .padding(horizontal = Spacing.sm),
                     )
 
+                    // Performance color scale legend
+                    Spacer(modifier = Modifier.height(Spacing.sm))
+                    PerformanceColorScale(modifier = Modifier.fillMaxWidth())
+
                     // Legend
                     if (selectedRatingType == RatingType.BOTH) {
                         Spacer(modifier = Modifier.height(Spacing.sm))
@@ -148,4 +155,43 @@ private fun LegendDot(
             .clip(CircleShape)
             .background(color),
     )
+}
+
+/**
+ * Horizontal gradient bar showing the performance color scale: Low → Mid → High.
+ */
+@Composable
+private fun PerformanceColorScale(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier.padding(horizontal = Spacing.md),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(
+            text = "Low",
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        Spacer(modifier = Modifier.width(Spacing.xs))
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .height(8.dp)
+                .clip(RoundedCornerShape(4.dp))
+                .background(
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(
+                            Color(0xFFE53935), // red
+                            Color(0xFFFFA726), // amber
+                            Color(0xFF43A047), // green
+                        ),
+                    ),
+                ),
+        )
+        Spacer(modifier = Modifier.width(Spacing.xs))
+        Text(
+            text = "High",
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
 }

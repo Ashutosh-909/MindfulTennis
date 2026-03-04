@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.sp
@@ -104,9 +105,9 @@ fun RadarChart(
             )
         }
 
-        // --- 3. Draw data polygons ---
+        // --- 3. Draw color-coded data polygons ---
         if (selfData.isNotEmpty()) {
-            drawDataPolygon(
+            drawColorCodedPolygon(
                 data = selfData,
                 aspects = aspects,
                 centerX = centerX,
@@ -115,13 +116,12 @@ fun RadarChart(
                 maxValue = maxValue,
                 startAngle = startAngle,
                 angleStep = angleStep,
-                fillColor = selfColor.copy(alpha = 0.20f),
-                strokeColor = selfColor,
+                baseColor = selfColor,
             )
         }
 
         if (partnerData.isNotEmpty()) {
-            drawDataPolygon(
+            drawColorCodedPolygon(
                 data = partnerData,
                 aspects = aspects,
                 centerX = centerX,
@@ -130,17 +130,16 @@ fun RadarChart(
                 maxValue = maxValue,
                 startAngle = startAngle,
                 angleStep = angleStep,
-                fillColor = partnerColor.copy(alpha = 0.20f),
-                strokeColor = partnerColor,
+                baseColor = partnerColor,
             )
         }
 
-        // --- 4. Draw dot markers on vertices ---
+        // --- 4. Draw color-coded dot markers on vertices ---
         if (selfData.isNotEmpty()) {
-            drawDotMarkers(selfData, aspects, centerX, centerY, radius, maxValue, startAngle, angleStep, selfColor)
+            drawColorCodedDotMarkers(selfData, aspects, centerX, centerY, radius, maxValue, startAngle, angleStep)
         }
         if (partnerData.isNotEmpty()) {
-            drawDotMarkers(partnerData, aspects, centerX, centerY, radius, maxValue, startAngle, angleStep, partnerColor)
+            drawColorCodedDotMarkers(partnerData, aspects, centerX, centerY, radius, maxValue, startAngle, angleStep)
         }
 
         // --- 5. Draw axis labels ---
@@ -169,7 +168,27 @@ fun RadarChart(
     }
 }
 
-private fun DrawScope.drawDataPolygon(
+/**
+ * Maps a rating value (0–maxValue) to a color on a red → amber → green gradient.
+ * 0 → red, ~40% → amber/orange, ~70%+ → green.
+ */
+private fun performanceColor(value: Float, maxValue: Float): Color {
+    val fraction = (value / maxValue).coerceIn(0f, 1f)
+    val red = Color(0xFFE53935)    // low
+    val amber = Color(0xFFFFA726)  // medium
+    val green = Color(0xFF43A047)  // high
+    return when {
+        fraction < 0.5f -> lerp(red, amber, fraction / 0.5f)
+        else -> lerp(amber, green, (fraction - 0.5f) / 0.5f)
+    }
+}
+
+/**
+ * Draws triangular segments from the center to each pair of adjacent data
+ * vertices, each filled with a performance-based color and outlined with
+ * [baseColor] for series identity.
+ */
+private fun DrawScope.drawColorCodedPolygon(
     data: Map<Aspect, Float>,
     aspects: List<Aspect>,
     centerX: Float,
@@ -178,25 +197,50 @@ private fun DrawScope.drawDataPolygon(
     maxValue: Float,
     startAngle: Float,
     angleStep: Float,
-    fillColor: Color,
-    strokeColor: Color,
+    baseColor: Color,
 ) {
-    val path = Path().apply {
-        for (i in aspects.indices) {
-            val value = (data[aspects[i]] ?: 0f).coerceIn(0f, maxValue)
-            val fraction = value / maxValue
-            val angle = startAngle + i * angleStep
-            val x = centerX + radius * fraction * cos(angle)
-            val y = centerY + radius * fraction * sin(angle)
-            if (i == 0) moveTo(x, y) else lineTo(x, y)
+    val center = Offset(centerX, centerY)
+    val points = aspects.mapIndexed { i, aspect ->
+        val value = (data[aspect] ?: 0f).coerceIn(0f, maxValue)
+        val fraction = value / maxValue
+        val angle = startAngle + i * angleStep
+        Triple(
+            Offset(centerX + radius * fraction * cos(angle), centerY + radius * fraction * sin(angle)),
+            value,
+            fraction,
+        )
+    }
+
+    // Draw color-coded filled segments (triangle: center → vertex i → vertex i+1)
+    for (i in points.indices) {
+        val j = (i + 1) % points.size
+        val avgValue = (points[i].second + points[j].second) / 2f
+        val segmentColor = performanceColor(avgValue, maxValue)
+
+        val segmentPath = Path().apply {
+            moveTo(center.x, center.y)
+            lineTo(points[i].first.x, points[i].first.y)
+            lineTo(points[j].first.x, points[j].first.y)
+            close()
+        }
+        drawPath(path = segmentPath, color = segmentColor.copy(alpha = 0.28f), style = Fill)
+    }
+
+    // Draw the outer polygon stroke for series identity
+    val outlinePath = Path().apply {
+        for (i in points.indices) {
+            if (i == 0) moveTo(points[i].first.x, points[i].first.y)
+            else lineTo(points[i].first.x, points[i].first.y)
         }
         close()
     }
-    drawPath(path = path, color = fillColor, style = Fill)
-    drawPath(path = path, color = strokeColor, style = Stroke(width = 2.5f))
+    drawPath(path = outlinePath, color = baseColor, style = Stroke(width = 2.5f))
 }
 
-private fun DrawScope.drawDotMarkers(
+/**
+ * Draws dot markers at each data vertex, colored by performance level.
+ */
+private fun DrawScope.drawColorCodedDotMarkers(
     data: Map<Aspect, Float>,
     aspects: List<Aspect>,
     centerX: Float,
@@ -205,7 +249,6 @@ private fun DrawScope.drawDotMarkers(
     maxValue: Float,
     startAngle: Float,
     angleStep: Float,
-    color: Color,
 ) {
     for (i in aspects.indices) {
         val value = (data[aspects[i]] ?: 0f).coerceIn(0f, maxValue)
@@ -213,6 +256,9 @@ private fun DrawScope.drawDotMarkers(
         val angle = startAngle + i * angleStep
         val x = centerX + radius * fraction * cos(angle)
         val y = centerY + radius * fraction * sin(angle)
-        drawCircle(color = color, radius = 4.5f, center = Offset(x, y))
+        val dotColor = performanceColor(value, maxValue)
+        drawCircle(color = dotColor, radius = 5f, center = Offset(x, y))
+        // White center for better visibility
+        drawCircle(color = Color.White, radius = 2f, center = Offset(x, y))
     }
 }
