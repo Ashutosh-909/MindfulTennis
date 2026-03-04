@@ -15,6 +15,10 @@ import com.ashutosh.mindfultennis.ui.home.HomeScreen
 import com.ashutosh.mindfultennis.ui.home.HomeViewModel
 import com.ashutosh.mindfultennis.ui.login.LoginScreen
 import com.ashutosh.mindfultennis.ui.login.LoginViewModel
+import com.ashutosh.mindfultennis.ui.sessions.SessionDetailScreen
+import com.ashutosh.mindfultennis.ui.sessions.SessionDetailViewModel
+import com.ashutosh.mindfultennis.ui.sessions.SessionsListScreen
+import com.ashutosh.mindfultennis.ui.sessions.SessionsListViewModel
 import com.ashutosh.mindfultennis.ui.startsession.StartSessionScreen
 import com.ashutosh.mindfultennis.ui.startsession.StartSessionViewModel
 
@@ -108,7 +112,16 @@ fun NavGraph(
         }
 
         composable(Route.SessionsList.route) {
-            // TODO: SessionsListScreen (Milestone 7)
+            val viewModel: SessionsListViewModel = hiltViewModel()
+            SessionsListScreen(
+                viewModel = viewModel,
+                onSessionClicked = { sessionId ->
+                    navController.navigate(Route.SessionDetail(sessionId).route)
+                },
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+            )
         }
 
         composable(
@@ -120,7 +133,13 @@ fun NavGraph(
             ),
         ) { backStackEntry ->
             val sessionId = backStackEntry.arguments?.getString(Route.SessionDetail.ARG_SESSION_ID) ?: return@composable
-            // TODO: SessionDetailScreen (Milestone 7)
+            val viewModel: SessionDetailViewModel = hiltViewModel()
+            SessionDetailScreen(
+                viewModel = viewModel,
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+            )
         }
     }
 }
