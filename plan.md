@@ -38,7 +38,7 @@ Login → Dashboard (Home) → Start Session → (Play Tennis — app in backgro
   - Performance line chart with duration filter (1W / 1M / 3M / 6M / 1Y / custom)
   - Win/Loss record with duration + opponent multi-select filter
   - Scrollable Focus Points list
-  - Aspect performance cards (8 aspects) with time-period filter
+  - Aspect performance cards (8 aspects) with duration + opponent multi-select filter
   - "Show Sessions" button → color-coded session list
   - "Start New Session" button
 - [x] Start Session screen (header text, focus note input, CTA)
@@ -200,33 +200,46 @@ sealed class Route(val route: String) {
 #### 4.1 Login Screen
 
 ```
-┌─────────────────────────┐
-│                         │
-│      🎾 App Logo        │
-│   "Mindful Tennis"      │
-│                         │
-│  Track your tennis      │
-│  journey, one session   │
-│  at a time.             │
-│                         │
-│  ┌───────────────────┐  │
-│  │ Sign in with      │  │
-│  │ Google       [G]  │  │
-│  └───────────────────┘  │
-│                         │
-│  By signing in you      │
-│  agree to our Terms     │
-│  & Privacy Policy.      │
-│                         │
-└─────────────────────────┘
+┌──────────────────────────────┐
+│                              │
+│  ┌──────────────────────────┐│
+│  │  ┌────┬────┬────┬────┐   ││
+│  │  │    │    │    │    │   ││
+│  │  ├────┼────┼────┼────┤   ││  ← Tennis court illustration
+│  │  │    │    │    │    │   ││    (top-down view, line art,
+│  │  └────┴────┴────┴────┘   ││     dark navy on white)
+│  └──────────────────────────┘│
+│                              │
+│         M I N D F U L        │  ← Small-caps, letter-spaced,
+│                              │    dark navy (#1B2040)
+│         Tennis               │  ← Large elegant serif font,
+│                              │    dark navy, bold
+│                              │
+│                              │
+│                              │
+│                              │  
+│                              │
+│  ┌────────────────────────┐  │
+│  │ Sign in with Google [G]│  │  ← OutlinedButton
+│  └────────────────────────┘  │
+│                              │
+│  By signing in you agree to  │
+│  our Terms & Privacy Policy. │
+│                              │
+└──────────────────────────────┘
 ```
 
-- **Scaffold**: No top bar. Centered content column.
-- **Components**: App icon/illustration, tagline text, Google Sign-In button (Material 3 `OutlinedButton` with Google icon), legal links.
+- **Scaffold**: No top bar. Full-screen centered content column with vertical arrangement.
+- **Components**:
+  - **Tennis court illustration**: Top-down line-art view of a tennis court rendered as a custom `Canvas` composable or vector drawable. Uses dark navy stroke (`#1B2040`) on white background. Occupies ~40% of screen height.
+  - **Branding text**: "MINDFUL" in small-caps with wide letter-spacing (`labelLarge`, tracking 4 sp). "Tennis" below in a large elegant serif font (`displayMedium`, dark navy `#1B2040`). Both centered.
+  - **Name label**: Shows the user's display name after Google Sign-In (hidden before login).
+  - **Google Sign-In button**: Material 3 `OutlinedButton` with Google icon.
+  - **Legal links**: Terms & Privacy Policy text with clickable `AnnotatedString` links.
 - **Empty state**: N/A.
 - **Loading state**: Sign-in button shows `CircularProgressIndicator` after tap; disable button.
 - **Error state**: `Snackbar` at bottom with error message + "Retry" action.
-- **Accessibility**: Button has content description "Sign in with Google". Min touch target 48 dp.
+- **Accessibility**: Button has content description "Sign in with Google". Min touch target 48 dp. Court illustration has content description "Tennis court illustration".
 
 ---
 
@@ -256,24 +269,21 @@ sealed class Route(val route: String) {
 │ └──────────────────────────┘ │
 │ ┌──────────────────────────┐ │
 │ │ Aspect Performance       │ │  ← Card
-│ │ Filter: 1M               │ │
+│ │ Filter: 1M | Opponents ▼ │ │
 │ │ Forehand ★★★★☆  4.1      │ │
 │ │ Backhand ★★★☆☆  3.2      │ │
 │ │ Serve    ★★★★☆  3.8      │ │
 │ │ …                        │ │
 │ └──────────────────────────┘ │
 │                              │
-│  ┌────────────────────────┐  │
-│  │   Show Sessions        │  │  ← OutlinedButton
-│  └────────────────────────┘  │
-│  ┌────────────────────────┐  │
-│  │  Start New Session     │  │  ← FilledButton (primary) OR
-│  │  End Session (RED)     │  │  ← FilledButton (error) if active
-│  └────────────────────────┘  │
+│ ┌───────────┐ ┌────────────┐ │
+│ │   Show    │ │Start New   │ │  ← Row: OutlinedButton + FilledButton
+│ │ Sessions  │ │  Session   │ │     (equal weight, side-by-side)
+│ └───────────┘ └────────────┘ │     OR FilledButton(error) "End Session"
 └──────────────────────────────┘
 ```
 
-- **Scaffold**: `TopAppBar` ("Dashboard" title, settings icon). Scrollable `LazyColumn` body. Bottom persistent button area (not a BottomBar — use `Column` with weight).
+- **Scaffold**: `TopAppBar` ("Dashboard" title, settings icon). Scrollable `LazyColumn` body. Bottom persistent button area with two adjacent buttons in a `Row` (equal weight, 8 dp gap; not a BottomBar — use `Column` with weight). Left: `OutlinedButton` "Show Sessions". Right: `FilledButton` "Start New Session" (primary) or "End Session" (error color) if a session is active.
 - **Components**: `ElevatedCard` per section, `FilterChip` rows for duration, `LazyRow` for focus chips, `Row` for each aspect with star bar + numeric label.
 - **Empty states**:
   - No sessions yet: chart area shows illustration + "Log your first session to see trends."
@@ -356,29 +366,106 @@ sealed class Route(val route: String) {
 │  └──────────────────────────┘    │
 │                                  │
 │ ── Partner Ratings (optional) ── │
-│  ▶ Add Partner Ratings           │  ← Expandable section
-│   (same 8 aspects if expanded)   │
+│  ┌────────────────────────────┐  │
+│  │  + Add Partner Ratings     │  │  ← OutlinedButton, opens popup
+│  └────────────────────────────┘  │
+│                                  │
+│  (After adding, shows summary:) │
+│  ┌──────────────────────────────┐│
+│  │ Partner Ratings              ││
+│  │ Forehand ★★★☆☆  Backhand ★★★☆☆││
+│  │ Serve ★★★★☆  …              ││
+│  │                    [Edit][✕] ││  ← Tap Edit reopens popup
+│  └──────────────────────────────┘│
 │                                  │
 │ ── Set Scores ─────────────────  │
-│  ▶ Add Set Scores                │  ← Expandable section
-│   Set 1: [___] - [___]          │
-│   Set 2: [___] - [___]          │
-│   + Add Set                      │
+│  ┌────────────────────────────┐  │
+│  │    + Add Set Scores        │  │  ← OutlinedButton, opens popup
+│  └────────────────────────────┘  │
+│                                  │
+│  (After adding, shows summary:) │
+│  ┌──────────────────────────────┐│
+│  │ Doubles • vs. John, Mike     ││
+│  │ w/ Partner: Alex             ││
+│  │ Set 1: 6-3  Set 2: 6-4      ││
+│  │                    [Edit][✕] ││  ← Tap Edit reopens popup
+│  └──────────────────────────────┘│
 │                                  │
 │  ┌────────────────────────────┐  │
 │  │      Submit Session        │  │
 │  └────────────────────────────┘  │
 └──────────────────────────────────┘
+
+**Partner Rating Popup Dialog** (opens on "+ Add Partner Ratings" tap):
+
+```
+┌──────────────────────────────────┐
+│     "Rate Your Partner"       ✕  │  ← Dialog title + close icon
+├──────────────────────────────────┤
+│                                  │
+│  Forehand    ☆ ☆ ☆ ☆ ☆          │
+│  Backhand    ☆ ☆ ☆ ☆ ☆          │
+│  Serve       ☆ ☆ ☆ ☆ ☆          │
+│  Return      ☆ ☆ ☆ ☆ ☆          │
+│  Volley      ☆ ☆ ☆ ☆ ☆          │
+│  Slice       ☆ ☆ ☆ ☆ ☆          │
+│  Movement    ☆ ☆ ☆ ☆ ☆          │
+│  Mindset     ☆ ☆ ☆ ☆ ☆          │
+│                                  │
+│  ┌────────────────────────────┐  │
+│  │         Save               │  │  ← FilledButton (primary)
+│  └────────────────────────────┘  │
+└──────────────────────────────────┘
+```
+
+**Set Score Popup Dialog** (opens on "+ Add Set Scores" tap):
+
+```
+┌──────────────────────────────────┐
+│         "Set Scores"          ✕  │  ← Dialog title + close icon
+├──────────────────────────────────┤
+│                                  │
+│  Match Type:                     │
+│  (●) Singles    (○) Doubles      │  ← RadioButton row
+│                                  │
+│  ── Opponent(s) ──────────────── │
+│  Opponent 1: [_____________] ▼   │  ← AutoComplete / dropdown
+│             + Add New Opponent   │
+│                                  │
+│  ── If Doubles ────────────────  │
+│  Opponent 2: [_____________] ▼   │  ← Second opponent (doubles only)
+│             + Add New Opponent   │
+│                                  │
+│  Partner:    [_____________] ▼   │  ← Partner (doubles only)
+│             + Add New Partner    │
+│  ──────────────────────────────  │
+│                                  │
+│  ── Sets ──────────────────────  │
+│  Set 1:  [___]  -  [___]        │
+│  Set 2:  [___]  -  [___]     🗑 │  ← Remove set
+│  + Add Set                       │
+│                                  │
+│  ┌────────────────────────────┐  │
+│  │         Save               │  │  ← FilledButton (primary)
+│  └────────────────────────────┘  │
+└──────────────────────────────────┘
 ```
 
 - **Scaffold**: `TopAppBar` with back + title. Scrollable `LazyColumn`.
-- **Components**: Session metadata header, 8× star-rating rows (custom `StarRatingBar` composable, tappable stars), `OutlinedTextField` for notes, expandable `ListItem` for partner section, expandable set-scores section with dynamic row add.
+- **Components**: Session metadata header, 8× star-rating rows (custom `StarRatingBar` composable, tappable stars), `OutlinedTextField` for notes, "+ Add Partner Ratings" button that opens a popup dialog (with summary card after saving), "+ Add Set Scores" button that opens a popup dialog (with summary card after saving).
 - **Star Rating**: Each star is 40 dp touch target. Half-star not in MVP. Selected stars filled with `primary` color.
-- **Set Scores**: Two `OutlinedTextField` (numeric keyboard) per set, side-by-side. "Add Set" button. Remove set via trailing icon.
-- **Validation**: At least one self-rating required. Set scores optional. Show inline error if submit attempted with no ratings.
+- **Partner Rating Popup**: `AlertDialog` (or `ModalBottomSheet`) containing the same 8 aspect star-rating rows used for self-ratings. Opens on "+ Add Partner Ratings" tap. Closes on "Save" (data saved to ViewModel state) or dismiss. User can reopen via "Edit" on the summary card to modify. No rating is pre-filled — all start at 0 stars.
+- **Partner Rating Summary Card**: After saving from the popup, the main screen shows a read-only summary card displaying aspect names with their star ratings in a compact grid/row layout. "Edit" button reopens the popup. "✕" button clears all partner rating data.
+- **Set Score Popup**: `AlertDialog` (or `ModalBottomSheet`) containing match type, opponent/partner inputs, and set score rows. Opens on "+ Add Set Scores" tap. Closes on "Save" (data saved to ViewModel state) or dismiss. User can reopen via "Edit" on the summary card to modify.
+- **Match Type**: `RadioButton` row inside the popup to choose Singles or Doubles. Defaults to Singles. When Doubles is selected, the second opponent and partner input fields appear.
+- **Opponent Input**: `ExposedDropdownMenuBox` (autocomplete) populated from saved opponents in Room. User can type to filter or tap "+ Add New Opponent" to create a new opponent inline (name field + confirm). In Singles, one opponent field is shown. **In Doubles, two opponent fields** ("Opponent 1" and "Opponent 2") are shown to capture both opposing players. Both are stored as references on the session (`opponent1Id`, `opponent2Id`).
+- **Partner Input** (Doubles only): Same autocomplete pattern as opponent. Selects or creates a doubles partner. Partner is stored as a reference on the session (`partnerId`).
+- **Set Scores** (inside popup): Two `OutlinedTextField` (numeric keyboard) per set, side-by-side. "Add Set" button to add more. Remove set via trailing trash icon. First set cannot be removed.
+- **Set Score Summary Card**: After saving from the popup, the main screen shows a read-only summary card with match type, opponent name(s), partner name (if doubles), and set scores. "Edit" button reopens the popup. "✕" button clears all set score data.
+- **Validation**: At least one self-rating required. Partner ratings and set scores are optional. If set scores are entered via the popup, both user and opponent scores are required per set. Show inline error if submit attempted with no ratings.
 - **Loading**: Submit button shows spinner.
 - **Error**: Snackbar for save failure.
-- **Accessibility**: Star rows: "Forehand rating, 3 out of 5 stars" announced. Stars selectable via d-pad/keyboard.
+- **Accessibility**: Star rows: "Forehand rating, 3 out of 5 stars" announced. Stars selectable via d-pad/keyboard. Match type radio group labeled "Match type". Opponent and partner fields have descriptive labels for TalkBack. Popup dialogs are announced as "Rate Your Partner dialog" / "Set Scores dialog" when opened.
 
 ---
 
@@ -448,6 +535,10 @@ sealed class Route(val route: String) {
 | `endedAt` | `Long?` (epoch ms) | Null while active |
 | `timeZoneId` | `String` | TZ at start |
 | `notes` | `String?` | Post-session comment |
+| `matchType` | `String` (enum) | `SINGLES` or `DOUBLES`, default `SINGLES` |
+| `opponent1Id` | `String?` | FK → Opponent (nullable, primary opponent) |
+| `opponent2Id` | `String?` | FK → Opponent (nullable, second opponent for doubles) |
+| `partnerId` | `String?` | FK → Partner (nullable, only for doubles) |
 | `isActive` | `Boolean` | True while in progress |
 | `overallScore` | `Int?` | Derived 0–100 composite |
 | `createdAt` | `Long` | Document created |
@@ -491,6 +582,15 @@ sealed class Route(val route: String) {
 | `name` | `String` | Display name |
 | `createdAt` | `Long` | |
 
+#### Partner
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | `String` (UUID) | PK |
+| `userId` | `String` | FK → User |
+| `name` | `String` | Display name |
+| `createdAt` | `Long` | |
+
 #### SetScore
 
 | Field | Type | Notes |
@@ -500,13 +600,20 @@ sealed class Route(val route: String) {
 | `setNumber` | `Int` | 1, 2, 3… |
 | `userScore` | `Int` | Games won |
 | `opponentScore` | `Int` | Games lost |
-| `opponentId` | `String?` | FK → Opponent (nullable for unnamed) |
 
 ### Aspect Enum
 
 ```kotlin
 enum class Aspect {
     FOREHAND, BACKHAND, SERVE, RETURN, VOLLEY, SLICE, MOVEMENT, MINDSET
+}
+```
+
+### MatchType Enum
+
+```kotlin
+enum class MatchType {
+    SINGLES, DOUBLES
 }
 ```
 
@@ -540,6 +647,10 @@ erDiagram
         long endedAt
         string timeZoneId
         string notes
+        string matchType
+        string opponent1Id FK
+        string opponent2Id FK
+        string partnerId FK
         boolean isActive
         int overallScore
         long createdAt
@@ -576,22 +687,31 @@ erDiagram
         long createdAt
     }
 
+    PARTNER {
+        string id PK
+        string userId FK
+        string name
+        long createdAt
+    }
+
     SET_SCORE {
         string id PK
         string sessionId FK
         int setNumber
         int userScore
         int opponentScore
-        string opponentId FK
     }
 
     USER ||--o{ SESSION : "has many"
     USER ||--o{ FOCUS_POINT : "has many"
     USER ||--o{ OPPONENT : "has many"
+    USER ||--o{ PARTNER : "has many"
     SESSION ||--o{ SELF_RATING : "has many"
     SESSION ||--o{ PARTNER_RATING : "has many"
     SESSION ||--o{ SET_SCORE : "has many"
-    OPPONENT ||--o{ SET_SCORE : "opponent in"
+    OPPONENT ||--o{ SESSION : "opponent1 in"
+    OPPONENT ||--o{ SESSION : "opponent2 in"
+    PARTNER ||--o{ SESSION : "partner in"
 ```
 
 ### Versioning Strategy
@@ -620,6 +740,10 @@ erDiagram
   "endedAt": 1741106100000,
   "timeZoneId": "America/New_York",
   "notes": "Felt good after first set, tired in second",
+  "matchType": "DOUBLES",
+  "opponent1Id": "opp-uuid-1",
+  "opponent2Id": "opp-uuid-2",
+  "partnerId": "partner-uuid-1",
   "isActive": false,
   "overallScore": 72,
   "createdAt": 1741100700000,
@@ -640,8 +764,8 @@ erDiagram
     { "aspect": "BACKHAND", "rating": 3 }
   ],
   "setScores": [
-    { "setNumber": 1, "userScore": 6, "opponentScore": 3, "opponentId": "opp-uuid-1" },
-    { "setNumber": 2, "userScore": 6, "opponentScore": 4, "opponentId": "opp-uuid-1" }
+    { "setNumber": 1, "userScore": 6, "opponentScore": 3 },
+    { "setNumber": 2, "userScore": 6, "opponentScore": 4 }
   ]
 }
 ```
@@ -681,6 +805,7 @@ com.ashutosh.mindfultennis/
 │   │   │   │   ├── RatingDao.kt
 │   │   │   │   ├── FocusPointDao.kt
 │   │   │   │   ├── OpponentDao.kt
+│   │   │   │   ├── PartnerDao.kt
 │   │   │   │   └── SetScoreDao.kt
 │   │   │   └── entity/             // Room @Entity classes
 │   │   │       ├── SessionEntity.kt
@@ -688,6 +813,7 @@ com.ashutosh.mindfultennis/
 │   │   │       ├── PartnerRatingEntity.kt
 │   │   │       ├── FocusPointEntity.kt
 │   │   │       ├── OpponentEntity.kt
+│   │   │       ├── PartnerEntity.kt
 │   │   │       └── SetScoreEntity.kt
 │   │   └── datastore/
 │   │       └── UserPreferences.kt  // DataStore for prefs (auth token cache, UI prefs)
@@ -704,7 +830,9 @@ com.ashutosh.mindfultennis/
 │   │   ├── FocusPointRepository.kt
 │   │   ├── FocusPointRepositoryImpl.kt
 │   │   ├── OpponentRepository.kt
-│   │   └── OpponentRepositoryImpl.kt
+│   │   ├── OpponentRepositoryImpl.kt
+│   │   ├── PartnerRepository.kt
+│   │   └── PartnerRepositoryImpl.kt
 │   └── sync/
 │       ├── SyncManager.kt          // Orchestrates local ↔ cloud sync
 │       └── SyncWorker.kt           // WorkManager periodic sync
@@ -714,8 +842,10 @@ com.ashutosh.mindfultennis/
 │   │   ├── Rating.kt
 │   │   ├── FocusPoint.kt
 │   │   ├── Opponent.kt
+│   │   ├── Partner.kt
 │   │   ├── SetScore.kt
 │   │   ├── Aspect.kt
+│   │   ├── MatchType.kt
 │   │   └── PerformanceTrend.kt
 │   └── usecase/
 │       ├── StartSessionUseCase.kt
@@ -778,6 +908,7 @@ data class HomeUiState(
     val winLossRecord: WinLossRecord? = null,
     val focusPoints: List<FocusPoint> = emptyList(),
     val aspectAverages: Map<Aspect, Float> = emptyMap(),
+    val selectedAspectOpponentIds: Set<String> = emptySet(), // opponent filter for aspect card
     val activeSession: Session? = null,
     val error: String? = null
 )
@@ -786,6 +917,7 @@ data class HomeUiState(
 sealed interface HomeUiEvent {
     data class DurationChanged(val duration: Duration) : HomeUiEvent
     data class OpponentFilterChanged(val ids: Set<String>) : HomeUiEvent
+    data class AspectOpponentFilterChanged(val ids: Set<String>) : HomeUiEvent
     data object StartSessionClicked : HomeUiEvent
     data object EndSessionClicked : HomeUiEvent
     data object RetryClicked : HomeUiEvent
@@ -828,7 +960,7 @@ ViewModel → UseCase (optional) → Repository (interface) → DataSource (Room
 
 | Store | What | Why |
 |---|---|---|
-| **Room** | Sessions, Ratings, FocusPoints, Opponents, SetScores | Structured relational data, complex queries, offline-first |
+| **Room** | Sessions, Ratings, FocusPoints, Opponents, Partners, SetScores | Structured relational data, complex queries, offline-first |
 | **DataStore (Preferences)** | Auth state cache, selected filters, last sync timestamp, UI preferences | Simple key-value, no schema needed |
 
 ### Cloud Storage: Supabase (Free Tier)
@@ -859,6 +991,7 @@ self_ratings        → Self-rating rows (session_id FK → sessions.id)
 partner_ratings     → Partner-rating rows (session_id FK → sessions.id)
 focus_points        → Focus point rows (user_id FK → users.id)
 opponents           → Opponent rows (user_id FK → users.id)
+partners            → Partner rows (user_id FK → users.id)
 set_scores          → Set score rows (session_id FK → sessions.id)
 ```
 
