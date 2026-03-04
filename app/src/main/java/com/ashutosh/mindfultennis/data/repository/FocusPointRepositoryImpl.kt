@@ -1,6 +1,7 @@
 package com.ashutosh.mindfultennis.data.repository
 
 import com.ashutosh.mindfultennis.data.local.db.dao.FocusPointDao
+import com.ashutosh.mindfultennis.data.local.db.dao.SessionDao
 import com.ashutosh.mindfultennis.data.local.db.entity.SyncStatus
 import com.ashutosh.mindfultennis.data.local.db.entity.toDomain
 import com.ashutosh.mindfultennis.data.local.db.entity.toDto
@@ -17,6 +18,7 @@ import javax.inject.Singleton
 @Singleton
 class FocusPointRepositoryImpl @Inject constructor(
     private val focusPointDao: FocusPointDao,
+    private val sessionDao: SessionDao,
     private val remoteDataSource: SupabaseSessionDataSource,
 ) : FocusPointRepository {
 
@@ -58,4 +60,13 @@ class FocusPointRepositoryImpl @Inject constructor(
     override suspend fun deleteAllForUser(userId: String) = withContext(Dispatchers.IO) {
         focusPointDao.deleteAllForUser(userId)
     }
+
+    override suspend fun getAllWithAverageScore(userId: String): List<FocusPoint> =
+        withContext(Dispatchers.IO) {
+            val entities = focusPointDao.getAllForUser(userId)
+            entities.map { entity ->
+                val avgScore = sessionDao.getAverageScoreForFocusText(userId, entity.text)
+                entity.toDomain().copy(averageScore = avgScore?.toInt())
+            }
+        }
 }

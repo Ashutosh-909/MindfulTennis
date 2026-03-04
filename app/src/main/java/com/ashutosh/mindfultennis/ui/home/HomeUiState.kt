@@ -25,7 +25,6 @@ data class HomeUiState(
     val opponents: List<Opponent> = emptyList(),
     val selectedWinLossOpponentIds: Set<String> = emptySet(),
     val selectedAspectOpponentIds: Set<String> = emptySet(),
-    val selectedAspectDuration: DurationFilter = DurationFilter.ONE_MONTH,
     val selectedAspectRatingType: RatingType = RatingType.SELF,
     val activeSession: Session? = null,
     val activeSessionElapsedMs: Long = 0L,
@@ -44,7 +43,6 @@ sealed interface HomeUiEvent {
     data class DurationChanged(val duration: DurationFilter) : HomeUiEvent
     data class WinLossOpponentFilterChanged(val ids: Set<String>) : HomeUiEvent
     data class AspectOpponentFilterChanged(val ids: Set<String>) : HomeUiEvent
-    data class AspectDurationChanged(val duration: DurationFilter) : HomeUiEvent
     data class AspectRatingTypeChanged(val ratingType: RatingType) : HomeUiEvent
     data object StartSessionClicked : HomeUiEvent
     data object EndSessionClicked : HomeUiEvent

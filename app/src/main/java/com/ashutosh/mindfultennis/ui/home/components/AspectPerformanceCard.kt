@@ -25,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.ashutosh.mindfultennis.domain.model.Aspect
-import com.ashutosh.mindfultennis.domain.model.DurationFilter
 import com.ashutosh.mindfultennis.domain.model.RatingType
 import com.ashutosh.mindfultennis.ui.components.ErrorRetryCard
 import com.ashutosh.mindfultennis.ui.components.LoadingShimmer
@@ -40,8 +39,6 @@ import java.util.Locale
 @Composable
 fun AspectPerformanceCard(
     aspectAverages: Map<Aspect, Float>,
-    selectedDuration: DurationFilter,
-    onDurationSelected: (DurationFilter) -> Unit,
     selectedRatingType: RatingType,
     onRatingTypeSelected: (RatingType) -> Unit,
     isLoading: Boolean,
@@ -57,14 +54,6 @@ fun AspectPerformanceCard(
             )
 
             Spacer(modifier = Modifier.height(Spacing.sm))
-
-            // Duration filter chips
-            DurationFilterChips(
-                selectedDuration = selectedDuration,
-                onDurationSelected = onDurationSelected,
-            )
-
-            Spacer(modifier = Modifier.height(Spacing.xs))
 
             // Rating type filter chips
             FlowRow(

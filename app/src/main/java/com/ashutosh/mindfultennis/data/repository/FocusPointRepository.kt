@@ -19,4 +19,10 @@ interface FocusPointRepository {
     suspend fun delete(focusPointId: String): Result<Unit>
 
     suspend fun deleteAllForUser(userId: String)
+
+    /**
+     * Returns all focus points for the user with their average performance score
+     * computed from completed sessions that used each focus point.
+     */
+    suspend fun getAllWithAverageScore(userId: String): List<FocusPoint>
 }

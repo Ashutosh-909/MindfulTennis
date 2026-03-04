@@ -1,18 +1,23 @@
 package com.ashutosh.mindfultennis.ui.startsession
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -21,15 +26,21 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TooltipBox
+import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -37,6 +48,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ashutosh.mindfultennis.ui.components.RequestNotificationPermission
 import com.ashutosh.mindfultennis.ui.theme.Spacing
+import com.ashutosh.mindfultennis.util.ScoreCalculator
+import kotlinx.coroutines.launch
 
 /**
  * Start Session screen.
@@ -141,11 +154,45 @@ private fun StartSessionContent(
 
             // Recent focus points
             if (state.recentFocusPoints.isNotEmpty()) {
-                Text(
-                    text = "Recent Focus Points:",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                )
+                val tooltipState = rememberTooltipState()
+                val scope = rememberCoroutineScope()
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = "Recent Focus Points:",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.weight(1f),
+                    )
+                    TooltipBox(
+                        positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+                        tooltip = {
+                            PlainTooltip {
+                                Text(
+                                    text = "Chips are color-coded by your average " +
+                                        "performance when using each focus point.\n" +
+                                        "Green (\u226570) = Great\n" +
+                                        "Amber (40\u201369) = Average\n" +
+                                        "Red (<40) = Needs Work\n" +
+                                        "Grey = No rated sessions yet",
+                                )
+                            }
+                        },
+                        state = tooltipState,
+                    ) {
+                        IconButton(
+                            onClick = { scope.launch { tooltipState.show() } },
+                            modifier = Modifier.size(24.dp),
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Info,
+                                contentDescription = "Focus point color info",
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.size(18.dp),
+                            )
+                        }
+                    }
+                }
 
                 Spacer(modifier = Modifier.height(Spacing.sm))
 
@@ -154,11 +201,26 @@ private fun StartSessionContent(
                     verticalArrangement = Arrangement.spacedBy(Spacing.xs),
                 ) {
                     state.recentFocusPoints.forEach { focusPoint ->
+                        val chipColor = ScoreCalculator.sessionColor(focusPoint.averageScore)
+
                         AssistChip(
                             onClick = {
                                 onEvent(StartSessionUiEvent.FocusPointChipClicked(focusPoint.text))
                             },
-                            label = { Text(focusPoint.text) },
+                            label = {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Text(focusPoint.text)
+                                    if (focusPoint.averageScore != null) {
+                                        Spacer(modifier = Modifier.width(4.dp))
+                                        Text(
+                                            text = "(${focusPoint.averageScore})",
+                                            style = MaterialTheme.typography.labelSmall,
+                                            color = chipColor,
+                                        )
+                                    }
+                                }
+                            },
+                            border = BorderStroke(1.dp, chipColor),
                         )
                     }
                 }

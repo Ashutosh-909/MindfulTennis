@@ -64,9 +64,6 @@ class HomeViewModel @Inject constructor(
             val duration = runCatching { DurationFilter.valueOf(savedFilter) }
                 .getOrDefault(DurationFilter.ONE_MONTH)
             val savedWinLossOpponents = userPreferences.selectedOpponentIds.first()
-            val savedAspectDuration = userPreferences.aspectDurationFilter.first()
-            val aspectDuration = runCatching { DurationFilter.valueOf(savedAspectDuration) }
-                .getOrDefault(DurationFilter.ONE_MONTH)
             val savedAspectRatingType = userPreferences.aspectRatingType.first()
             val aspectRatingType = runCatching { RatingType.valueOf(savedAspectRatingType) }
                 .getOrDefault(RatingType.SELF)
@@ -75,7 +72,6 @@ class HomeViewModel @Inject constructor(
                 it.copy(
                     selectedDuration = duration,
                     selectedWinLossOpponentIds = savedWinLossOpponents,
-                    selectedAspectDuration = aspectDuration,
                     selectedAspectRatingType = aspectRatingType,
                 )
             }
@@ -109,7 +105,6 @@ class HomeViewModel @Inject constructor(
             is HomeUiEvent.DurationChanged -> onDurationChanged(event.duration)
             is HomeUiEvent.WinLossOpponentFilterChanged -> onWinLossOpponentFilterChanged(event.ids)
             is HomeUiEvent.AspectOpponentFilterChanged -> onAspectOpponentFilterChanged(event.ids)
-            is HomeUiEvent.AspectDurationChanged -> onAspectDurationChanged(event.duration)
             is HomeUiEvent.AspectRatingTypeChanged -> onAspectRatingTypeChanged(event.ratingType)
             is HomeUiEvent.RetryClicked -> retry()
             is HomeUiEvent.RefreshClicked -> currentUserId?.let { performSync(it) }
@@ -181,8 +176,10 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             focusPointRepository.observeAll(userId)
                 .catch { /* ignore */ }
-                .collectLatest { points ->
-                    _uiState.update { it.copy(focusPoints = points) }
+                .collectLatest { _ ->
+                    // Re-compute average scores whenever the focus points list changes
+                    val pointsWithScores = focusPointRepository.getAllWithAverageScore(userId)
+                    _uiState.update { it.copy(focusPoints = pointsWithScores) }
                 }
         }
     }
@@ -232,7 +229,7 @@ class HomeViewModel @Inject constructor(
         aspectJob = viewModelScope.launch {
             getAspectAveragesUseCase(
                 userId,
-                _uiState.value.selectedAspectDuration,
+                _uiState.value.selectedDuration,
                 _uiState.value.selectedAspectOpponentIds,
                 _uiState.value.selectedAspectRatingType,
             )
@@ -253,15 +250,8 @@ class HomeViewModel @Inject constructor(
         currentUserId?.let { userId ->
             refreshTrend(userId)
             refreshWinLoss(userId)
+            refreshAspects(userId)
         }
-    }
-
-    private fun onAspectDurationChanged(duration: DurationFilter) {
-        _uiState.update { it.copy(selectedAspectDuration = duration) }
-        viewModelScope.launch {
-            userPreferences.setAspectDurationFilter(duration.name)
-        }
-        currentUserId?.let { refreshAspects(it) }
     }
 
     private fun onAspectRatingTypeChanged(ratingType: RatingType) {

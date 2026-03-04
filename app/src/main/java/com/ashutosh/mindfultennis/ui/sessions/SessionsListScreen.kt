@@ -49,7 +49,7 @@ import com.ashutosh.mindfultennis.domain.model.DurationFilter
 import com.ashutosh.mindfultennis.domain.model.Session
 import com.ashutosh.mindfultennis.ui.components.ErrorRetryCard
 import com.ashutosh.mindfultennis.ui.components.LoadingShimmer
-import com.ashutosh.mindfultennis.ui.home.components.DurationFilterChips
+import com.ashutosh.mindfultennis.ui.home.components.TimeRangeSegmentedControl
 import com.ashutosh.mindfultennis.ui.theme.Spacing
 import com.ashutosh.mindfultennis.util.DateTimeUtils
 import com.ashutosh.mindfultennis.util.ScoreCalculator
@@ -108,10 +108,10 @@ private fun SessionsListContent(
                 .fillMaxSize()
                 .padding(innerPadding),
         ) {
-            // Duration filter chips
-            DurationFilterChips(
-                selectedDuration = state.selectedDuration,
-                onDurationSelected = { onEvent(SessionsListUiEvent.DurationChanged(it)) },
+            // Duration filter
+            TimeRangeSegmentedControl(
+                selected = state.selectedDuration,
+                onSelected = { onEvent(SessionsListUiEvent.DurationChanged(it)) },
                 modifier = Modifier.padding(horizontal = Spacing.md, vertical = Spacing.sm),
             )
 

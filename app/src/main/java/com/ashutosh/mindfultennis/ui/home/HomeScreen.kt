@@ -36,6 +36,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ashutosh.mindfultennis.ui.home.components.AspectPerformanceCard
 import com.ashutosh.mindfultennis.ui.home.components.FocusPointsRow
 import com.ashutosh.mindfultennis.ui.home.components.PerformanceChart
+import com.ashutosh.mindfultennis.ui.home.components.TimeRangeSegmentedControl
 import com.ashutosh.mindfultennis.ui.home.components.WinLossCard
 import com.ashutosh.mindfultennis.ui.theme.Spacing
 import com.ashutosh.mindfultennis.util.DateTimeUtils
@@ -117,6 +118,14 @@ private fun HomeScreenContent(
                 ),
                 verticalArrangement = Arrangement.spacedBy(Spacing.md),
             ) {
+                // Global time-range selector
+                item(key = "time_range") {
+                    TimeRangeSegmentedControl(
+                        selected = state.selectedDuration,
+                        onSelected = { onEvent(HomeUiEvent.DurationChanged(it)) },
+                    )
+                }
+
                 // Active session banner
                 if (hasActiveSession) {
                     item(key = "active_banner") {
@@ -132,7 +141,6 @@ private fun HomeScreenContent(
                     PerformanceChart(
                         trend = state.performanceTrend,
                         selectedDuration = state.selectedDuration,
-                        onDurationSelected = { onEvent(HomeUiEvent.DurationChanged(it)) },
                         isLoading = state.isLoading,
                         error = state.trendError,
                         onRetry = { onEvent(HomeUiEvent.RetryClicked) },
@@ -163,8 +171,6 @@ private fun HomeScreenContent(
                 item(key = "aspect_performance") {
                     AspectPerformanceCard(
                         aspectAverages = state.aspectAverages,
-                        selectedDuration = state.selectedAspectDuration,
-                        onDurationSelected = { onEvent(HomeUiEvent.AspectDurationChanged(it)) },
                         selectedRatingType = state.selectedAspectRatingType,
                         onRatingTypeSelected = { onEvent(HomeUiEvent.AspectRatingTypeChanged(it)) },
                         isLoading = state.isLoading,

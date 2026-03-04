@@ -60,9 +60,15 @@ class StartSessionViewModel @Inject constructor(
                 if (authState is AuthState.Authenticated) {
                     focusPointRepository.observeAll(authState.userId)
                         .catch { /* ignore */ }
-                        .collectLatest { points ->
+                        .collectLatest { _ ->
+                            // Re-compute average scores whenever focus points change
+                            val pointsWithScores = focusPointRepository
+                                .getAllWithAverageScore(authState.userId)
                             _uiState.update {
-                                it.copy(recentFocusPoints = points.take(MAX_RECENT_FOCUS_POINTS))
+                                it.copy(
+                                    recentFocusPoints = pointsWithScores
+                                        .take(MAX_RECENT_FOCUS_POINTS),
+                                )
                             }
                         }
                 }

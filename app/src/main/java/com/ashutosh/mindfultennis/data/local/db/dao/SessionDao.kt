@@ -75,6 +75,24 @@ interface SessionDao {
     @Query("SELECT * FROM sessions WHERE user_id = :userId AND updated_at > :afterMs")
     suspend fun getUpdatedAfter(userId: String, afterMs: Long): List<SessionEntity>
 
+    // ── Focus Point Performance ────────────────────────────────────────
+
+    /**
+     * Returns the average overall_score from completed sessions whose
+     * focus_note contains the given text. Returns null if no matching
+     * sessions have scores.
+     */
+    @Query(
+        """
+        SELECT AVG(overall_score) FROM sessions
+        WHERE user_id = :userId
+          AND is_active = 0
+          AND overall_score IS NOT NULL
+          AND focus_note LIKE '%' || :focusText || '%'
+        """
+    )
+    suspend fun getAverageScoreForFocusText(userId: String, focusText: String): Double?
+
     // ── Delete ────────────────────────────────────────────────────────
 
     @Query("DELETE FROM sessions WHERE id = :sessionId")
