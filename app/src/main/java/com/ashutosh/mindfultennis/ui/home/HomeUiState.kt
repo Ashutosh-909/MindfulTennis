@@ -15,6 +15,7 @@ import com.ashutosh.mindfultennis.domain.model.WinLossRecord
 @Immutable
 data class HomeUiState(
     val isLoading: Boolean = true,
+    val isSyncing: Boolean = false,
     val performanceTrend: List<PerformanceTrend> = emptyList(),
     val selectedDuration: DurationFilter = DurationFilter.ONE_MONTH,
     val winLossRecord: WinLossRecord? = null,
@@ -42,5 +43,6 @@ sealed interface HomeUiEvent {
     data object EndSessionClicked : HomeUiEvent
     data object ShowSessionsClicked : HomeUiEvent
     data object RetryClicked : HomeUiEvent
+    data object RefreshClicked : HomeUiEvent
     data object ErrorDismissed : HomeUiEvent
 }

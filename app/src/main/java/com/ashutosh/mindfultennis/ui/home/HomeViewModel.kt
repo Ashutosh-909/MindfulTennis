@@ -2,12 +2,15 @@ package com.ashutosh.mindfultennis.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import android.app.Application
 import com.ashutosh.mindfultennis.data.local.datastore.UserPreferences
 import com.ashutosh.mindfultennis.data.repository.AuthRepository
 import com.ashutosh.mindfultennis.data.repository.AuthState
 import com.ashutosh.mindfultennis.data.repository.FocusPointRepository
 import com.ashutosh.mindfultennis.data.repository.OpponentRepository
 import com.ashutosh.mindfultennis.data.repository.SessionRepository
+import com.ashutosh.mindfultennis.data.sync.SyncManager
+import com.ashutosh.mindfultennis.data.sync.SyncWorker
 import com.ashutosh.mindfultennis.domain.model.DurationFilter
 import com.ashutosh.mindfultennis.domain.usecase.GetAspectAveragesUseCase
 import com.ashutosh.mindfultennis.domain.usecase.GetPerformanceTrendUseCase
@@ -28,11 +31,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    private val application: Application,
     private val authRepository: AuthRepository,
     private val sessionRepository: SessionRepository,
     private val focusPointRepository: FocusPointRepository,
     private val opponentRepository: OpponentRepository,
     private val userPreferences: UserPreferences,
+    private val syncManager: SyncManager,
     private val getPerformanceTrendUseCase: GetPerformanceTrendUseCase,
     private val getWinLossRecordUseCase: GetWinLossRecordUseCase,
     private val getAspectAveragesUseCase: GetAspectAveragesUseCase,
@@ -68,7 +73,12 @@ class HomeViewModel @Inject constructor(
                 when (authState) {
                     is AuthState.Authenticated -> {
                         currentUserId = authState.userId
-                        loadAllData(authState.userId)
+                        // Cache the user ID for SyncWorker
+                        userPreferences.setCachedUserId(authState.userId)
+                        // Enqueue the periodic SyncWorker
+                        SyncWorker.enqueue(application)
+                        // Run an immediate sync to pull remote data into Room
+                        performSync(authState.userId)
                     }
                     is AuthState.Unauthenticated -> {
                         currentUserId = null
@@ -88,11 +98,24 @@ class HomeViewModel @Inject constructor(
             is HomeUiEvent.WinLossOpponentFilterChanged -> onWinLossOpponentFilterChanged(event.ids)
             is HomeUiEvent.AspectOpponentFilterChanged -> onAspectOpponentFilterChanged(event.ids)
             is HomeUiEvent.RetryClicked -> retry()
+            is HomeUiEvent.RefreshClicked -> currentUserId?.let { performSync(it) }
             is HomeUiEvent.ErrorDismissed -> _uiState.update { it.copy(error = null) }
             // Navigation events handled by screen
             is HomeUiEvent.StartSessionClicked,
             is HomeUiEvent.EndSessionClicked,
             is HomeUiEvent.ShowSessionsClicked -> { /* handled by HomeScreen */ }
+        }
+    }
+
+    /**
+     * Triggers an immediate sync with Supabase, then loads all data from Room.
+     */
+    private fun performSync(userId: String) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isSyncing = true) }
+            syncManager.sync(userId)
+            _uiState.update { it.copy(isSyncing = false) }
+            loadAllData(userId)
         }
     }
 
