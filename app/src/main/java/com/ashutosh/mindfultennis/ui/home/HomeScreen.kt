@@ -30,6 +30,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -103,11 +104,17 @@ private fun HomeScreenContent(
                 .fillMaxSize()
                 .padding(innerPadding),
         ) {
-            // Main scrollable content
-            LazyColumn(
+            // Main scrollable content with pull-to-refresh
+            PullToRefreshBox(
+                isRefreshing = state.isSyncing,
+                onRefresh = { onEvent(HomeUiEvent.RefreshClicked) },
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth(),
+            ) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize(),
                 contentPadding = PaddingValues(
                     start = Spacing.md,
                     end = Spacing.md,
@@ -178,6 +185,7 @@ private fun HomeScreenContent(
                     )
                 }
             }
+            } // end PullToRefreshBox
 
             // Bottom button area
             BottomButtonBar(

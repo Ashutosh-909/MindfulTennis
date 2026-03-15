@@ -64,9 +64,12 @@ class FocusPointRepositoryImpl @Inject constructor(
     override suspend fun getAllWithAverageScore(userId: String): List<FocusPoint> =
         withContext(Dispatchers.IO) {
             val entities = focusPointDao.getAllForUser(userId)
-            entities.map { entity ->
-                val avgScore = sessionDao.getAverageScoreForFocusText(userId, entity.text)
-                entity.toDomain().copy(averageScore = avgScore?.toInt())
-            }
+            entities
+                .groupBy { it.text.trim().lowercase() }
+                .map { (_, dupes) -> dupes.maxBy { it.createdAt } }
+                .map { entity ->
+                    val avgScore = sessionDao.getAverageScoreForFocusText(userId, entity.text)
+                    entity.toDomain().copy(averageScore = avgScore?.toInt())
+                }
         }
 }
