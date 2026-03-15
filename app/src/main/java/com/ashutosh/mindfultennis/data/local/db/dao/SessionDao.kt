@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import androidx.room.Upsert
 import com.ashutosh.mindfultennis.data.local.db.entity.SessionEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -13,10 +14,10 @@ interface SessionDao {
 
     // ── Inserts / Updates ─────────────────────────────────────────────
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Upsert
     suspend fun upsert(session: SessionEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Upsert
     suspend fun upsertAll(sessions: List<SessionEntity>)
 
     @Update
