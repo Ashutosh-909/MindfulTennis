@@ -37,6 +37,9 @@ data class SetScoreEntity(
     @ColumnInfo(name = "opponent_score")
     val opponentScore: Int,
 
+    @ColumnInfo(name = "opponent_id")
+    val opponentId: String? = null,
+
     @ColumnInfo(name = "sync_status")
     val syncStatus: String = SyncStatus.PENDING.name,
 )

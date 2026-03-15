@@ -95,6 +95,15 @@ class SessionDetailViewModel @Inject constructor(
                     .catch { /* ignore */ }
                     .collectLatest { scores ->
                         _uiState.update { it.copy(setScores = scores) }
+                        // Load opponent names for set scores
+                        val opponentIds = scores.mapNotNull { it.opponentId }.distinct()
+                        val opponentNames = mutableMapOf<String, String>()
+                        for (id in opponentIds) {
+                            opponentRepository.getById(id)?.let { opp ->
+                                opponentNames[id] = opp.name
+                            }
+                        }
+                        _uiState.update { it.copy(setOpponentNames = opponentNames) }
                     }
             }
         }

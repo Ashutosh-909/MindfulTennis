@@ -151,7 +151,8 @@ CREATE TABLE IF NOT EXISTS set_scores (
     session_id      TEXT NOT NULL REFERENCES sessions(id) ON DELETE CASCADE,
     set_number      INTEGER NOT NULL,
     user_score      INTEGER NOT NULL,
-    opponent_score  INTEGER NOT NULL
+    opponent_score  INTEGER NOT NULL,
+    opponent_id     TEXT REFERENCES opponents(id) ON DELETE SET NULL
 );
 
 ALTER TABLE set_scores ENABLE ROW LEVEL SECURITY;

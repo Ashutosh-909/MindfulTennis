@@ -16,6 +16,7 @@ data class SessionDetailUiState(
     val selfRatings: List<Rating> = emptyList(),
     val partnerRatings: List<Rating> = emptyList(),
     val setScores: List<SetScore> = emptyList(),
+    val setOpponentNames: Map<String, String> = emptyMap(),
     val opponent1: Opponent? = null,
     val opponent2: Opponent? = null,
     val partner: Partner? = null,

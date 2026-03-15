@@ -9,4 +9,5 @@ data class SetScore(
     val setNumber: Int,
     val userScore: Int,
     val opponentScore: Int,
+    val opponentId: String? = null,
 )

@@ -183,7 +183,10 @@ private fun SessionDetailContent(
                     // Set scores
                     if (state.setScores.isNotEmpty()) {
                         item(key = "set_scores") {
-                            SetScoresCard(setScores = state.setScores)
+                            SetScoresCard(
+                                setScores = state.setScores,
+                                opponentNames = state.setOpponentNames,
+                            )
                         }
                     }
 
@@ -434,6 +437,7 @@ private fun RatingRow(
 @Composable
 private fun SetScoresCard(
     setScores: List<SetScore>,
+    opponentNames: Map<String, String> = emptyMap(),
     modifier: Modifier = Modifier,
 ) {
     val winResult = ScoreCalculator.isWin(setScores)
@@ -515,6 +519,7 @@ private fun SetScoresCard(
 
             setScores.sortedBy { it.setNumber }.forEach { score ->
                 val setWon = score.userScore > score.opponentScore
+                val oppName = score.opponentId?.let { opponentNames[it] }
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -522,7 +527,8 @@ private fun SetScoresCard(
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Text(
-                        text = "Set ${score.setNumber}",
+                        text = "Set ${score.setNumber}" +
+                            if (oppName != null) " vs $oppName" else "",
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.weight(1f),
                     )

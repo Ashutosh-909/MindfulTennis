@@ -214,11 +214,12 @@ class EndSessionViewModel @Inject constructor(
                         setNumber = index + 1,
                         userScore = row.userScore.toIntOrNull() ?: 0,
                         opponentScore = row.opponentScore.toIntOrNull() ?: 0,
+                        opponentId = row.opponent?.id,
                     )
                 } ?: emptyList()
 
             val matchType = setScoreData?.matchType ?: MatchType.SINGLES
-            val opponent1Id = setScoreData?.opponent1?.id
+            val opponent1Id = setScores.firstOrNull { it.opponentId != null }?.opponentId
             val opponent2Id = if (matchType == MatchType.DOUBLES) setScoreData?.opponent2?.id else null
             val partnerId = if (matchType == MatchType.DOUBLES) setScoreData?.partner?.id else null
 

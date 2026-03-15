@@ -13,4 +13,5 @@ data class SetScoreDto(
     @SerialName("set_number") val setNumber: Int,
     @SerialName("user_score") val userScore: Int,
     @SerialName("opponent_score") val opponentScore: Int,
+    @SerialName("opponent_id") val opponentId: String? = null,
 )

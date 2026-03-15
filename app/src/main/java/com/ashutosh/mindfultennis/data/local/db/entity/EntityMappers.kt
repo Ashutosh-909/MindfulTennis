@@ -275,6 +275,7 @@ fun SetScoreEntity.toDomain(): SetScore = SetScore(
     setNumber = setNumber,
     userScore = userScore,
     opponentScore = opponentScore,
+    opponentId = opponentId,
 )
 
 fun SetScore.toEntity(syncStatus: SyncStatus = SyncStatus.PENDING): SetScoreEntity = SetScoreEntity(
@@ -283,6 +284,7 @@ fun SetScore.toEntity(syncStatus: SyncStatus = SyncStatus.PENDING): SetScoreEnti
     setNumber = setNumber,
     userScore = userScore,
     opponentScore = opponentScore,
+    opponentId = opponentId,
     syncStatus = syncStatus.name,
 )
 
@@ -292,6 +294,7 @@ fun SetScoreEntity.toDto(): SetScoreDto = SetScoreDto(
     setNumber = setNumber,
     userScore = userScore,
     opponentScore = opponentScore,
+    opponentId = opponentId,
 )
 
 fun SetScoreDto.toEntity(syncStatus: SyncStatus = SyncStatus.SYNCED): SetScoreEntity =
@@ -301,5 +304,6 @@ fun SetScoreDto.toEntity(syncStatus: SyncStatus = SyncStatus.SYNCED): SetScoreEn
         setNumber = setNumber,
         userScore = userScore,
         opponentScore = opponentScore,
+        opponentId = opponentId,
         syncStatus = syncStatus.name,
     )

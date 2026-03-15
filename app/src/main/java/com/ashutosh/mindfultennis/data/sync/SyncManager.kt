@@ -52,13 +52,18 @@ class SyncManager @Inject constructor(
         runCatching {
             Log.d(TAG, "Starting sync for user $userId")
 
-            pushPendingSessions()
-            pushPendingSelfRatings()
-            pushPendingPartnerRatings()
-            pushPendingSetScores()
+            // Push entities with no FK dependencies first
             pushPendingFocusPoints()
             pushPendingOpponents()
             pushPendingPartners()
+
+            // Sessions depend on opponents + partners via FK
+            pushPendingSessions()
+
+            // Ratings and scores depend on sessions (and set_scores on opponents) via FK
+            pushPendingSelfRatings()
+            pushPendingPartnerRatings()
+            pushPendingSetScores()
 
             val lastSync = userPreferences.lastSyncTimestamp.first()
             pullRemoteSessions(userId, lastSync)
@@ -95,6 +100,7 @@ class SyncManager @Inject constructor(
         val grouped = pending.groupBy { it.sessionId }
         for ((sessionId, ratings) in grouped) {
             try {
+                remoteDataSource.deleteSelfRatingsForSession(sessionId)
                 remoteDataSource.upsertSelfRatings(ratings.map { it.toDto() })
                 selfRatingDao.updateSyncStatusForSession(sessionId, SyncStatus.SYNCED.name)
             } catch (e: Exception) {
@@ -111,6 +117,7 @@ class SyncManager @Inject constructor(
         val grouped = pending.groupBy { it.sessionId }
         for ((sessionId, ratings) in grouped) {
             try {
+                remoteDataSource.deletePartnerRatingsForSession(sessionId)
                 remoteDataSource.upsertPartnerRatings(ratings.map { it.toDto() })
                 partnerRatingDao.updateSyncStatusForSession(sessionId, SyncStatus.SYNCED.name)
             } catch (e: Exception) {
@@ -127,6 +134,7 @@ class SyncManager @Inject constructor(
         val grouped = pending.groupBy { it.sessionId }
         for ((sessionId, scores) in grouped) {
             try {
+                remoteDataSource.deleteSetScoresForSession(sessionId)
                 remoteDataSource.upsertSetScores(scores.map { it.toDto() })
                 setScoreDao.updateSyncStatusForSession(sessionId, SyncStatus.SYNCED.name)
             } catch (e: Exception) {

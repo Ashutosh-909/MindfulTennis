@@ -54,7 +54,6 @@ import com.ashutosh.mindfultennis.ui.theme.Spacing
  */
 data class SetScoreInputData(
     val matchType: MatchType = MatchType.SINGLES,
-    val opponent1: Opponent? = null,
     val opponent2: Opponent? = null,
     val partner: Partner? = null,
     val sets: List<SetScoreRow> = listOf(SetScoreRow()),
@@ -63,6 +62,7 @@ data class SetScoreInputData(
 data class SetScoreRow(
     val userScore: String = "",
     val opponentScore: String = "",
+    val opponent: Opponent? = null,
 )
 
 /**
@@ -159,15 +159,12 @@ private fun SetScoreSummaryCard(
             }
 
             // Opponent info
-            val opp1Name = data.opponent1?.name
             val opp2Name = data.opponent2?.name
-            if (opp1Name != null) {
-                val oppText = if (data.matchType == MatchType.DOUBLES && opp2Name != null) {
-                    "vs. $opp1Name, $opp2Name"
-                } else {
-                    "vs. $opp1Name"
-                }
-                Text(text = oppText, style = MaterialTheme.typography.bodyMedium)
+            if (data.matchType == MatchType.DOUBLES && opp2Name != null) {
+                Text(
+                    text = "vs. Opponent 2: $opp2Name",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
             }
 
             // Partner info (doubles)
@@ -184,7 +181,8 @@ private fun SetScoreSummaryCard(
             val scoresText = data.sets
                 .filter { it.userScore.isNotBlank() && it.opponentScore.isNotBlank() }
                 .mapIndexed { index, row ->
-                    "Set ${index + 1}: ${row.userScore}-${row.opponentScore}"
+                    val oppLabel = row.opponent?.name?.let { " vs $it" } ?: ""
+                    "Set ${index + 1}: ${row.userScore}-${row.opponentScore}$oppLabel"
                 }
                 .joinToString("  ")
             if (scoresText.isNotBlank()) {
@@ -206,7 +204,6 @@ private fun SetScoreDialog(
     onCreatePartner: (String) -> Unit,
 ) {
     var matchType by rememberSaveable { mutableStateOf(initialData.matchType) }
-    var opponent1 by remember { mutableStateOf(initialData.opponent1) }
     var opponent2 by remember { mutableStateOf(initialData.opponent2) }
     var partner by remember { mutableStateOf(initialData.partner) }
     var sets by remember { mutableStateOf(initialData.sets.ifEmpty { listOf(SetScoreRow()) }) }
@@ -220,7 +217,6 @@ private fun SetScoreDialog(
                     onSave(
                         SetScoreInputData(
                             matchType = matchType,
-                            opponent1 = opponent1,
                             opponent2 = if (matchType == MatchType.DOUBLES) opponent2 else null,
                             partner = if (matchType == MatchType.DOUBLES) partner else null,
                             sets = sets,
@@ -258,27 +254,13 @@ private fun SetScoreDialog(
 
                 Spacer(Modifier.height(Spacing.md))
 
-                // Opponent 1
-                Text("Opponent${if (matchType == MatchType.DOUBLES) " 1" else ""}:",
-                    style = MaterialTheme.typography.labelLarge)
-                Spacer(Modifier.height(Spacing.xs))
-                OpponentDropdown(
-                    selectedOpponent = opponent1,
-                    opponents = opponents,
-                    onSelected = { opponent1 = it },
-                    onCreateNew = onCreateOpponent,
-                    label = "Opponent${if (matchType == MatchType.DOUBLES) " 1" else ""}",
-                )
-
-                // Doubles-only fields
+                // Doubles-only fields (Opponent 2 and Partner stay at dialog level)
                 if (matchType == MatchType.DOUBLES) {
-                    Spacer(Modifier.height(Spacing.sm))
-
                     Text("Opponent 2:", style = MaterialTheme.typography.labelLarge)
                     Spacer(Modifier.height(Spacing.xs))
                     OpponentDropdown(
                         selectedOpponent = opponent2,
-                        opponents = opponents.filter { it.id != opponent1?.id },
+                        opponents = opponents,
                         onSelected = { opponent2 = it },
                         onCreateNew = onCreateOpponent,
                         label = "Opponent 2",
@@ -308,6 +290,8 @@ private fun SetScoreDialog(
                         setNumber = index + 1,
                         userScore = setRow.userScore,
                         opponentScore = setRow.opponentScore,
+                        selectedOpponent = setRow.opponent,
+                        opponents = opponents,
                         onUserScoreChanged = { value ->
                             sets = sets.toMutableList().also {
                                 it[index] = it[index].copy(userScore = value.filter { c -> c.isDigit() }.take(2))
@@ -318,6 +302,12 @@ private fun SetScoreDialog(
                                 it[index] = it[index].copy(opponentScore = value.filter { c -> c.isDigit() }.take(2))
                             }
                         },
+                        onOpponentSelected = { opponent ->
+                            sets = sets.toMutableList().also {
+                                it[index] = it[index].copy(opponent = opponent)
+                            }
+                        },
+                        onCreateOpponent = onCreateOpponent,
                         canRemove = index > 0,
                         onRemove = {
                             sets = sets.toMutableList().also { it.removeAt(index) }
@@ -349,44 +339,58 @@ private fun SetScoreRowInput(
     setNumber: Int,
     userScore: String,
     opponentScore: String,
+    selectedOpponent: Opponent?,
+    opponents: List<Opponent>,
     onUserScoreChanged: (String) -> Unit,
     onOpponentScoreChanged: (String) -> Unit,
+    onOpponentSelected: (Opponent?) -> Unit,
+    onCreateOpponent: (String) -> Unit,
     canRemove: Boolean,
     onRemove: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-    ) {
-        Text(
-            text = "Set $setNumber:",
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.width(48.dp),
-        )
-        OutlinedTextField(
-            value = userScore,
-            onValueChange = onUserScoreChanged,
-            modifier = Modifier.width(56.dp),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            singleLine = true,
-            label = { Text("You") },
-        )
-        Text("–", style = MaterialTheme.typography.titleMedium)
-        OutlinedTextField(
-            value = opponentScore,
-            onValueChange = onOpponentScoreChanged,
-            modifier = Modifier.width(56.dp),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            singleLine = true,
-            label = { Text("Opp") },
-        )
-        if (canRemove) {
-            IconButton(onClick = onRemove) {
-                Icon(Icons.Default.Delete, contentDescription = "Remove set $setNumber")
+    Column(modifier = modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+        ) {
+            Text(
+                text = "Set $setNumber:",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.width(48.dp),
+            )
+            OutlinedTextField(
+                value = userScore,
+                onValueChange = onUserScoreChanged,
+                modifier = Modifier.width(56.dp),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                singleLine = true,
+                label = { Text("You") },
+            )
+            Text("–", style = MaterialTheme.typography.titleMedium)
+            OutlinedTextField(
+                value = opponentScore,
+                onValueChange = onOpponentScoreChanged,
+                modifier = Modifier.width(56.dp),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                singleLine = true,
+                label = { Text("Opp") },
+            )
+            if (canRemove) {
+                IconButton(onClick = onRemove) {
+                    Icon(Icons.Default.Delete, contentDescription = "Remove set $setNumber")
+                }
             }
         }
+        Spacer(Modifier.height(Spacing.xs))
+        OpponentDropdown(
+            selectedOpponent = selectedOpponent,
+            opponents = opponents,
+            onSelected = onOpponentSelected,
+            onCreateNew = onCreateOpponent,
+            label = "Opponent (Set $setNumber)",
+        )
     }
 }
 

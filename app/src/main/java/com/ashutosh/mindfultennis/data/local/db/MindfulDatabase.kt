@@ -27,7 +27,7 @@ import com.ashutosh.mindfultennis.data.local.db.entity.SetScoreEntity
         PartnerEntity::class,
         SetScoreEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = false,
 )
 abstract class MindfulDatabase : RoomDatabase() {
