@@ -65,6 +65,18 @@ interface SessionDao {
     )
     suspend fun getSessionsInRange(userId: String, fromMs: Long, toMs: Long): List<SessionEntity>
 
+    // ── Incomplete data detection ─────────────────────────────────────
+
+    @Query(
+        """
+        SELECT s.id FROM sessions s
+        WHERE s.user_id = :userId
+          AND s.is_active = 0
+          AND NOT EXISTS (SELECT 1 FROM self_ratings sr WHERE sr.session_id = s.id)
+        """
+    )
+    suspend fun getSessionIdsWithoutRatings(userId: String): List<String>
+
     // ── Sync ──────────────────────────────────────────────────────────
 
     @Query("SELECT * FROM sessions WHERE sync_status = :status")

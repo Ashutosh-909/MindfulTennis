@@ -190,41 +190,62 @@ class SyncManager @Inject constructor(
     private suspend fun pullRemoteSessions(userId: String, lastSyncMs: Long) {
         try {
             val remoteSessions = remoteDataSource.getSessionsUpdatedAfter(userId, lastSyncMs)
+
+            // Upsert newly updated sessions (LWW merge)
+            val newSessionIds = mutableListOf<String>()
             for (remoteDto in remoteSessions) {
                 val local = sessionDao.getById(remoteDto.id)
                 if (local == null || remoteDto.updatedAt > local.updatedAt) {
-                    // Remote is newer or row doesn't exist locally — accept remote
                     sessionDao.upsert(remoteDto.toEntity(SyncStatus.SYNCED))
                 }
-                // Also pull associated data for each session
-                pullRatingsAndScoresForSession(remoteDto.id)
+                newSessionIds.add(remoteDto.id)
+            }
+
+            // Also find sessions in Room that are missing ratings/scores
+            // (self-healing for previously failed syncs)
+            val incompleteIds = sessionDao.getSessionIdsWithoutRatings(userId)
+            val allIds = (newSessionIds + incompleteIds).distinct()
+
+            if (allIds.isNotEmpty()) {
+                Log.d(TAG, "Pulling ratings/scores for ${allIds.size} sessions " +
+                    "(${newSessionIds.size} new, ${incompleteIds.size} incomplete)")
+                pullRatingsAndScoresBulk(allIds)
             }
         } catch (e: Exception) {
             Log.w(TAG, "Failed to pull remote sessions", e)
         }
     }
 
-    private suspend fun pullRatingsAndScoresForSession(sessionId: String) {
+    private suspend fun pullRatingsAndScoresBulk(sessionIds: List<String>) {
         try {
-            val remoteSelfRatings = remoteDataSource.getSelfRatingsForSession(sessionId)
-            if (remoteSelfRatings.isNotEmpty()) {
-                selfRatingDao.deleteForSession(sessionId)
-                selfRatingDao.upsertAll(remoteSelfRatings.map { it.toEntity(SyncStatus.SYNCED) })
+            val allSelfRatings = remoteDataSource.getSelfRatingsForSessions(sessionIds)
+            if (allSelfRatings.isNotEmpty()) {
+                val grouped = allSelfRatings.groupBy { it.sessionId }
+                for ((sessionId, ratings) in grouped) {
+                    selfRatingDao.deleteForSession(sessionId)
+                    selfRatingDao.upsertAll(ratings.map { it.toEntity(SyncStatus.SYNCED) })
+                }
             }
 
-            val remotePartnerRatings = remoteDataSource.getPartnerRatingsForSession(sessionId)
-            if (remotePartnerRatings.isNotEmpty()) {
-                partnerRatingDao.deleteForSession(sessionId)
-                partnerRatingDao.upsertAll(remotePartnerRatings.map { it.toEntity(SyncStatus.SYNCED) })
+            val allPartnerRatings = remoteDataSource.getPartnerRatingsForSessions(sessionIds)
+            if (allPartnerRatings.isNotEmpty()) {
+                val grouped = allPartnerRatings.groupBy { it.sessionId }
+                for ((sessionId, ratings) in grouped) {
+                    partnerRatingDao.deleteForSession(sessionId)
+                    partnerRatingDao.upsertAll(ratings.map { it.toEntity(SyncStatus.SYNCED) })
+                }
             }
 
-            val remoteSetScores = remoteDataSource.getSetScoresForSession(sessionId)
-            if (remoteSetScores.isNotEmpty()) {
-                setScoreDao.deleteForSession(sessionId)
-                setScoreDao.upsertAll(remoteSetScores.map { it.toEntity(SyncStatus.SYNCED) })
+            val allSetScores = remoteDataSource.getSetScoresForSessions(sessionIds)
+            if (allSetScores.isNotEmpty()) {
+                val grouped = allSetScores.groupBy { it.sessionId }
+                for ((sessionId, scores) in grouped) {
+                    setScoreDao.deleteForSession(sessionId)
+                    setScoreDao.upsertAll(scores.map { it.toEntity(SyncStatus.SYNCED) })
+                }
             }
         } catch (e: Exception) {
-            Log.w(TAG, "Failed to pull ratings/scores for session $sessionId", e)
+            Log.w(TAG, "Failed to pull ratings/scores in bulk", e)
         }
     }
 

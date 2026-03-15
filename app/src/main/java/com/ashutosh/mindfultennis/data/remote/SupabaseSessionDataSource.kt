@@ -71,6 +71,16 @@ class SupabaseSessionDataSource @Inject constructor(
             .decodeList<SelfRatingDto>()
     }
 
+    suspend fun getSelfRatingsForSessions(sessionIds: List<String>): List<SelfRatingDto> {
+        if (sessionIds.isEmpty()) return emptyList()
+        return selfRatings
+            .select {
+                filter { isIn("session_id", sessionIds) }
+                limit(sessionIds.size.toLong() * 8 + 100)
+            }
+            .decodeList<SelfRatingDto>()
+    }
+
     suspend fun deleteSelfRatingsForSession(sessionId: String) {
         selfRatings.delete { filter { eq("session_id", sessionId) } }
     }
@@ -90,6 +100,16 @@ class SupabaseSessionDataSource @Inject constructor(
             .decodeList<PartnerRatingDto>()
     }
 
+    suspend fun getPartnerRatingsForSessions(sessionIds: List<String>): List<PartnerRatingDto> {
+        if (sessionIds.isEmpty()) return emptyList()
+        return partnerRatings
+            .select {
+                filter { isIn("session_id", sessionIds) }
+                limit(sessionIds.size.toLong() * 8 + 100)
+            }
+            .decodeList<PartnerRatingDto>()
+    }
+
     suspend fun deletePartnerRatingsForSession(sessionId: String) {
         partnerRatings.delete { filter { eq("session_id", sessionId) } }
     }
@@ -106,6 +126,16 @@ class SupabaseSessionDataSource @Inject constructor(
     suspend fun getSetScoresForSession(sessionId: String): List<SetScoreDto> {
         return setScores
             .select { filter { eq("session_id", sessionId) } }
+            .decodeList<SetScoreDto>()
+    }
+
+    suspend fun getSetScoresForSessions(sessionIds: List<String>): List<SetScoreDto> {
+        if (sessionIds.isEmpty()) return emptyList()
+        return setScores
+            .select {
+                filter { isIn("session_id", sessionIds) }
+                limit(sessionIds.size.toLong() * 5 + 100)
+            }
             .decodeList<SetScoreDto>()
     }
 
