@@ -1,5 +1,6 @@
 package com.ashutosh.mindfultennis.ui.home
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,8 +22,10 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
@@ -240,53 +243,71 @@ private fun BottomButtonBar(
     onCancel: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(
-                horizontal = Spacing.md,
-                vertical = Spacing.sm,
-            ),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        OutlinedButton(
-            onClick = onShowSessions,
+    if (hasActiveSession) {
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(
+                    horizontal = Spacing.md,
+                    vertical = Spacing.sm,
+                ),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text("Show Sessions")
-        }
-
-        if (hasActiveSession) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-                verticalAlignment = Alignment.CenterVertically,
+            OutlinedButton(
+                onClick = onShowSessions,
+                modifier = Modifier.weight(1f),
             ) {
-                OutlinedButton(
-                    onClick = onCancel,
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = MaterialTheme.colorScheme.error,
-                    ),
-                ) {
-                    Text("Cancel")
-                }
+                Text("Sessions")
+            }
 
-                // Stop square FAB for ending session
-                FloatingActionButton(
-                    onClick = onStartOrEnd,
+            OutlinedButton(
+                onClick = onCancel,
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = MaterialTheme.colorScheme.error,
+                ),
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.error),
+            ) {
+                Text("Cancel")
+            }
+
+            FilledIconButton(
+                onClick = onStartOrEnd,
+                modifier = Modifier.size(48.dp),
+                colors = IconButtonDefaults.filledIconButtonColors(
                     containerColor = MaterialTheme.colorScheme.error,
                     contentColor = MaterialTheme.colorScheme.onError,
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Stop,
-                        contentDescription = "End Session",
-                        modifier = Modifier.size(28.dp),
-                    )
-                }
+                ),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Stop,
+                    contentDescription = "End Session",
+                    modifier = Modifier.size(24.dp),
+                )
             }
-        } else {
-            // "Log Session" button for new session
+        }
+    } else {
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(
+                    horizontal = Spacing.md,
+                    vertical = Spacing.sm,
+                ),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            OutlinedButton(
+                onClick = onShowSessions,
+                modifier = Modifier.weight(1f),
+            ) {
+                Text("Sessions")
+            }
+
             Button(
                 onClick = onStartOrEnd,
+                modifier = Modifier.weight(1f),
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
