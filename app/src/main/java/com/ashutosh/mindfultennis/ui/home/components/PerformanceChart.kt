@@ -48,19 +48,11 @@ import com.ashutosh.mindfultennis.ui.components.LoadingShimmer
 import com.ashutosh.mindfultennis.ui.theme.Spacing
 import com.ashutosh.mindfultennis.util.DateTimeUtils
 
-// ── Card palette (always dark regardless of system theme) ─────────────────────
-private val CardBg = Color(0xFF0F1428)
-private val SegmentBg = Color(0xFF1A2038)
-private val SegmentSelectedBg = Color(0xFF2D3460)
-private val ChartLine = Color(0xFFCCD6E0)
-private val GridLine = Color(0xFF1C2246)
-private val AxisLabel = Color(0xFF6B7394)
-private val SubtitleText = Color(0xFF8B92B0)
+// ── Semantic accent colors (same in both light and dark themes) ───────────────
 private val KpiDeltaUp = Color(0xFF4CAF50)
 private val KpiDeltaDown = Color(0xFFF44336)
 private val BestColor = Color(0xFF4CAF50)
 private val LowColor = Color(0xFFF44336)
-private val FootnoteText = Color(0xFF6B7394)
 
 // ── Computed KPI helper ───────────────────────────────────────────────────────
 private data class TrendKpi(
@@ -123,7 +115,6 @@ fun PerformanceChart(
     ElevatedCard(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.elevatedCardColors(containerColor = CardBg),
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp),
     ) {
         Column(modifier = Modifier.padding(Spacing.md)) {
@@ -162,8 +153,10 @@ private fun KpiStrip(
     selectedDuration: DurationFilter,
     modifier: Modifier = Modifier,
 ) {
+    val subtitleColor = MaterialTheme.colorScheme.onSurfaceVariant
+    val onSurfaceColor = MaterialTheme.colorScheme.onSurface
     val deltaColor = when {
-        kpi.delta == null -> SubtitleText
+        kpi.delta == null -> subtitleColor
         kpi.delta >= 0f -> KpiDeltaUp
         else -> KpiDeltaDown
     }
@@ -176,10 +169,10 @@ private fun KpiStrip(
     Text(
         modifier = modifier,
         text = buildAnnotatedString {
-            withStyle(SpanStyle(color = Color.White, fontWeight = FontWeight.Normal, fontSize = 14.sp)) {
+            withStyle(SpanStyle(color = onSurfaceColor, fontWeight = FontWeight.Normal, fontSize = 14.sp)) {
                 append("Latest Performance: ")
             }
-            withStyle(SpanStyle(color = Color.White, fontWeight = FontWeight.Bold, fontSize = 22.sp)) {
+            withStyle(SpanStyle(color = onSurfaceColor, fontWeight = FontWeight.Bold, fontSize = 22.sp)) {
                 append("${kpi.currentScore}")
             }
             if (kpi.delta != null) {
@@ -187,13 +180,13 @@ private fun KpiStrip(
                 withStyle(SpanStyle(color = deltaColor, fontWeight = FontWeight.SemiBold, fontSize = 13.sp)) {
                     append("$arrow${if (kpi.delta >= 0) "+" else ""}${"%.1f".format(kpi.delta)}")
                 }
-                withStyle(SpanStyle(color = SubtitleText, fontSize = 12.sp)) {
+                withStyle(SpanStyle(color = subtitleColor, fontSize = 12.sp)) {
                     append(" vs previous ${selectedDuration.label}")
                 }
             }
             if (kpi.periodAverage != null) {
                 append("  ")
-                withStyle(SpanStyle(color = SubtitleText, fontSize = 12.sp)) {
+                withStyle(SpanStyle(color = subtitleColor, fontSize = 12.sp)) {
                     append("(Avg ${selectedDuration.label}: ${"%.1f".format(kpi.periodAverage)})")
                 }
             }
@@ -214,7 +207,7 @@ private fun EmptyChartPlaceholder(modifier: Modifier = Modifier) {
         Text(
             text = "Log your first session to see trends.",
             style = MaterialTheme.typography.bodyMedium,
-            color = SubtitleText,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
 }
@@ -228,6 +221,13 @@ private fun TrendLineChart(
     modifier: Modifier = Modifier,
 ) {
     val textMeasurer = rememberTextMeasurer()
+
+    // Resolve theme colors for Canvas (non-composable scope)
+    val gridLineColor = MaterialTheme.colorScheme.outlineVariant
+    val axisLabelColor = MaterialTheme.colorScheme.onSurfaceVariant
+    val chartLineColor = MaterialTheme.colorScheme.onSurfaceVariant
+    val onSurfaceColor = MaterialTheme.colorScheme.onSurface
+    val surfaceColor = MaterialTheme.colorScheme.surface
 
     // Accessibility
     val avgScore = remember(trend) {
@@ -265,11 +265,11 @@ private fun TrendLineChart(
         val yTicks = listOf(0, 25, 50, 75, 100)
         yTicks.forEach { value ->
             val y = padTop + chartH * (1f - value / 100f)
-            drawLine(GridLine, Offset(padLeft, y), Offset(padLeft + chartW, y), 1f)
+            drawLine(gridLineColor, Offset(padLeft, y), Offset(padLeft + chartW, y), 1f)
 
             val label = textMeasurer.measure(
                 value.toString(),
-                TextStyle(fontSize = 10.sp, color = AxisLabel),
+                TextStyle(fontSize = 10.sp, color = axisLabelColor),
             )
             drawText(label, topLeft = Offset(padLeft - label.size.width - 6f, y - label.size.height / 2f))
         }
@@ -278,7 +278,7 @@ private fun TrendLineChart(
         if (trend.size == 1) {
             val cx = padLeft + chartW / 2f
             val cy = padTop + chartH * (1f - trend.first().overallScore / 100f)
-            drawCircle(Color.White, 7f, Offset(cx, cy))
+            drawCircle(onSurfaceColor, 7f, Offset(cx, cy))
             return@Canvas
         }
 
@@ -298,7 +298,7 @@ private fun TrendLineChart(
         val path = Path().apply {
             points.forEachIndexed { i, o -> if (i == 0) moveTo(o.x, o.y) else lineTo(o.x, o.y) }
         }
-        drawPath(path, ChartLine, style = Stroke(2.5f, cap = StrokeCap.Round, join = StrokeJoin.Round))
+        drawPath(path, chartLineColor, style = Stroke(2.5f, cap = StrokeCap.Round, join = StrokeJoin.Round))
 
         // ── Draw regular dots ──────────────────────────────────────
         points.forEachIndexed { i, offset ->
@@ -306,8 +306,8 @@ private fun TrendLineChart(
             val isLow = i == kpi.lowIndex
             val isLast = i == points.lastIndex
             if (!isBest && !isLow && !isLast) {
-                drawCircle(Color.White, 4.5f, offset)
-                drawCircle(ChartLine, 3.5f, offset)
+                drawCircle(onSurfaceColor, 4.5f, offset)
+                drawCircle(chartLineColor, 3.5f, offset)
             }
         }
 
@@ -357,14 +357,14 @@ private fun TrendLineChart(
         val lastPt = points.last()
         val lastScore = trend.last().overallScore
         // Outer glow ring
-        drawCircle(Color.White.copy(alpha = 0.18f), 12f, lastPt)
-        drawCircle(Color.White, 7f, lastPt)
-        drawCircle(ChartLine, 5f, lastPt)
+        drawCircle(onSurfaceColor.copy(alpha = 0.18f), 12f, lastPt)
+        drawCircle(onSurfaceColor, 7f, lastPt)
+        drawCircle(chartLineColor, 5f, lastPt)
 
         // Value label to the right
         val lastLabel = textMeasurer.measure(
             lastScore.toString(),
-            TextStyle(fontSize = 14.sp, color = Color.White, fontWeight = FontWeight.Bold),
+            TextStyle(fontSize = 14.sp, color = onSurfaceColor, fontWeight = FontWeight.Bold),
         )
         drawText(
             lastLabel,
@@ -374,13 +374,13 @@ private fun TrendLineChart(
         // ── X-axis date labels ─────────────────────────────────────
         val firstDateLabel = textMeasurer.measure(
             DateTimeUtils.formatShortDate(trend.first().date),
-            TextStyle(fontSize = 10.sp, color = AxisLabel),
+            TextStyle(fontSize = 10.sp, color = axisLabelColor),
         )
         drawText(firstDateLabel, topLeft = Offset(padLeft, size.height - padBottom + 6f))
 
         val lastDateLabel = textMeasurer.measure(
             DateTimeUtils.formatShortDate(trend.last().date),
-            TextStyle(fontSize = 10.sp, color = AxisLabel),
+            TextStyle(fontSize = 10.sp, color = axisLabelColor),
         )
         drawText(
             lastDateLabel,
@@ -411,13 +411,13 @@ private fun TrendFootnote(
             imageVector = Icons.Outlined.Info,
             contentDescription = null,
             modifier = Modifier.size(14.dp),
-            tint = FootnoteText,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Spacer(Modifier.width(4.dp))
         Text(
             text = "Change vs previous $periodText",
             style = MaterialTheme.typography.labelSmall,
-            color = FootnoteText,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
 }

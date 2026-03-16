@@ -14,14 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.ashutosh.mindfultennis.domain.model.DurationFilter
-
-private val SegmentBg = Color(0xFF1A2038)
-private val SegmentSelectedBg = Color(0xFF2D3460)
-private val SubtitleText = Color(0xFF8B92B0)
 
 /**
  * Global time-range segmented control for the dashboard.
@@ -33,10 +28,15 @@ fun TimeRangeSegmentedControl(
     onSelected: (DurationFilter) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val segmentBg = MaterialTheme.colorScheme.surfaceContainerHighest
+    val segmentSelectedBg = MaterialTheme.colorScheme.primary
+    val selectedTextColor = MaterialTheme.colorScheme.onPrimary
+    val unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
+
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(color = SegmentBg, shape = RoundedCornerShape(10.dp))
+            .background(color = segmentBg, shape = RoundedCornerShape(10.dp))
             .padding(3.dp),
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
@@ -46,7 +46,7 @@ fun TimeRangeSegmentedControl(
                 modifier = Modifier
                     .weight(1f)
                     .clip(RoundedCornerShape(8.dp))
-                    .background(if (isSelected) SegmentSelectedBg else Color.Transparent)
+                    .background(if (isSelected) segmentSelectedBg else androidx.compose.ui.graphics.Color.Transparent)
                     .clickable { onSelected(duration) }
                     .padding(vertical = 8.dp),
                 contentAlignment = Alignment.Center,
@@ -55,7 +55,7 @@ fun TimeRangeSegmentedControl(
                     text = duration.label,
                     style = MaterialTheme.typography.labelMedium,
                     fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
-                    color = if (isSelected) Color.White else SubtitleText,
+                    color = if (isSelected) selectedTextColor else unselectedTextColor,
                 )
             }
         }
