@@ -120,120 +120,124 @@ private fun StartSessionContent(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
-                .padding(horizontal = Spacing.md)
-                .verticalScroll(rememberScrollState()),
+                .padding(innerPadding),
         ) {
-            Spacer(modifier = Modifier.height(Spacing.lg))
-
-            // Encouraging header
-            Text(
-                text = "All the best for this session.",
-                style = MaterialTheme.typography.headlineMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-
-            Spacer(modifier = Modifier.height(Spacing.lg))
-
-            // Focus note text field
-            OutlinedTextField(
-                value = state.focusNote,
-                onValueChange = { onEvent(StartSessionUiEvent.FocusNoteChanged(it)) },
-                label = { Text("What do you want to work on today?") },
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .semantics { contentDescription = "Session focus note" },
-                minLines = 3,
-                maxLines = 5,
-                supportingText = {
-                    Text("${state.focusNote.length}/500")
-                },
-            )
+                    .weight(1f)
+                    .padding(horizontal = Spacing.md)
+                    .verticalScroll(rememberScrollState()),
+            ) {
+                Spacer(modifier = Modifier.height(Spacing.lg))
 
-            Spacer(modifier = Modifier.height(Spacing.lg))
+                // Encouraging header
+                Text(
+                    text = "All the best for this session.",
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
 
-            // Recent focus points
-            if (state.recentFocusPoints.isNotEmpty()) {
-                val tooltipState = rememberTooltipState()
-                val scope = rememberCoroutineScope()
+                Spacer(modifier = Modifier.height(Spacing.lg))
 
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = "Recent Focus Points:",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.weight(1f),
-                    )
-                    TooltipBox(
-                        positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
-                        tooltip = {
-                            PlainTooltip {
-                                Text(
-                                    text = "Chips are color-coded by your average " +
-                                        "performance when using each focus point.\n" +
-                                        "Green (\u226570) = Great\n" +
-                                        "Amber (40\u201369) = Average\n" +
-                                        "Red (<40) = Needs Work\n" +
-                                        "Grey = No rated sessions yet",
+                // Focus note text field
+                OutlinedTextField(
+                    value = state.focusNote,
+                    onValueChange = { onEvent(StartSessionUiEvent.FocusNoteChanged(it)) },
+                    label = { Text("What do you want to work on today?") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .semantics { contentDescription = "Session focus note" },
+                    minLines = 3,
+                    maxLines = 5,
+                    supportingText = {
+                        Text("${state.focusNote.length}/500")
+                    },
+                )
+
+                Spacer(modifier = Modifier.height(Spacing.lg))
+
+                // Recent focus points
+                if (state.recentFocusPoints.isNotEmpty()) {
+                    val tooltipState = rememberTooltipState()
+                    val scope = rememberCoroutineScope()
+
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "Recent Focus Points:",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.weight(1f),
+                        )
+                        TooltipBox(
+                            positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+                            tooltip = {
+                                PlainTooltip {
+                                    Text(
+                                        text = "Chips are color-coded by your average " +
+                                            "performance when using each focus point.\n" +
+                                            "Green (\u226570) = Great\n" +
+                                            "Amber (40\u201369) = Average\n" +
+                                            "Red (<40) = Needs Work\n" +
+                                            "Grey = No rated sessions yet",
+                                    )
+                                }
+                            },
+                            state = tooltipState,
+                        ) {
+                            IconButton(
+                                onClick = { scope.launch { tooltipState.show() } },
+                                modifier = Modifier.size(24.dp),
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Info,
+                                    contentDescription = "Focus point color info",
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    modifier = Modifier.size(18.dp),
                                 )
                             }
-                        },
-                        state = tooltipState,
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(Spacing.sm))
+
+                    FlowRow(
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+                        verticalArrangement = Arrangement.spacedBy(Spacing.xs),
                     ) {
-                        IconButton(
-                            onClick = { scope.launch { tooltipState.show() } },
-                            modifier = Modifier.size(24.dp),
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Info,
-                                contentDescription = "Focus point color info",
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.size(18.dp),
+                        state.recentFocusPoints.forEach { focusPoint ->
+                            val chipColor = ScoreCalculator.sessionColor(focusPoint.averageScore)
+
+                            AssistChip(
+                                onClick = {
+                                    onEvent(StartSessionUiEvent.FocusPointChipClicked(focusPoint.text))
+                                },
+                                label = {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Text(focusPoint.text)
+                                        if (focusPoint.averageScore != null) {
+                                            Spacer(modifier = Modifier.width(4.dp))
+                                            Text(
+                                                text = "(${focusPoint.averageScore})",
+                                                style = MaterialTheme.typography.labelSmall,
+                                                color = chipColor,
+                                            )
+                                        }
+                                    }
+                                },
+                                border = BorderStroke(1.dp, chipColor),
                             )
                         }
                     }
                 }
-
-                Spacer(modifier = Modifier.height(Spacing.sm))
-
-                FlowRow(
-                    horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-                    verticalArrangement = Arrangement.spacedBy(Spacing.xs),
-                ) {
-                    state.recentFocusPoints.forEach { focusPoint ->
-                        val chipColor = ScoreCalculator.sessionColor(focusPoint.averageScore)
-
-                        AssistChip(
-                            onClick = {
-                                onEvent(StartSessionUiEvent.FocusPointChipClicked(focusPoint.text))
-                            },
-                            label = {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Text(focusPoint.text)
-                                    if (focusPoint.averageScore != null) {
-                                        Spacer(modifier = Modifier.width(4.dp))
-                                        Text(
-                                            text = "(${focusPoint.averageScore})",
-                                            style = MaterialTheme.typography.labelSmall,
-                                            color = chipColor,
-                                        )
-                                    }
-                                }
-                            },
-                            border = BorderStroke(1.dp, chipColor),
-                        )
-                    }
-                }
             }
 
-            Spacer(modifier = Modifier.weight(1f))
-            Spacer(modifier = Modifier.height(Spacing.lg))
-
-            // Start Session button
+            // Start Session button — fixed at bottom
             Button(
                 onClick = { onEvent(StartSessionUiEvent.StartSessionClicked) },
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(horizontal = Spacing.md)
+                    .padding(vertical = Spacing.md)
                     .height(56.dp),
                 enabled = !state.isLoading,
             ) {
@@ -249,8 +253,6 @@ private fun StartSessionContent(
                     )
                 }
             }
-
-            Spacer(modifier = Modifier.height(Spacing.lg))
         }
     }
 }
