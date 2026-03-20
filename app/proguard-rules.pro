@@ -5,17 +5,86 @@
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Preserve line number information for debugging crash reports
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# ───── Kotlin Serialization ─────
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.AnnotationsKt
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Keep @Serializable classes and their generated serializers
+-if @kotlinx.serialization.Serializable class **
+-keepclassmembers class <1> {
+    static <1>$Companion Companion;
+}
+-if @kotlinx.serialization.Serializable class ** {
+    static **$Companion Companion;
+}
+-keepclassmembers class <2>$Companion {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+-if @kotlinx.serialization.Serializable class ** {
+    public static ** INSTANCE;
+}
+-keepclassmembers class <1> {
+    public static ** INSTANCE;
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+# Keep Serializable data classes' members (needed for reflection-free serialization)
+-keepclassmembers class com.ashutosh.mindfultennis.data.remote.model.** {
+    *;
+}
+
+# ───── Supabase SDK ─────
+-keep class io.github.jan.supabase.** { *; }
+-dontwarn io.github.jan.supabase.**
+
+# ───── Ktor ─────
+-keep class io.ktor.** { *; }
+-dontwarn io.ktor.**
+
+# ───── OkHttp (Ktor engine) ─────
+-dontwarn okhttp3.internal.platform.**
+-dontwarn org.conscrypt.**
+-dontwarn org.bouncycastle.**
+-dontwarn org.openjsse.**
+
+# ───── Room ─────
+# Room handles its own keep rules via annotations processor,
+# but keep entity classes to be safe
+-keep class com.ashutosh.mindfultennis.data.local.db.entity.** { *; }
+-keep class com.ashutosh.mindfultennis.data.local.db.dao.** { *; }
+
+# ───── Hilt / Dagger ─────
+-dontwarn dagger.hilt.internal.**
+-keep class dagger.hilt.** { *; }
+-keep class javax.inject.** { *; }
+-keep class * extends dagger.hilt.android.internal.managers.ViewComponentManager$FragmentContextWrapper { *; }
+
+# ───── Enum classes ─────
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+# ───── Parcelable ─────
+-keep class * implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
+}
+
+# ───── DataStore ─────
+-keep class androidx.datastore.** { *; }
+
+# ───── WorkManager ─────
+-keep class * extends androidx.work.Worker { *; }
+-keep class * extends androidx.work.ListenableWorker { *; }
+
+# ───── Kotlin Coroutines ─────
+-dontwarn kotlinx.coroutines.**
+
+# ───── Compose ─────
+# Compose compiler handles most rules; keep @Stable/@Immutable annotated classes
+-keep @androidx.compose.runtime.Stable class * { *; }
+-keep @androidx.compose.runtime.Immutable class * { *; }

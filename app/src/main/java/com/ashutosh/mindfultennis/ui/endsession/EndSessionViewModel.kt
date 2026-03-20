@@ -1,6 +1,5 @@
 package com.ashutosh.mindfultennis.ui.endsession
 
-import android.app.Application
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,7 +16,6 @@ import com.ashutosh.mindfultennis.domain.model.Rating
 import com.ashutosh.mindfultennis.domain.model.SetScore
 import com.ashutosh.mindfultennis.domain.usecase.SubmitRatingsUseCase
 import com.ashutosh.mindfultennis.navigation.Route
-import com.ashutosh.mindfultennis.service.ActiveSessionService
 import com.ashutosh.mindfultennis.ui.endsession.components.SetScoreInputData
 import com.ashutosh.mindfultennis.util.generateId
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,7 +32,6 @@ import javax.inject.Inject
 @HiltViewModel
 class EndSessionViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val application: Application,
     private val authRepository: AuthRepository,
     private val sessionRepository: SessionRepository,
     private val opponentRepository: OpponentRepository,
@@ -237,8 +234,6 @@ class EndSessionViewModel @Inject constructor(
 
             result.fold(
                 onSuccess = {
-                    // Stop the foreground service now that the session is ended
-                    ActiveSessionService.stop(application)
                     _uiState.update { it.copy(isSubmitting = false, submitted = true) }
                 },
                 onFailure = { e ->

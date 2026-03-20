@@ -17,7 +17,6 @@ import com.ashutosh.mindfultennis.domain.usecase.CancelSessionUseCase
 import com.ashutosh.mindfultennis.domain.usecase.GetAspectAveragesUseCase
 import com.ashutosh.mindfultennis.domain.usecase.GetPerformanceTrendUseCase
 import com.ashutosh.mindfultennis.domain.usecase.GetWinLossRecordUseCase
-import com.ashutosh.mindfultennis.service.ActiveSessionService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -298,7 +297,6 @@ class HomeViewModel @Inject constructor(
             val result = cancelSessionUseCase(session.id)
             result.fold(
                 onSuccess = {
-                    ActiveSessionService.stop(application)
                     _uiState.update { it.copy(isCancellingSession = false) }
                 },
                 onFailure = { e ->

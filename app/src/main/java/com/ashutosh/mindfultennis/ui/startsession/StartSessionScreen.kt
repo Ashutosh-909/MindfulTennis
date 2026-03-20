@@ -46,7 +46,6 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ashutosh.mindfultennis.ui.components.RequestNotificationPermission
 import com.ashutosh.mindfultennis.ui.theme.Spacing
 import com.ashutosh.mindfultennis.util.ScoreCalculator
 import kotlinx.coroutines.launch
@@ -64,9 +63,6 @@ fun StartSessionScreen(
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    // Request POST_NOTIFICATIONS permission on Android 13+ before starting a session
-    RequestNotificationPermission()
 
     // Navigate back to Home when session starts
     LaunchedEffect(uiState.sessionStarted) {

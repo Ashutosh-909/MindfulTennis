@@ -1,13 +1,11 @@
 package com.ashutosh.mindfultennis.ui.startsession
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ashutosh.mindfultennis.data.repository.AuthRepository
 import com.ashutosh.mindfultennis.data.repository.AuthState
 import com.ashutosh.mindfultennis.data.repository.FocusPointRepository
 import com.ashutosh.mindfultennis.domain.usecase.StartSessionUseCase
-import com.ashutosh.mindfultennis.service.ActiveSessionService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +18,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StartSessionViewModel @Inject constructor(
-    private val application: Application,
     private val authRepository: AuthRepository,
     private val focusPointRepository: FocusPointRepository,
     private val startSessionUseCase: StartSessionUseCase,
@@ -85,12 +82,6 @@ class StartSessionViewModel @Inject constructor(
             val result = startSessionUseCase(_uiState.value.focusNote)
             result.fold(
                 onSuccess = { session ->
-                    // Start the foreground service for the active session
-                    ActiveSessionService.start(
-                        context = application,
-                        sessionId = session.id,
-                        startedAt = session.startedAt,
-                    )
                     _uiState.update { it.copy(isLoading = false, sessionStarted = true) }
                 },
                 onFailure = { e ->
