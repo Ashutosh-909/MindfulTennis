@@ -1,0 +1,6 @@
+package com.ashutosh.mindfultennis.di
+
+data class AppConfig(
+    val supabaseUrl: String,
+    val supabaseAnonKey: String,
+)
