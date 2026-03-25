@@ -17,6 +17,8 @@ sealed class Route(val route: String) {
 
     data object SessionsList : Route("sessions_list")
 
+    data object Settings : Route("settings")
+
     data class SessionDetail(val sessionId: String) : Route("session_detail/$sessionId") {
         companion object {
             const val ROUTE_PATTERN = "session_detail/{sessionId}"

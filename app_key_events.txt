@@ -1,0 +1,1083 @@
+﻿
+03-25 21:14:54.777 30413 30436 I DisplayManager: Choreographer implicitly 
+03-25 21:14:54.784 30413 30413 I Supabase-Core: SupabaseClient created! Please 
+03-25 21:14:54.788 30413 30435 D WM-SystemJobScheduler: Reconciling jobs
+https://www.slf4j.org/codes.html#noProviders for further details.
+03-25 21:14:54.818 30413 30439 I Supabase-Auth: Trying to load latest session 
+03-25 21:14:54.827 30413 30439 I Supabase-Auth: Successfully loaded session 
+03-25 21:14:54.832 30413 30435 D WM-SystemJobScheduler: Scheduling work ID 
+03-25 21:14:54.835 30413 30435 D WM-GreedyScheduler: Starting tracking for 
+03-25 21:14:54.845 30413 30450 D WM-GreedyScheduler: Constraints met: 
+03-25 21:14:54.847 30413 30450 D WM-Processor: s: processing 
+android.view.Choreographer$CallbackRecord.run:1901 
+android.view.Choreographer$CallbackRecord.run:1910 
+android.view.Choreographer.doCallbacks:1367 
+android.view.Choreographer.doFrame:1292 
+android.view.Choreographer$FrameDisplayEventReceiver.run:1870 
+android.view.Choreographer$CallbackRecord.run:1901 
+android.view.Choreographer$CallbackRecord.run:1901 
+android.view.Choreographer$CallbackRecord.run:1910 
+03-25 21:14:54.935 30413 30413 D WM-WorkerWrapper: Starting work for 
+com.ashutosh.mindfultennis.data.sync.SyncWorker
+03-25 21:14:54.946 30413 30440 D SyncManager: Starting sync for user 
+03-25 21:14:54.990 30413 30413 D WM-SystemJobService: onStartJob for 
+03-25 21:14:55.000 30413 30448 D WM-Processor: Work 
+03-25 21:14:55.060 30413 30413 D SyncWorker: Periodic sync worker enqueued (15 
+03-25 21:14:55.061 30413 30439 D SyncManager: Starting sync for user 
+03-25 21:14:55.062 30413 30413 D SyncWorker: Periodic sync worker enqueued (15 
+03-25 21:14:55.062 30413 30457 D SyncManager: Starting sync for user 
+03-25 21:14:55.737 30413 30473 E Supabase-Core: GET request to endpoint 
+/rest/v1/sessions was cancelled
+03-25 21:14:55.737 30413 30473 W SyncManager: Failed to pull remote sessions
+03-25 21:14:55.737 30413 30473 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c3.m0.j(Unknown Source:12)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c3.t0.L(Unknown Source:48)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c3.t0.m(Unknown Source:199)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c3.q.j(Unknown Source:6)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c3.t0.L(Unknown Source:48)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c3.t0.m(Unknown Source:199)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c3.q.j(Unknown Source:6)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c3.t0.L(Unknown Source:48)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c3.t0.U(Unknown Source:180)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c3.t0.m(Unknown Source:48)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c3.t0.n(Unknown Source:0)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c3.t0.cancel(Unknown 
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at A0.W.e(Unknown Source:10)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at Z.a.close(Unknown Source:3)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at Z.c.c(Unknown Source:2)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at 
+androidx.lifecycle.L.clear$lifecycle_viewmodel(Unknown Source:37)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at 
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at 
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c0.J.invokeSuspend(Unknown 
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at x1.a.resumeWith(Unknown 
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at c3.U.run(Unknown Source:114)
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at androidx.compose.ui.platform.
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at androidx.compose.ui.platform.
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at androidx.compose.ui.platform.
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at 
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at 
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at 
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at 
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at 
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at 
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at com.android.internal.os.Runti
+03-25 21:14:55.737 30413 30473 W SyncManager: 	at 
+03-25 21:14:55.742 30413 30473 E Supabase-Core: GET request to endpoint 
+03-25 21:14:55.742 30413 30473 W SyncManager: Failed to pull remote focus 
+03-25 21:14:55.742 30413 30473 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at c3.m0.j(Unknown Source:12)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at c3.t0.F(Unknown Source:97)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at c3.t0.r(Unknown Source:13)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngineKt.createCallContext(Unknown Source:40)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at io.ktor.client.engine.HttpCli
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at io.ktor.client.engine.HttpCli
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invokeSuspend(Unknown 
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invoke(SourceFile:1)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invoke(SourceFile:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.execute$ktor_utils(Unknown Source:6)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.Pipeline.execute(Unknown Source:8)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$DefaultSender.execute(Unknown Source:85)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invokeSuspend(Unknown 
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invoke(SourceFile:1)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invoke(SourceFile:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invokeSuspend(Unknown 
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invoke(SourceFile:1)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invoke(SourceFile:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invokeSuspend(Unknown Source:48)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invoke(SourceFile:1)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invoke(SourceFile:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invokeSuspend(Unknown 
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invoke(SourceFile:1)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invoke(SourceFile:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invokeSuspend(Unknown Source:46)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:1)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at io.ktor.client.plugins.SetupR
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at io.ktor.client.plugins.SetupR
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1$1.invoke(SourceFile:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1$1.invoke(SourceFile:1)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invokeSuspend(Unknown Source:78)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invoke(SourceFile:1)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invoke(SourceFile:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invokeSuspend(Unknown 
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invoke(SourceFile:1)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invoke(SourceFile:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.execute$ktor_utils(Unknown Source:6)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.Pipeline.execute(Unknown Source:8)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.HttpClient.execute$ktor_client_core(Unknown Source:67)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.statement.HttpStatement.fetchResponse(Unknown Source:97)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.ktor.client.statement.HttpStatement.execute(SourceFile:8)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.network.KtorSupabaseHttpClient.request(Unknown 
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.rawRequest$suspendImpl(Unknown 
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.rawRequest(Unknown Source:0)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.auth.AuthenticatedSupabaseApi.rawRequest(SourceFile:3)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.request(Unknown Source:8)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.postgrest.executor.RestRequestExecutor.execute(Unknown 
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at R0.h.e(Unknown Source:167)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at U0.o.a(Unknown Source:92)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at U0.n.invokeSuspend(Unknown 
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at x1.a.resumeWith(Unknown 
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at c3.U.run(Unknown Source:106)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at h3.h$a.run(Unknown Source:3)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at j3.h.run(Unknown Source:2)
+03-25 21:14:55.742 30413 30473 W SyncManager: 	at j3.a$a.run(Unknown Source:93)
+03-25 21:14:55.746 30413 30473 E Supabase-Core: GET request to endpoint 
+03-25 21:14:55.746 30413 30473 W SyncManager: Failed to pull remote opponents
+03-25 21:14:55.746 30413 30473 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at c3.m0.j(Unknown Source:12)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at c3.t0.F(Unknown Source:97)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at c3.t0.r(Unknown Source:13)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngineKt.createCallContext(Unknown Source:40)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at io.ktor.client.engine.HttpCli
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at io.ktor.client.engine.HttpCli
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invokeSuspend(Unknown 
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invoke(SourceFile:1)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invoke(SourceFile:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.execute$ktor_utils(Unknown Source:6)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.Pipeline.execute(Unknown Source:8)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$DefaultSender.execute(Unknown Source:85)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invokeSuspend(Unknown 
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invoke(SourceFile:1)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invoke(SourceFile:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invokeSuspend(Unknown 
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invoke(SourceFile:1)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invoke(SourceFile:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invokeSuspend(Unknown Source:48)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invoke(SourceFile:1)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invoke(SourceFile:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invokeSuspend(Unknown 
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invoke(SourceFile:1)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invoke(SourceFile:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invokeSuspend(Unknown Source:46)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:1)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at io.ktor.client.plugins.SetupR
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at io.ktor.client.plugins.SetupR
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1$1.invoke(SourceFile:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1$1.invoke(SourceFile:1)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invokeSuspend(Unknown Source:78)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invoke(SourceFile:1)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invoke(SourceFile:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invokeSuspend(Unknown 
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invoke(SourceFile:1)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invoke(SourceFile:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.execute$ktor_utils(Unknown Source:6)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.Pipeline.execute(Unknown Source:8)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.HttpClient.execute$ktor_client_core(Unknown Source:67)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.statement.HttpStatement.fetchResponse(Unknown Source:97)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.ktor.client.statement.HttpStatement.execute(SourceFile:8)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.network.KtorSupabaseHttpClient.request(Unknown 
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.rawRequest$suspendImpl(Unknown 
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.rawRequest(Unknown Source:0)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.auth.AuthenticatedSupabaseApi.rawRequest(SourceFile:3)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.request(Unknown Source:8)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.postgrest.executor.RestRequestExecutor.execute(Unknown 
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at R0.h.f(Unknown Source:167)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at U0.o.b(Unknown Source:92)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at U0.n.invokeSuspend(Unknown 
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at x1.a.resumeWith(Unknown 
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at c3.U.run(Unknown Source:106)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at h3.h$a.run(Unknown Source:3)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at j3.h.run(Unknown Source:2)
+03-25 21:14:55.746 30413 30473 W SyncManager: 	at j3.a$a.run(Unknown Source:93)
+03-25 21:14:55.750 30413 30473 E Supabase-Core: GET request to endpoint 
+03-25 21:14:55.750 30413 30473 W SyncManager: Failed to pull remote partners
+03-25 21:14:55.750 30413 30473 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at c3.m0.j(Unknown Source:12)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at c3.t0.F(Unknown Source:97)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at c3.t0.r(Unknown Source:13)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngineKt.createCallContext(Unknown Source:40)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at io.ktor.client.engine.HttpCli
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at io.ktor.client.engine.HttpCli
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invokeSuspend(Unknown 
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invoke(SourceFile:1)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invoke(SourceFile:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.execute$ktor_utils(Unknown Source:6)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.Pipeline.execute(Unknown Source:8)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$DefaultSender.execute(Unknown Source:85)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invokeSuspend(Unknown 
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invoke(SourceFile:1)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invoke(SourceFile:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invokeSuspend(Unknown 
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invoke(SourceFile:1)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invoke(SourceFile:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invokeSuspend(Unknown Source:48)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invoke(SourceFile:1)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invoke(SourceFile:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invokeSuspend(Unknown 
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invoke(SourceFile:1)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invoke(SourceFile:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invokeSuspend(Unknown Source:46)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:1)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at io.ktor.client.plugins.SetupR
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at io.ktor.client.plugins.SetupR
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1$1.invoke(SourceFile:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1$1.invoke(SourceFile:1)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invokeSuspend(Unknown Source:78)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invoke(SourceFile:1)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invoke(SourceFile:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invokeSuspend(Unknown 
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invoke(SourceFile:1)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invoke(SourceFile:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.execute$ktor_utils(Unknown Source:6)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.util.pipeline.Pipeline.execute(Unknown Source:8)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.HttpClient.execute$ktor_client_core(Unknown Source:67)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.statement.HttpStatement.fetchResponse(Unknown Source:97)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.ktor.client.statement.HttpStatement.execute(SourceFile:8)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.network.KtorSupabaseHttpClient.request(Unknown 
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.rawRequest$suspendImpl(Unknown 
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.rawRequest(Unknown Source:0)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.auth.AuthenticatedSupabaseApi.rawRequest(SourceFile:3)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.request(Unknown Source:8)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at 
+io.github.jan.supabase.postgrest.executor.RestRequestExecutor.execute(Unknown 
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at R0.h.h(Unknown Source:167)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at U0.o.c(Unknown Source:92)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at U0.n.invokeSuspend(Unknown 
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at x1.a.resumeWith(Unknown 
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at c3.U.run(Unknown Source:106)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at h3.h$a.run(Unknown Source:3)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at j3.h.run(Unknown Source:2)
+03-25 21:14:55.750 30413 30473 W SyncManager: 	at j3.a$a.run(Unknown Source:93)
+03-25 21:15:00.357 30413 30502 D ProfileInstaller: Skipping profile 
+03-25 21:15:04.765 30413 30421 W h.mindfultennis: userfaultfd: MOVE ioctl 
+03-25 21:15:10.765 30413 30457 E Supabase-Core: GET request to endpoint 
+03-25 21:15:10.765 30413 30457 W SyncManager: Failed to pull remote opponents
+03-25 21:15:10.765 30413 30457 W SyncManager: 
+io.ktor.client.plugins.HttpRequestTimeoutException: Request timeout has 
+expired [url=https://ffdybinqhqsytaomitbr.supabase.co/rest/v1/opponents?user_id
+03-25 21:15:10.765 30413 30457 W SyncManager: 	at io.ktor.client.plugins.HttpTi
+03-25 21:15:10.765 30413 30457 W SyncManager: 	at x1.a.resumeWith(Unknown 
+03-25 21:15:10.765 30413 30457 W SyncManager: 	at c3.U.run(Unknown Source:114)
+03-25 21:15:10.765 30413 30457 W SyncManager: 	at h3.h$a.run(Unknown Source:3)
+03-25 21:15:10.765 30413 30457 W SyncManager: 	at j3.h.run(Unknown Source:2)
+03-25 21:15:10.765 30413 30457 W SyncManager: 	at j3.a$a.run(Unknown Source:93)
+android.view.Choreographer$CallbackRecord.run:1901 
+android.view.Choreographer$CallbackRecord.run:1910 
+android.view.Choreographer.doCallbacks:1367 
+android.view.Choreographer.doFrame:1292 
+android.view.Choreographer$FrameDisplayEventReceiver.run:1870 
+android.view.Choreographer$CallbackRecord.run:1901 
+android.view.Choreographer$CallbackRecord.run:1901 
+android.view.Choreographer$CallbackRecord.run:1910 
+03-25 21:15:13.085 30413 30413 D SyncWorker: Periodic sync worker enqueued (15 
+03-25 21:15:13.086 30413 30439 D SyncManager: Starting sync for user 
+03-25 21:15:13.194 30413 30413 D SyncWorker: Periodic sync worker enqueued (15 
+03-25 21:15:13.195 30413 30500 D SyncManager: Starting sync for user 
+03-25 21:15:13.196 30413 30413 D SyncWorker: Periodic sync worker enqueued (15 
+03-25 21:15:13.197 30413 30500 D SyncManager: Starting sync for user 
+03-25 21:15:14.412 30413 30458 E Supabase-Core: GET request to endpoint 
+03-25 21:15:14.412 30413 30458 W SyncManager: Failed to pull remote partners
+03-25 21:15:14.412 30413 30458 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c3.m0.j(Unknown Source:12)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c3.t0.L(Unknown Source:48)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c3.t0.m(Unknown Source:199)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c3.q.j(Unknown Source:6)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c3.t0.L(Unknown Source:48)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c3.t0.m(Unknown Source:199)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c3.q.j(Unknown Source:6)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c3.t0.L(Unknown Source:48)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c3.t0.U(Unknown Source:180)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c3.t0.m(Unknown Source:48)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c3.t0.n(Unknown Source:0)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c3.t0.cancel(Unknown 
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at A0.W.e(Unknown Source:10)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at Z.a.close(Unknown Source:3)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at Z.c.c(Unknown Source:2)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at 
+androidx.lifecycle.L.clear$lifecycle_viewmodel(Unknown Source:37)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at 
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at 
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c0.J.invokeSuspend(Unknown 
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at x1.a.resumeWith(Unknown 
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at c3.U.run(Unknown Source:114)
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at androidx.compose.ui.platform.
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at androidx.compose.ui.platform.
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at androidx.compose.ui.platform.
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at 
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at 
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at 
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at 
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at 
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at 
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at com.android.internal.os.Runti
+03-25 21:15:14.412 30413 30458 W SyncManager: 	at 
+03-25 21:15:14.412 30413 30439 E Supabase-Core: GET request to endpoint 
+/rest/v1/sessions was cancelled
+03-25 21:15:14.413 30413 30439 W SyncManager: Failed to pull remote sessions
+03-25 21:15:14.413 30413 30439 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c3.m0.j(Unknown Source:12)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c3.t0.L(Unknown Source:48)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c3.t0.m(Unknown Source:199)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c3.q.j(Unknown Source:6)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c3.t0.L(Unknown Source:48)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c3.t0.m(Unknown Source:199)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c3.q.j(Unknown Source:6)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c3.t0.L(Unknown Source:48)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c3.t0.U(Unknown Source:180)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c3.t0.m(Unknown Source:48)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c3.t0.n(Unknown Source:0)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c3.t0.cancel(Unknown 
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at A0.W.e(Unknown Source:10)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at Z.a.close(Unknown Source:3)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at Z.c.c(Unknown Source:2)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at 
+androidx.lifecycle.L.clear$lifecycle_viewmodel(Unknown Source:37)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at 
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at 
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c0.J.invokeSuspend(Unknown 
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at x1.a.resumeWith(Unknown 
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at c3.U.run(Unknown Source:114)
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at androidx.compose.ui.platform.
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at androidx.compose.ui.platform.
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at androidx.compose.ui.platform.
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at 
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at 
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at 
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at 
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at 
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at 
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at com.android.internal.os.Runti
+03-25 21:15:14.413 30413 30439 W SyncManager: 	at 
+03-25 21:15:14.415 30413 30439 E Supabase-Core: GET request to endpoint 
+03-25 21:15:14.415 30413 30439 W SyncManager: Failed to pull remote focus 
+03-25 21:15:14.415 30413 30439 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at c3.m0.j(Unknown Source:12)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at c3.t0.F(Unknown Source:97)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at c3.t0.r(Unknown Source:13)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngineKt.createCallContext(Unknown Source:40)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at io.ktor.client.engine.HttpCli
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at io.ktor.client.engine.HttpCli
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invokeSuspend(Unknown 
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invoke(SourceFile:1)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invoke(SourceFile:2)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.execute$ktor_utils(Unknown Source:6)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.Pipeline.execute(Unknown Source:8)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$DefaultSender.execute(Unknown Source:85)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invokeSuspend(Unknown 
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invoke(SourceFile:1)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invoke(SourceFile:2)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invokeSuspend(Unknown 
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invoke(SourceFile:1)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invoke(SourceFile:2)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invokeSuspend(Unknown Source:48)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invoke(SourceFile:1)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invoke(SourceFile:2)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invokeSuspend(Unknown 
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invoke(SourceFile:1)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invoke(SourceFile:2)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invokeSuspend(Unknown Source:46)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:1)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:2)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:15:14.415 30413 30439 W SyncManager: 	at io.ktor.client.plugins.SetupR
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at io.ktor.client.plugins.SetupR
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1$1.invoke(SourceFile:2)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1$1.invoke(SourceFile:1)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invokeSuspend(Unknown Source:78)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invoke(SourceFile:1)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invoke(SourceFile:2)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invokeSuspend(Unknown 
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invoke(SourceFile:1)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invoke(SourceFile:2)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.execute$ktor_utils(Unknown Source:6)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.Pipeline.execute(Unknown Source:8)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.ktor.client.HttpClient.execute$ktor_client_core(Unknown Source:67)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.ktor.client.statement.HttpStatement.fetchResponse(Unknown Source:97)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.ktor.client.statement.HttpStatement.execute(SourceFile:8)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.network.KtorSupabaseHttpClient.request(Unknown 
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.rawRequest$suspendImpl(Unknown 
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.rawRequest(Unknown Source:0)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.auth.AuthenticatedSupabaseApi.rawRequest(SourceFile:3)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.request(Unknown Source:8)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.postgrest.executor.RestRequestExecutor.execute(Unknown 
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at R0.h.e(Unknown Source:167)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at U0.o.a(Unknown Source:92)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at U0.n.invokeSuspend(Unknown 
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at x1.a.resumeWith(Unknown 
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at c3.U.run(Unknown Source:106)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at h3.h$a.run(Unknown Source:3)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at j3.h.run(Unknown Source:2)
+03-25 21:15:14.416 30413 30439 W SyncManager: 	at j3.a$a.run(Unknown Source:93)
+03-25 21:15:14.421 30413 30439 E Supabase-Core: GET request to endpoint 
+03-25 21:15:14.421 30413 30439 W SyncManager: Failed to pull remote opponents
+03-25 21:15:14.421 30413 30439 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at c3.m0.j(Unknown Source:12)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at c3.t0.F(Unknown Source:97)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at c3.t0.r(Unknown Source:13)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngineKt.createCallContext(Unknown Source:40)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at io.ktor.client.engine.HttpCli
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at io.ktor.client.engine.HttpCli
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invokeSuspend(Unknown 
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invoke(SourceFile:1)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invoke(SourceFile:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.execute$ktor_utils(Unknown Source:6)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.Pipeline.execute(Unknown Source:8)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$DefaultSender.execute(Unknown Source:85)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invokeSuspend(Unknown 
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invoke(SourceFile:1)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invoke(SourceFile:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invokeSuspend(Unknown 
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invoke(SourceFile:1)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invoke(SourceFile:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invokeSuspend(Unknown Source:48)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invoke(SourceFile:1)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invoke(SourceFile:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invokeSuspend(Unknown 
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invoke(SourceFile:1)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invoke(SourceFile:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invokeSuspend(Unknown Source:46)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:1)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at io.ktor.client.plugins.SetupR
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at io.ktor.client.plugins.SetupR
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1$1.invoke(SourceFile:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1$1.invoke(SourceFile:1)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invokeSuspend(Unknown Source:78)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invoke(SourceFile:1)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invoke(SourceFile:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invokeSuspend(Unknown 
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invoke(SourceFile:1)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invoke(SourceFile:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.execute$ktor_utils(Unknown Source:6)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.Pipeline.execute(Unknown Source:8)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.HttpClient.execute$ktor_client_core(Unknown Source:67)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.statement.HttpStatement.fetchResponse(Unknown Source:97)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.ktor.client.statement.HttpStatement.execute(SourceFile:8)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.network.KtorSupabaseHttpClient.request(Unknown 
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.rawRequest$suspendImpl(Unknown 
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.rawRequest(Unknown Source:0)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.auth.AuthenticatedSupabaseApi.rawRequest(SourceFile:3)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.request(Unknown Source:8)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.postgrest.executor.RestRequestExecutor.execute(Unknown 
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at R0.h.f(Unknown Source:167)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at U0.o.b(Unknown Source:92)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at U0.n.invokeSuspend(Unknown 
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at x1.a.resumeWith(Unknown 
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at c3.U.run(Unknown Source:106)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at h3.h$a.run(Unknown Source:3)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at j3.h.run(Unknown Source:2)
+03-25 21:15:14.421 30413 30439 W SyncManager: 	at j3.a$a.run(Unknown Source:93)
+03-25 21:15:14.423 30413 30439 E Supabase-Core: GET request to endpoint 
+03-25 21:15:14.423 30413 30439 W SyncManager: Failed to pull remote partners
+03-25 21:15:14.423 30413 30439 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at io.ktor.client.engine.UtilsKt
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at c3.m0.j(Unknown Source:12)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at c3.t0.F(Unknown Source:97)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at c3.t0.r(Unknown Source:13)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngineKt.createCallContext(Unknown Source:40)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at io.ktor.client.engine.HttpCli
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at io.ktor.client.engine.HttpCli
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invokeSuspend(Unknown 
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invoke(SourceFile:1)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.engine.HttpClientEngine$install$1.invoke(SourceFile:2)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.execute$ktor_utils(Unknown Source:6)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.Pipeline.execute(Unknown Source:8)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$DefaultSender.execute(Unknown Source:85)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invokeSuspend(Unknown 
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invoke(SourceFile:1)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpTimeoutKt$HttpTimeout$3$1.invoke(SourceFile:2)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invokeSuspend(Unknown 
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invoke(SourceFile:1)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpRedirectKt$HttpRedirect$2$1.invoke(SourceFile:2)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$Sender.proceed(Unknown Source:2)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invokeSuspend(Unknown Source:48)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invoke(SourceFile:1)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpCa
+llValidatorKt$HttpCallValidator$2$2.invoke(SourceFile:2)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invokeSuspend(Unknown Source:50)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:1)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.api.Send$install$1.invoke(SourceFile:2)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$InterceptedSender.execute(Unknown Source:4)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invokeSuspend(Unknown 
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invoke(SourceFile:1)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.HttpSend$Plugin$install$1.invoke(SourceFile:2)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invokeSuspend(Unknown Source:46)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:1)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:2)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:15:14.423 30413 30439 W SyncManager: 	at io.ktor.client.plugins.SetupR
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at io.ktor.client.plugins.SetupR
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1$1.invoke(SourceFile:2)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1$1.invoke(SourceFile:1)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invokeSuspend(Unknown Source:78)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invoke(SourceFile:1)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at io.ktor.client.plugins.HttpRe
+questLifecycleKt$HttpRequestLifecycle$1$1.invoke(SourceFile:2)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invokeSuspend(Unknown 
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invoke(SourceFile:1)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.ktor.client.plugins.SetupRequestContext$install$1.invoke(SourceFile:2)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceedLoop(Unknown Source:91)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.proceed(Unknown Source:25)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.DebugPipelineContext.execute$ktor_utils(Unknown Source:6)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.ktor.util.pipeline.Pipeline.execute(Unknown Source:8)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.ktor.client.HttpClient.execute$ktor_client_core(Unknown Source:67)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.ktor.client.statement.HttpStatement.fetchResponse(Unknown Source:97)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.ktor.client.statement.HttpStatement.execute(SourceFile:8)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.network.KtorSupabaseHttpClient.request(Unknown 
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.rawRequest$suspendImpl(Unknown 
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.rawRequest(Unknown Source:0)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.auth.AuthenticatedSupabaseApi.rawRequest(SourceFile:3)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.network.SupabaseApi.request(Unknown Source:8)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at 
+io.github.jan.supabase.postgrest.executor.RestRequestExecutor.execute(Unknown 
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at R0.h.h(Unknown Source:167)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at U0.o.c(Unknown Source:92)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at U0.n.invokeSuspend(Unknown 
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at x1.a.resumeWith(Unknown 
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at c3.U.run(Unknown Source:106)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at h3.h$a.run(Unknown Source:3)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at j3.h.run(Unknown Source:2)
+03-25 21:15:14.424 30413 30439 W SyncManager: 	at j3.a$a.run(Unknown Source:93)
+03-25 21:15:14.631 30413 30743 D SyncManager: Sync completed for user 
+03-25 21:15:14.631 30413 30500 D SyncWorker: Sync succeeded
+03-25 21:15:14.633 30413 30448 I WM-WorkerWrapper: Worker result SUCCESS for 
+com.ashutosh.mindfultennis.data.sync.SyncWorker,mindful_tennis_sync } ]
+03-25 21:15:14.634 30413 30413 D WM-Processor: s 
+03-25 21:15:14.634 30413 30413 D WM-GreedyScheduler: Stopping tracking for 
+03-25 21:15:14.635 30413 30413 D WM-SystemJobService: 
+03-25 21:15:14.637 30413 30435 D WM-GreedyScheduler: Cancelling work ID 
+03-25 21:15:14.639 30413 30435 D WM-SystemJobScheduler: Scheduling work ID 
+03-25 21:15:14.643 30413 30413 D WM-SystemJobService: onStopJob for 
+03-25 21:15:16.470 30413 30441 D SyncManager: Sync completed for user 
+03-25 21:15:16.475 30413 30744 D SyncManager: Sync completed for user 
+03-25 21:15:22.645 30413 30744 D SyncManager: Starting sync for user 
+
+

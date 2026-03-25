@@ -65,6 +65,12 @@ class SyncManager @Inject constructor(
             pushPendingPartnerRatings()
             pushPendingSetScores()
 
+            // Push deletes (reverse dependency order: children first, then parents)
+            pushPendingDeleteSessions()
+            pushPendingDeleteFocusPoints()
+            pushPendingDeleteOpponents()
+            pushPendingDeletePartners()
+
             val lastSync = userPreferences.lastSyncTimestamp.first()
             pullRemoteSessions(userId, lastSync)
             pullRemoteFocusPoints(userId)
@@ -181,6 +187,62 @@ class SyncManager @Inject constructor(
                 partnerDao.updateSyncStatus(p.id, SyncStatus.SYNCED.name)
             } catch (e: Exception) {
                 Log.w(TAG, "Failed to push partner ${p.id}", e)
+            }
+        }
+    }
+
+    // ── Push Deletes: Sessions ────────────────────────────────────────
+
+    private suspend fun pushPendingDeleteSessions() {
+        val pending = sessionDao.getBySyncStatus(SyncStatus.PENDING_DELETE.name)
+        for (session in pending) {
+            try {
+                remoteDataSource.deleteSession(session.id)
+                sessionDao.deleteById(session.id)
+            } catch (e: Exception) {
+                Log.w(TAG, "Failed to push delete for session ${session.id}", e)
+            }
+        }
+    }
+
+    // ── Push Deletes: Focus Points ────────────────────────────────────
+
+    private suspend fun pushPendingDeleteFocusPoints() {
+        val pending = focusPointDao.getBySyncStatus(SyncStatus.PENDING_DELETE.name)
+        for (fp in pending) {
+            try {
+                remoteDataSource.deleteFocusPoint(fp.id)
+                focusPointDao.deleteById(fp.id)
+            } catch (e: Exception) {
+                Log.w(TAG, "Failed to push delete for focus point ${fp.id}", e)
+            }
+        }
+    }
+
+    // ── Push Deletes: Opponents ───────────────────────────────────────
+
+    private suspend fun pushPendingDeleteOpponents() {
+        val pending = opponentDao.getBySyncStatus(SyncStatus.PENDING_DELETE.name)
+        for (opp in pending) {
+            try {
+                remoteDataSource.deleteOpponent(opp.id)
+                opponentDao.deleteById(opp.id)
+            } catch (e: Exception) {
+                Log.w(TAG, "Failed to push delete for opponent ${opp.id}", e)
+            }
+        }
+    }
+
+    // ── Push Deletes: Partners ────────────────────────────────────────
+
+    private suspend fun pushPendingDeletePartners() {
+        val pending = partnerDao.getBySyncStatus(SyncStatus.PENDING_DELETE.name)
+        for (p in pending) {
+            try {
+                remoteDataSource.deletePartner(p.id)
+                partnerDao.deleteById(p.id)
+            } catch (e: Exception) {
+                Log.w(TAG, "Failed to push delete for partner ${p.id}", e)
             }
         }
     }

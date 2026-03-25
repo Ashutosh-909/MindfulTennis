@@ -1,0 +1,1734 @@
+﻿
+03-25 21:14:54.636  2435  3851 V WindowManager: Collecting in transition 1348: 
+ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity, 
+caller=com.android.server.wm.TransitionController.collect:7 
+com.android.server.wm.ActivityStarter.startActivityUnchecked:98 
+com.android.server.wm.ActivityStarter.executeRequest:3651 
+com.android.server.wm.ActivityStarter.execute:1752 
+com.android.server.wm.ActivityTaskManagerService.startActivityAsUser:95 
+03-25 21:14:54.636  2435  3851 D ActivityTaskManager: 
+DesktopModeLaunchParamsModifier: task=null activity=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t-1} task null, skipping
+03-25 21:14:54.636  2435  3851 D ActivityTaskManager: 
+TaskLaunchParamsModifier:task=null activity=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t-1} 
+display-area-from-current-params=null 
+display-area-from-default-fallback=DefaultTaskDisplayArea_d0@245617632 
+display-id=0 task-display-area-windowing-mode=1 
+suggested-display-area=DefaultTaskDisplayArea_d0@245617632
+03-25 21:14:54.636  2435  3851 D ActivityTaskManager: 
+DesktopModeLaunchParamsModifier: task=null activity=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t-1} task null, skipping
+03-25 21:14:54.636  2435  3851 D ActivityTaskManager: 
+TaskLaunchParamsModifier:task=null activity=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t-1} 
+display-area-from-current-params=null 
+display-area-from-default-fallback=DefaultTaskDisplayArea_d0@245617632 
+display-id=0 task-display-area-windowing-mode=1 
+suggested-display-area=DefaultTaskDisplayArea_d0@245617632 
+non-freeform-task-display-area 
+display-area=DefaultTaskDisplayArea_d0@245617632 default-portrait 
+freeform-size-mismatch=Rect(81, 603 - 999, 1773)
+03-25 21:14:54.642  2435  3851 D ActivityTaskManager: 
+DesktopModeLaunchParamsModifier: task=Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis} activity=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t-1} non-desktop, skipping
+03-25 21:14:54.642  2435  3851 D ActivityTaskManager: 
+TaskLaunchParamsModifier:task=Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis} activity=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t-1} display-from-task=0 display-id=0 
+task-display-area-windowing-mode=1 
+suggested-display-area=DefaultTaskDisplayArea_d0@245617632 
+inherit-from-task=fullscreen non-freeform-task-display-area 
+display-area=DefaultTaskDisplayArea_d0@245617632 default-portrait 
+freeform-size-mismatch=Rect(81, 603 - 999, 1773)
+03-25 21:14:54.642  2435  3851 V WindowManager: Collecting in transition 1348: 
+Task{d00bb7e #10768 type=standard A=10261:com.ashutosh.mindfultennis}, 
+caller=com.android.server.wm.Transition.collectExistenceChange:40 
+com.android.server.wm.ActivityStarter.startActivityInner:293 
+com.android.server.wm.ActivityStarter.startActivityUnchecked:111 
+com.android.server.wm.ActivityStarter.executeRequest:3651 
+com.android.server.wm.ActivityStarter.execute:1752 
+03-25 21:14:54.643  1647  1773 I SurfaceFlinger: id=17705 createSurf, 
+flag=84004, ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}#17705
+03-25 21:14:54.644  2435  3851 V WindowManager: Add starting 
+ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity t10768}: 
+startingData=SplashScreenStartingData{baec92c removeAfterTransaction= 0}
+03-25 21:14:54.645  2435  3851 V WindowManager: Added starting 
+ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity t10768}: 
+startingWindow=null startingView=com.android.server.wm.StartingSurfaceControlle
+r$StartingSurface@ebf3ff5
+03-25 21:14:54.648  2435  3851 V WindowManager: Collecting in transition 1348: 
+ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity t10768}, 
+caller=com.android.server.wm.Transition.collectExistenceChange:40 
+com.android.server.wm.ActivityStarter.handleStartResult:761 
+com.android.server.wm.ActivityStarter.startActivityUnchecked:124 
+com.android.server.wm.ActivityStarter.executeRequest:3651 
+com.android.server.wm.ActivityStarter.execute:1752 
+03-25 21:14:54.648  2435  3851 V WindowManager:    ChangeInfo{1d54c18 
+container=ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity 
+t10768} flags=0x0}
+03-25 21:14:54.648  2435  3851 V WindowManager:    ChangeInfo{790e671 
+container=Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis} flags=0x0}
+03-25 21:14:54.649  2435  3851 I ActivityTaskManager: START u0 {flg=0x10000000 
+xflg=0x5 cmp=com.ashutosh.mindfultennis/.MainActivity} with LAUNCH_MULTIPLE 
+from uid 2000 (BAL_ALLOW_PERMISSION) result code=0
+03-25 21:14:54.652  3292  3386 V WindowManagerShell: Transition requested 
+(#1348): android.os.BinderProxy@e21330 TransitionRequestInfo { type = OPEN, 
+triggerTask = TaskInfo{userId=0 taskId=10768 effectiveUid=10261 displayId=0 
+isRunning=true baseIntent=Intent { flg=0x10000000 
+cmp=com.ashutosh.mindfultennis/.MainActivity } baseActivity=ComponentInfo{com.a
+shutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity} topActivity=Comp
+onentInfo{com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity} 
+origActivity=null realActivity=ComponentInfo{com.ashutosh.mindfultennis/com.ash
+utosh.mindfultennis.MainActivity} numActivities=1 lastActiveTime=74029210 
+supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 
+minHeight=-1 maxWidth=-1 maxHeight=-1 defaultMinSize=220 
+desktopDefaultMinSize=304 
+token=WCT{android.window.IWindowContainerToken$Stub$Proxy@93afba9} 
+topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false 
+launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 
+displayCutoutSafeInsets=Rect(0, 81 - 0, 0) 
+topActivityInfo=ActivityInfo{480d52e com.ashutosh.mindfultennis.MainActivity} 
+launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false 
+isVisible=false isVisibleRequested=false isTopActivityNoDisplay=false 
+isSleeping=false locusId=null displayAreaFeatureId=1 
+isTopActivityTransparent=false isActivityStackTransparent=false 
+lastNonFullscreenBounds=Rect(81, 603 - 999, 1773) capturedLink=null 
+capturedLinkTimestamp=0 requestedVisibleTypes=-9 
+topActivityRequestOpenInBrowserEducationTimestamp=0 
+appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false 
+eligibleForLetterboxEducation= false isLetterboxEducationEnabled= false 
+isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false 
+topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false 
+topActivityLetterboxVerticalPosition= -1 
+topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 
+topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1080, 2340) 
+isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false 
+hasMinAspectRatioOverride=false topActivityLetterboxBounds=null 
+cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive} 
+topActivityBounds=null topActivityInDisplayCompat=false 
+singleTapFromLetterbox=false} topActivityMainWindowFrame=null 
+originallySupportedMultiWindow=true hasWallpaper=false 
+rootAffinity=10261:com.ashutosh.mindfultennis isTopTaskInStage=false 
+CoverLauncherWidgetTask=false LaunchedFromAppsCoverLauncherTask=false 
+LaunchedFromMultistarCoverLauncherTask=false isAllowedSeamlessRotation=false 
+isTopTransparentActivity=false isAliasManaged=false hasConfigChanged=false 
+snappingGuideBounds=null isAiKeyRemoveAppTask=false 
+lastDesktopWindowingBounds=null lastExternalDesktopWindowingBounds=null 
+safeCutoutInsets=null}, pipChange = null, remoteTransition = null, 
+displayChange = null, flags = 0, debugId = 1348 }
+03-25 21:14:54.656  2435  3851 I AppsFilter: interaction: 
+PackageSetting{ac6bb99 io.appium.uiautomator2.server.test/10504} -> 
+PackageSetting{c30f13a com.ashutosh.mindfultennis/10261} BLOCKED
+03-25 21:14:54.656  2435  3851 I AppsFilter: interaction: 
+PackageSetting{50b123f io.appium.uiautomator2.server/10503} -> 
+PackageSetting{c30f13a com.ashutosh.mindfultennis/10261} BLOCKED
+03-25 21:14:54.658  2435  3851 V WindowManager: Collecting in transition 1348: 
+ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity t10768}, 
+caller=com.android.server.wm.TransitionController.collect:7 
+com.android.server.wm.ActivityRecord.setVisibility:132 
+com.android.server.wm.EnsureActivitiesVisibleHelper.process:459 
+com.android.server.wm.TaskFragment.updateActivityVisibilities:12 
+com.android.server.wm.Task$$ExternalSyntheticLambda37.accept:37 
+03-25 21:14:54.662  3786  3956 I HoneySpace.TopTaskUseCase: topTasks 10768 Comp
+onentInfo{com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}[d
+isplayId=0]
+03-25 21:14:54.664  1647  1647 I SurfaceFlinger: [ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}#17705] attach to parent 
+LayerHierarchy{RequestedLayerState{Task=10768#17704 parentId=10} 1 children}
+03-25 21:14:54.675  2435  3851 D WindowManager: prepareSync 
+<SYNC_STATE_WAITING_FOR_DRAW>, mPrepareSyncSeqId=0, win=Window{bd02a6a u0 
+Splash Screen com.ashutosh.mindfultennis}
+03-25 21:14:54.676  1647  3915 I SurfaceFlinger: id=17706 createSurf, 
+flag=84004, bd02a6a Splash Screen com.ashutosh.mindfultennis#17706
+03-25 21:14:54.676  2435  3851 V WindowManager: addWindow: 
+ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity t10768} 
+startingWindow=Window{bd02a6a u0 Splash Screen com.ashutosh.mindfultennis}
+03-25 21:14:54.677  2435  3851 D WindowManager: rotationForOrientation, 
+orientationSource=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}
+03-25 21:14:54.678  3292  3437 I InsetsController: onStateChanged: host=Splash 
+Screen com.ashutosh.mindfultennis, 
+from=android.view.ViewRootImpl.onInsetsStateChanged:3026, state=InsetsState: 
+{mDisplayFrame=Rect(0, 0 - 1080, 2340), 
+mDisplayCutout=DisplayCutout{insets=Rect(0, 81 - 0, 0) 
+waterfall=Insets{left=0, top=0, right=0, bottom=0} 
+boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(512, 0 - 568, 81), Rect(0, 0 - 
+0, 0), Rect(0, 0 - 0, 0)]} 
+cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1080 
+displayHeight=2340 physicalDisplayWidth=1080 physicalDisplayHeight=2340 
+density={3.0} cutoutSpec={M 0,0 H -9.333333333333333 V 27 H 9.333333333333333 
+V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} 
+sideOverrides={}}, 
+mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=102, 
+center=Point(102, 102)}, RoundedCorner{position=TopRight, radius=102, 
+center=Point(978, 102)}, RoundedCorner{position=BottomRight, radius=102, 
+center=Point(978, 2238)}, RoundedCorner{position=BottomLeft, radius=102, 
+center=Point(102, 2238)}]}  mRoundedCornerFrame=Rect(0, 0 - 1080, 2340), 
+mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(948, 0 - 
+1080, 81) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 
+displayWidth=1080 displayHeight=2340 physicalPixelDisplaySizeRatio=1.0 
+rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {f5de0001 
+mType=navigationBars mFrame=[0,2295][1080,2340] mVisible=true 
+mFlags=SUPPRESS_SCRIM mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: 
+{f5de0004 mType=systemGestures mFrame=[0,0][90,2340] mVisible=true mFlags= 
+mSideHint=LEFT mBoundingRects=null}, InsetsSource: {f5de0005 
+mType=mandatorySystemGestures mFrame=[0,2244][1080,2340] mVisible=true mFlags= 
+mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {f5de0006 
+mType=tappableElement mFrame=[0,0][0,0] mVisible=true mFlags= mSideHint=NONE 
+mBoundingRects=null}, InsetsSource: {f5de0024 mType=systemGestures 
+mFrame=[990,0][1080,2340] mVisible=true mFlags= mSideHint=RIGHT 
+mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] 
+mVisible=false mFlags= mSideHint=NONE mBoundingRects=null}, InsetsSource: {27 
+mType=displayCutout mFrame=[0,0][1080,81] mVisible=true mFlags= mSideHint=TOP 
+mBoundingRects=null}, InsetsSource: {540a0000 mType=statusBars 
+mFrame=[0,0][1080,81] mVisible=true mFlags= mSideHint=TOP 
+mBoundingRects=null}, InsetsSource: {540a0005 mType=mandatorySystemGestures 
+mFrame=[0,0][1080,117] mVisible=true mFlags= mSideHint=TOP 
+mBoundingRects=null}, InsetsSource: {540a0006 mType=tappableElement 
+mFrame=[0,0][1080,81] mVisible=true mFlags= mSideHint=TOP mBoundingRects=null} 
+}
+03-25 21:14:54.678  2435  2548 I ActivityManager: Start proc 
+30413:com.ashutosh.mindfultennis/u0a261 for next-top-activity 
+{com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}
+03-25 21:14:54.678  3292  3437 I VRI[mindfultennis]@d325c: 
+onActiveControlsChanged, removed=false, mAdded=true, 
+caller=android.view.ViewRootImpl.handleInsetsControlChanged:3002 
+android.view.ViewRootImpl.setView:2014 
+android.view.WindowManagerGlobal.addView:604 
+com.android.wm.shell.startingsurface.SplashscreenWindowCreator.addWindow:38 com
+.android.wm.shell.startingsurface.StartingWindowController$$ExternalSyntheticLa
+mbda4.run:1365 
+03-25 21:14:54.678  2435  2548 D DynamicHiddenApp_BGProtectManager: [SecIpm] 
+it's a ML_TYPE_EMPTYPROCESS protected process com.ashutosh.mindfultennis
+03-25 21:14:54.678  3292  3437 I VRI[mindfultennis]@d325c: synced 
+displayState. AttachInfo displayState=2
+03-25 21:14:54.678  3292  3437 I VRI[mindfultennis]@d325c: setView = 
+android.widget.FrameLayout@f823463 IsHRR=false mFlingFrameRateChange=0 TM=true
+03-25 21:14:54.689  1647  1647 I SurfaceFlinger: [bd02a6a Splash Screen 
+com.ashutosh.mindfultennis#17706] attach to parent 
+LayerHierarchy{RequestedLayerState{ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}#17705 parentId=17704} 1 
+children}
+03-25 21:14:54.690  2435  3851 I WindowManager: Relayout Window{bd02a6a u0 
+Splash Screen com.ashutosh.mindfultennis}: viewVisibility=0 req=1080x2340 ty=3 
+d0
+03-25 21:14:54.691  1647  3915 I SurfaceFlinger: id=17707 createSurf, 
+flag=44004, Splash Screen com.ashutosh.mindfultennis$_3292#17707
+03-25 21:14:54.692 30413 30413 I h.mindfultennis: Using CollectorTypeCMC GC.
+03-25 21:14:54.692  2435  3851 D WindowManager: makeSurface duration=1 
+name=Splash Screen com.ashutosh.mindfultennis$_3292
+03-25 21:14:54.693  2435  3851 D SurfaceComposerClient: setCornerRadius ## 
+bd02a6a Splash Screen com.ashutosh.mindfultennis#17706 cornerRadius=0.000000
+03-25 21:14:54.693  2435  3851 D SurfaceComposerClient: setCornerRadius ## 
+bd02a6a Splash Screen com.ashutosh.mindfultennis#17706 cornerRadius=0.000000
+03-25 21:14:54.695  3292  3437 I VRI[mindfultennis]@d325c: 
+onActiveControlsChanged, removed=false, mAdded=true, 
+caller=android.view.ViewRootImpl.handleInsetsControlChanged:3002 
+android.view.ViewRootImpl.relayoutWindow:11629 
+android.view.ViewRootImpl.performTraversals:4804 
+android.view.ViewRootImpl.doTraversal:3924 
+android.view.ViewRootImpl$TraversalRunnable.run:12903 
+03-25 21:14:54.696  3292  3437 I BLASTBufferQueue_Java: new BLASTBufferQueue, 
+mName= VRI[mindfultennis]@d325c mNativeObject= 0xb4000076f143e1a0 caller= 
+android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3585 
+android.view.ViewRootImpl.relayoutWindow:11685 
+android.view.ViewRootImpl.performTraversals:4804 
+android.view.ViewRootImpl.doTraversal:3924 
+android.view.ViewRootImpl$TraversalRunnable.run:12903 
+android.view.Choreographer$CallbackRecord.run:1901 
+android.view.Choreographer$CallbackRecord.run:1910 
+android.view.Choreographer.doCallbacks:1367 
+android.view.Choreographer.doFrame:1292 
+android.view.Choreographer$FrameDisplayEventReceiver.run:1870 
+03-25 21:14:54.696  3292  3437 I BLASTBufferQueue_Java: update, w= 1080 h= 
+2340 mName = VRI[mindfultennis]@d325c mNativeObject= 0xb4000076f143e1a0 
+sc.mNativeObject= 0xb400007741082c50 format= -3 caller= 
+android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3590 
+android.view.ViewRootImpl.relayoutWindow:11685 
+android.view.ViewRootImpl.performTraversals:4804 
+android.view.ViewRootImpl.doTraversal:3924 
+android.view.ViewRootImpl$TraversalRunnable.run:12903 
+android.view.Choreographer$CallbackRecord.run:1901 
+03-25 21:14:54.696  3292  3437 I VRI[mindfultennis]@d325c: Relayout returned: 
+old=(0,0,1080,2340) new=(0,0,1080,2340) relayoutAsync=false req=(1080,2340)0 
+dur=6 res=0x3 s={true 0xb400007831384df0} ch=true seqId=0
+03-25 21:14:54.696  3292  3437 I VRI[mindfultennis]@d325c: 
+performConfigurationChange setNightDimText nightDimLevel=0
+03-25 21:14:54.697  3292  3437 D VRI[mindfultennis]@d325c: 
+mThreadedRenderer.initialize() mSurface={isValid=true 0xb400007831384df0} 
+hwInitialized=true
+03-25 21:14:54.697  3292  3437 D VRI[mindfultennis]@d325c: reportNextDraw 
+android.view.ViewRootImpl.performTraversals:5443 
+android.view.ViewRootImpl.doTraversal:3924 
+android.view.ViewRootImpl$TraversalRunnable.run:12903 
+android.view.Choreographer$CallbackRecord.run:1901 
+android.view.Choreographer$CallbackRecord.run:1910 
+03-25 21:14:54.697  3292  3437 D VRI[mindfultennis]@d325c: Setup new 
+sync=wmsSync-VRI[mindfultennis]@d325c#56
+03-25 21:14:54.697  3292  3437 I VRI[mindfultennis]@d325c: Creating new active 
+sync group VRI[mindfultennis]@d325c#57
+03-25 21:14:54.698  3292  3437 D VRI[mindfultennis]@d325c: 
+registerCallbacksForSync syncBuffer=false
+03-25 21:14:54.700  3292  3487 D VRI[mindfultennis]@d325c: Received 
+frameDrawingCallback syncResult=0 frameNum=1.
+03-25 21:14:54.700  3292  3487 I VRI[mindfultennis]@d325c: mWNT: 
+t=0xb4000076e1184790 mBlastBufferQueue=0xb4000076f143e1a0 fn= 1 HdrRenderState 
+mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$12.onFrameDraw:15441 
+android.view.ThreadedRenderer$1.onFrameDraw:718 <bottom of call stack> 
+03-25 21:14:54.700  3292  3487 I VRI[mindfultennis]@d325c: Setting up sync and 
+frameCommitCallback
+03-25 21:14:54.702  3292  3491 I BLASTBufferQueue: 
+[VRI[mindfultennis]@d325c#1049](f:0,a:0,s:0) onFrameAvailable the first frame 
+is available
+03-25 21:14:54.703  3292  3491 I VRI[mindfultennis]@d325c: Received 
+frameCommittedCallback lastAttemptedDrawFrameNum=1 didProduceBuffer=true
+03-25 21:14:54.703  1647  3915 I SurfaceFlinger: [Splash Screen 
+com.ashutosh.mindfultennis$_3292#17707] setTransactionState with the first 
+frame. bufferData(ID: 14139032346741, frameNumber: 1)
+03-25 21:14:54.703  3292  3437 D VRI[mindfultennis]@d325c: reportDrawFinished 
+seqId=0
+03-25 21:14:54.705  1647  1647 I SurfaceFlinger: [Splash Screen 
+com.ashutosh.mindfultennis$_3292#17707] attach to parent 
+LayerHierarchy{RequestedLayerState{bd02a6a Splash Screen 
+com.ashutosh.mindfultennis#17706 parentId=17705} 1 children}
+03-25 21:14:54.706  2435  3481 D WindowManager: finishDrawingWindow: 
+Window{bd02a6a u0 Splash Screen com.ashutosh.mindfultennis} 
+mDrawState=DRAW_PENDING seqId=0
+03-25 21:14:54.706  2435  3481 V WindowManager: Finishing drawing window 
+Window{bd02a6a u0 Splash Screen com.ashutosh.mindfultennis}: 
+mDrawState=DRAW_PENDING
+03-25 21:14:54.706  2435  3481 V WindowManager: Draw state now committed in 
+Window{bd02a6a u0 Splash Screen com.ashutosh.mindfultennis}
+03-25 21:14:54.709  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+bd02a6a Splash Screen com.ashutosh.mindfultennis#17706 cornerRadius=0.000000
+03-25 21:14:54.710  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+bd02a6a Splash Screen com.ashutosh.mindfultennis#17706 cornerRadius=0.000000
+03-25 21:14:54.711  2435  2530 V WindowManager: performShowLocked: 
+mDrawState=HAS_DRAWN in Window{bd02a6a u0 Splash Screen 
+com.ashutosh.mindfultennis}
+03-25 21:14:54.711  2435  2530 D WindowManagerServiceExt: 
+updateTaskbarTargetIfNeeded: cn=ComponentInfo{com.ashutosh.mindfultennis/com.as
+hutosh.mindfultennis.MainActivity} occludesParent=true 
+isInSplitScreenMode=false
+03-25 21:14:54.711  2435  2530 D ChangeTransitionController:    
+ChangeInfo{1d54c18 container=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768} flags=0x0}
+03-25 21:14:54.711  2435  2530 D ChangeTransitionController:    
+ChangeInfo{790e671 container=Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis} flags=0x0}
+03-25 21:14:54.711  2435  2530 V WindowManager: Start calculating 
+TransitionInfo based on participants: {ActivityRecord{9024268 u0 
+com.whatsapp/.home.ui.HomeActivity t10765}, ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}, Task{d00bb7e #10768 
+type=standard A=10261:com.ashutosh.mindfultennis}}
+03-25 21:14:54.711  2435  2530 V WindowManager:   Final targets: 
+[ChangeInfo{790e671 container=Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis} flags=0x10}, ChangeInfo{91e7509 
+container=Task{d5c7c73 #10765 type=standard A=10326:com.whatsapp} flags=0x10}]
+03-25 21:14:54.714  2435  2530 I SurfaceControlRegistry: show, 
+t=StartTransaction_SyncId<1348> sc=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}, 
+caller=android.view.SurfaceControl$Transaction.show:3557 
+com.android.server.wm.Transition.onTransactionReady:2048 
+com.android.server.wm.BLASTSyncEngine$SyncGroup.finishNow:240 
+com.android.server.wm.BLASTSyncEngine.onSurfacePlacement:263 
+com.android.server.wm.RootWindowContainer.performSurfacePlacementNoTrace:1083 
+com.android.server.wm.WindowSurfacePlacer.performSurfacePlacement:166 
+03-25 21:14:54.715  2435  2530 V WindowManager:         
+{WCT{RemoteToken{ce4833c Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis}}} m=OPEN f=NONE 
+leash=Surface(name=Task=10768)/@0x796c30e sb=Rect(0, 0 - 1080, 2340) 
+eb=Rect(0, 0 - 1080, 2340) epz=Point(1080, 2340) d=0 taskParent=-1 
+inset=Rect(0, 81 - 0, 45) dim=true},
+03-25 21:14:54.723  1647  1647 I SurfaceFlinger: RequestedLayer [bd02a6a 
+Splash Screen com.ashutosh.mindfultennis#17706] hidden!! flag  from(1) --> 
+to(0)
+03-25 21:14:54.723  1647  1647 I SurfaceFlinger: RequestedLayer [Splash Screen 
+com.ashutosh.mindfultennis$_3292#17707] hidden!! flag  from(1) --> to(0)
+03-25 21:14:54.728  2435  2526 V WindowManager: Sent Transition (#1348) 
+createdAt=03-25 21:14:54.634 via request=TransitionRequestInfo { type = OPEN, 
+triggerTask = TaskInfo{userId=0 taskId=10768 effectiveUid=10261 displayId=0 
+isRunning=true baseIntent=Intent { flg=0x10000000 
+cmp=com.ashutosh.mindfultennis/.MainActivity } baseActivity=ComponentInfo{com.a
+shutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity} topActivity=Comp
+onentInfo{com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity} 
+origActivity=null realActivity=ComponentInfo{com.ashutosh.mindfultennis/com.ash
+utosh.mindfultennis.MainActivity} numActivities=1 lastActiveTime=74029210 
+supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 
+minHeight=-1 maxWidth=-1 maxHeight=-1 defaultMinSize=220 
+desktopDefaultMinSize=304 token=WCT{RemoteToken{ce4833c Task{d00bb7e #10768 
+type=standard A=10261:com.ashutosh.mindfultennis}}} topActivityType=1 
+pictureInPictureParams=null shouldDockBigOverlays=false 
+launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 
+displayCutoutSafeInsets=Rect(0, 81 - 0, 0) 
+topActivityInfo=ActivityInfo{880021a com.ashutosh.mindfultennis.MainActivity} 
+launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false 
+isVisible=false isVisibleRequested=false isTopActivityNoDisplay=false 
+isSleeping=false locusId=null displayAreaFeatureId=1 
+isTopActivityTransparent=false isActivityStackTransparent=false 
+lastNonFullscreenBounds=Rect(81, 603 - 999, 1773) capturedLink=null 
+capturedLinkTimestamp=0 requestedVisibleTypes=-9 
+topActivityRequestOpenInBrowserEducationTimestamp=0 
+appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false 
+eligibleForLetterboxEducation= false isLetterboxEducationEnabled= false 
+isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false 
+topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false 
+topActivityLetterboxVerticalPosition= -1 
+topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 
+topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1080, 2340) 
+isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false 
+hasMinAspectRatioOverride=false topActivityLetterboxBounds=null 
+cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive} 
+topActivityBounds=null topActivityInDisplayCompat=false 
+singleTapFromLetterbox=false} topActivityMainWindowFrame=null 
+originallySupportedMultiWindow=true hasWallpaper=false 
+rootAffinity=10261:com.ashutosh.mindfultennis isTopTaskInStage=false 
+CoverLauncherWidgetTask=false LaunchedFromAppsCoverLauncherTask=false 
+LaunchedFromMultistarCoverLauncherTask=false isAllowedSeamlessRotation=false 
+isTopTransparentActivity=false isAliasManaged=false hasConfigChanged=false 
+snappingGuideBounds=null isAiKeyRemoveAppTask=false 
+lastDesktopWindowingBounds=null lastExternalDesktopWindowingBounds=null 
+safeCutoutInsets=null}, pipChange = null, remoteTransition = null, 
+displayChange = null, flags = 0, debugId = 1348 }
+03-25 21:14:54.728  2435  2526 V WindowManager:         
+{WCT{RemoteToken{ce4833c Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis}}} m=OPEN f=NONE 
+leash=Surface(name=Task=10768)/@0x796c30e sb=Rect(0, 0 - 1080, 2340) 
+eb=Rect(0, 0 - 1080, 2340) epz=Point(1080, 2340) d=0 taskParent=-1 
+inset=Rect(0, 81 - 0, 45) dim=true},
+03-25 21:14:54.730  2435  2530 D InsetsSourceProvider: updateControlForTarget: 
+control=InsetsSourceControl: {540a0000 mType=statusBars initiallyVisible 
+mSurfacePosition=Point(0, 0) mInsetsHint=Insets{left=0, top=81, right=0, 
+bottom=0}}, target=Window{bd02a6a u0 Splash Screen 
+com.ashutosh.mindfultennis}, 
+from=com.android.server.wm.InsetsStateController.onControlTargetChanged:83 
+com.android.server.wm.InsetsPolicy.updateBarControlTarget:212 
+com.android.server.wm.DisplayPolicy.updateSystemBarAttributes:262 
+com.android.server.wm.DisplayPolicy.finishPostLayoutPolicyLw:17 
+com.android.server.wm.RootWindowContainer.applySurfaceChangesTransaction$1:195 
+03-25 21:14:54.730  2435  2530 D InsetsSourceProvider: updateControlForTarget: 
+control=InsetsSourceControl: {f5de0001 mType=navigationBars initiallyVisible 
+mSurfacePosition=Point(0, 2196) mInsetsHint=Insets{left=0, top=0, right=0, 
+bottom=45}}, target=Window{bd02a6a u0 Splash Screen 
+com.ashutosh.mindfultennis}, 
+from=com.android.server.wm.InsetsStateController.onControlTargetChanged:83 
+com.android.server.wm.InsetsPolicy.updateBarControlTarget:225 
+com.android.server.wm.DisplayPolicy.updateSystemBarAttributes:262 
+com.android.server.wm.DisplayPolicy.finishPostLayoutPolicyLw:17 
+com.android.server.wm.RootWindowContainer.applySurfaceChangesTransaction$1:195 
+03-25 21:14:54.731  2435  2530 D WindowManager: updateSystemBarAttributes: 
+displayId=0, focusedCanBeNavColorWin=false, win=Window{bd02a6a u0 Splash 
+Screen com.ashutosh.mindfultennis}, navColorWin=Window{bd02a6a u0 Splash 
+Screen com.ashutosh.mindfultennis}, 
+caller=com.android.server.wm.DisplayPolicy.finishPostLayoutPolicyLw:17 
+com.android.server.wm.RootWindowContainer.applySurfaceChangesTransaction$1:195 
+com.android.server.wm.RootWindowContainer.performSurfacePlacementNoTrace:59 
+03-25 21:14:54.731  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+bd02a6a Splash Screen com.ashutosh.mindfultennis#17706 cornerRadius=0.000000
+03-25 21:14:54.732  1647  3915 I SurfaceFlinger: id=17712 createSurf, 
+flag=84000, 4d39b94 ActivityRecordInputSink 
+com.ashutosh.mindfultennis/.MainActivity#17712
+03-25 21:14:54.734  2435  3481 D SGM:GameManager: identifyGamePackage. 
+com.ashutosh.mindfultennis, mCurrentUserId: 0, callingMethodInfo: com.samsung.a
+ndroid.game.IGameManagerService$Stub.onTransact(IGameManagerService.java:247)
+03-25 21:14:54.739  1647  1647 I SurfaceFlinger: [4d39b94 
+ActivityRecordInputSink com.ashutosh.mindfultennis/.MainActivity#17712] attach 
+to parent LayerHierarchy{RequestedLayerState{ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}#17705 parentId=17704} 2 
+children}
+03-25 21:14:54.739  2435  3854 D SGM:GameManager: identifyGamePackage. 
+com.ashutosh.mindfultennis, mCurrentUserId: 0, callingMethodInfo: com.samsung.a
+ndroid.game.IGameManagerService$Stub.onTransact(IGameManagerService.java:247)
+03-25 21:14:54.741  2435  2530 I WindowManager: notifyInsetsControlChanged, 
+removed=false, win=Window{bd02a6a u0 Splash Screen 
+com.ashutosh.mindfultennis}, caller=com.android.server.wm.InsetsStateController
+$$ExternalSyntheticLambda1.run:137 com.android.server.wm.WindowAnimator$$Extern
+alSyntheticLambda2.onTransactionCommitted:26 
+android.view.SurfaceControl$Transaction$$ExternalSyntheticLambda4.run:0 
+android.os.Handler.handleCallback:995 android.os.Handler.dispatchMessage:103 
+android.os.Looper.loopOnce:273 
+03-25 21:14:54.743  3292  3292 D NavigationBar: onSystemBarAttributesChanged() 
+-  displayId:0, appearance:24, packageName: com.ashutosh.mindfultennis 
+(APPEARANCE_LIGHT_STATUS_BARS APPEARANCE_LIGHT_NAVIGATION_BARS ), 
+navbarColorManagedByIme:false
+03-25 21:14:54.745 30413 30413 W h.mindfultennis: Failed to find entry 
+'classes.dex': Entry not found
+03-25 21:14:54.745 30413 30413 W h.mindfultennis: Failed to find entry 
+'classes.dex': Entry not found
+03-25 21:14:54.746 30413 30413 W h.mindfultennis: Failed to find entry 
+'classes.dex': Entry not found
+03-25 21:14:54.746 30413 30413 W h.mindfultennis: Failed to find entry 
+'classes.dex': Entry not found
+03-25 21:14:54.746 30413 30413 W h.mindfultennis: Failed to find entry 
+'classes.dex': Entry not found
+03-25 21:14:54.746 30413 30413 W h.mindfultennis: Failed to find entry 
+'classes.dex': Entry not found
+03-25 21:14:54.747 30413 30413 W h.mindfultennis: Failed to find entry 
+'classes.dex': Entry not found
+03-25 21:14:54.747 30413 30413 W h.mindfultennis: Failed to find entry 
+'classes.dex': Entry not found
+03-25 21:14:54.747 30413 30413 W h.mindfultennis: Failed to find entry 
+'classes.dex': Entry not found
+03-25 21:14:54.747 30413 30413 W h.mindfultennis: Failed to find entry 
+'classes.dex': Entry not found
+03-25 21:14:54.747  3292  3437 I VRI[mindfultennis]@d325c: 
+onActiveControlsChanged, removed=false, mAdded=true, 
+caller=android.view.ViewRootImpl.handleInsetsControlChanged:3002 
+android.view.ViewRootImpl$ViewRootHandler.handleMessageImpl:8352 
+android.view.ViewRootImpl$ViewRootHandler.handleMessage:8301 
+android.os.Handler.dispatchMessage:110 android.os.Looper.loopOnce:273 
+03-25 21:14:54.747  3292  3437 I InsetsSourceConsumer: 
+applyRequestedVisibilityToControl: visible=true, type=statusBars, host=Splash 
+Screen com.ashutosh.mindfultennis
+03-25 21:14:54.748  3292  3437 I InsetsSourceConsumer: 
+applyRequestedVisibilityToControl: visible=true, type=navigationBars, 
+host=Splash Screen com.ashutosh.mindfultennis
+03-25 21:14:54.749 30413 30413 D nativeloader: Configuring clns-9 for other 
+apk /data/app/~~cbd3QdlFq10hxSdT1h2Hig==/com.ashutosh.mindfultennis-W0lbSUAT0iN
+klPKkAkPFWg==/base.apk:/data/app/~~cbd3QdlFq10hxSdT1h2Hig==/com.ashutosh.mindfu
+ltennis-W0lbSUAT0iNklPKkAkPFWg==/split_config.arm64_v8a.apk:/data/app/~~cbd3Qdl
+Fq10hxSdT1h2Hig==/com.ashutosh.mindfultennis-W0lbSUAT0iNklPKkAkPFWg==/split_con
+fig.bn.apk:/data/app/~~cbd3QdlFq10hxSdT1h2Hig==/com.ashutosh.mindfultennis-W0lb
+SUAT0iNklPKkAkPFWg==/split_config.en.apk:/data/app/~~cbd3QdlFq10hxSdT1h2Hig==/c
+om.ashutosh.mindfultennis-W0lbSUAT0iNklPKkAkPFWg==/split_config.gu.apk:/data/ap
+p/~~cbd3QdlFq10hxSdT1h2Hig==/com.ashutosh.mindfultennis-W0lbSUAT0iNklPKkAkPFWg=
+=/split_config.hi.apk:/data/app/~~cbd3QdlFq10hxSdT1h2Hig==/com.ashutosh.mindful
+tennis-W0lbSUAT0iNklPKkAkPFWg==/split_config.kn.apk:/data/app/~~cbd3QdlFq10hxSd
+T1h2Hig==/com.ashutosh.mindfultennis-W0lbSUAT0iNklPKkAkPFWg==/split_config.mr.a
+pk:/data/app/~~cbd3QdlFq10hxSdT1h2Hig==/com.ashutosh.mindfultennis-W0lbSUAT0iNk
+lPKkAkPFWg==/split_config.ta.apk:/data/app/~~c
+03-25 21:14:54.755 30413 30413 V GraphicsEnvironment: 
+com.ashutosh.mindfultennis is not listed in per-application setting
+03-25 21:14:54.755 30413 30413 V GraphicsEnvironment: 
+com.ashutosh.mindfultennis is not listed in ANGLE allowlist or settings, 
+returning default
+03-25 21:14:54.762  2435  3851 D BaseRestrictionMgr: Package: 
+com.android.vending, userid: 0, hostingType: bindService is allowed by 
+freecess, caller is: com.ashutosh.mindfultennis
+03-25 21:14:54.762  1647  1647 D SurfaceFlinger:        DEVICE |           
+14139032346741 | 00002100 | RGBA_8888    |    0.0    0.0  106.0 2340.0 |  974  
+  0 1080 2340 | Splash Screen com.ashutosh.mindfultennis$_3292#17707 (1)
+03-25 21:14:54.766  2435  3854 D SGM:FgCheckThread: notifyAppCreated(), 
+packageName: com.ashutosh.mindfultennis, userId: 0, sendRet: true
+03-25 21:14:54.766  2435  3010 D SGM:FgCheckThread: onLooperPrepared(), msg: 
+MSG_APP_CREATE, pkgName: com.ashutosh.mindfultennis, userId: 0
+03-25 21:14:54.767  2435  3854 D SGM:FgCheckThread:   
+sendRunningComponentFocus(), pkgName: com.ashutosh.mindfultennis, userId: 0
+03-25 21:14:54.767  2435  3854 D InputDispatcher: Focused application(0): 
+ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity t10768}
+03-25 21:14:54.767  2435  3010 D SGM:FgCheckThread: onLooperPrepared(), msg: 
+MSG_TASK_FOCUSED, pkgName: com.ashutosh.mindfultennis, userId: 0
+03-25 21:14:54.767  2435  3010 D SGM:FgCheckThread:   handleTaskFocused(), 
+pkgName: com.ashutosh.mindfultennis, userID:0
+03-25 21:14:54.767  2435  3854 D ActivityTaskManager: 
+scheduleTopResumedActivityChanged, onTop=true, r=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}, caller=com.android.server.wm.
+ActivityTaskSupervisor.scheduleTopResumedActivityStateIfNeeded:18 com.android.s
+erver.wm.ActivityTaskSupervisor.updateTopResumedActivityIfNeeded:54 
+com.android.server.wm.TaskFragment.setResumedActivity:30 
+com.android.server.wm.ActivityRecord.setState:100 
+com.android.server.wm.ActivityTaskSupervisor.realStartActivityLocked:477 
+com.android.server.wm.RootWindowContainer.attachApplication:92 
+03-25 21:14:54.767  2435  3010 D SGM:FgCheckThread:   handleResume(). pkgName: 
+com.ashutosh.mindfultennis, userId: 0, category: non-game
+03-25 21:14:54.767  2435  3010 D SGM:FgCheckThread: notifyFocusInOut(). of 
+pkg: com.ashutosh.mindfultennis, type: 4, isSecGameFamily: false, userId: 0
+03-25 21:14:54.769 30413 30413 D WM-RescheduleReceiver: Received intent Intent 
+{ act=android.intent.action.BOOT_COMPLETED flg=0x9000030 
+pkg=com.ashutosh.mindfultennis cmp=com.ashutosh.mindfultennis/androidx.work.imp
+l.background.systemalarm.RescheduleReceiver (has extras) }
+03-25 21:14:54.772  6001 10737 I SDHMS:k : handleResumeComponent : put = 
+com.ashutosh.mindfultennis, userid = 0 instanceid =65300703
+03-25 21:14:54.773  2435  2529 D SGM:GameManager: identifyGamePackage. 
+com.ashutosh.mindfultennis, mCurrentUserId: 0, callingMethodInfo: 
+com.samsung.android.game.SemGameManager.isGamePackage(SemGameManager.java:106)
+03-25 21:14:54.773  2435  2529 D SGM:SemGameManager: isGamePackage(), 
+pkgName=com.ashutosh.mindfultennis, ret=false
+03-25 21:14:54.773  2435  2529 D SGM:FgCheckThread: noteResumeComponent(), 
+received pkgName: com.ashutosh.mindfultennis, userId: 0
+03-25 21:14:54.773  2435  3010 D SGM:FgCheckThread: onLooperPrepared(), msg: 
+MSG_APP_RESUME, pkgName: com.ashutosh.mindfultennis, userid: 0
+03-25 21:14:54.773  2435  3010 D SGM:FgCheckThread:   handleResume(). pkgName: 
+com.ashutosh.mindfultennis, userId: 0, category: non-game
+03-25 21:14:54.773  2435  3010 D SGM:FgCheckThread: notifyFocusInOut(). of 
+pkg: com.ashutosh.mindfultennis, type: 4, isSecGameFamily: false, userId: 0
+03-25 21:14:54.776  2435  3481 D GraphicsStatsService: 
+requestRenderEngineFor(com.ashutosh.mindfultennis)
+03-25 21:14:54.776 30413 30413 D ActivityThread: com.ashutosh.mindfultennis 
+will use render engine as VK
+03-25 21:14:54.836  2435  3088 D MdnieScenarioControlService:  packageName : 
+com.ashutosh.mindfultennis    className : 
+com.ashutosh.mindfultennis.MainActivity
+03-25 21:14:54.839  1647  3915 I SurfaceFlinger: id=17713 createSurf, 
+flag=84004, ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713
+03-25 21:14:54.839  1647  1647 I SurfaceFlinger: [ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713] 
+attach to parent LayerHierarchy{RequestedLayerState{ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}#17705 parentId=17704} 3 
+children}
+03-25 21:14:54.840 30413 30413 I InsetsController: onStateChanged: 
+host=com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity, 
+from=android.view.ViewRootImpl.onInsetsStateChanged:3026, state=InsetsState: 
+{mDisplayFrame=Rect(0, 0 - 1080, 2340), 
+mDisplayCutout=DisplayCutout{insets=Rect(0, 81 - 0, 0) 
+waterfall=Insets{left=0, top=0, right=0, bottom=0} 
+boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(512, 0 - 568, 81), Rect(0, 0 - 
+0, 0), Rect(0, 0 - 0, 0)]} 
+cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1080 
+displayHeight=2340 physicalDisplayWidth=1080 physicalDisplayHeight=2340 
+density={3.0} cutoutSpec={M 0,0 H -9.333333333333333 V 27 H 9.333333333333333 
+V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} 
+sideOverrides={}}, 
+mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=102, 
+center=Point(102, 102)}, RoundedCorner{position=TopRight, radius=102, 
+center=Point(978, 102)}, RoundedCorner{position=BottomRight, radius=102, 
+center=Point(978, 2238)}, RoundedCorner{position=BottomLeft, radius=102, 
+center=Point(102, 2238)}]}  mRoundedCornerFrame=Rect(0, 0 - 1080, 2340), 
+mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(948, 0 - 
+1080, 81) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 
+displayWidth=1080 displayHeight=2340 physicalPixelDisplaySizeRatio=1.0 
+rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {f5de0001 
+mType=navigationBars mFrame=[0,2295][1080,2340] mVisible=true 
+mFlags=SUPPRESS_SCRIM mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: 
+{f5de0004 mType=systemGestures mFrame=[0,0][90,2340] mVisible=true mFlags= 
+mSideHint=LEFT mBoundingRects=null}, InsetsSource: {f5de0005 
+mType=mandatorySystemGestures mFrame=[0,2244][1080,2340] mVisible=true mFlags= 
+mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {f5de0006 
+mType=tappableElement mFrame=[0,0][0,0] mVisible=true mFlags= mSideHint=NONE 
+mBoundingRects=null}, InsetsSource: {f5de0024 mType=systemGestures 
+mFrame=[990,0][1080,2340] mVisible=true mFlags= mSideHint=RIGHT 
+mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] 
+mVisible=false mFlags= mSideHint=NONE mBoundingRects=null}, InsetsSource: {27 
+mType=displayCutout mFrame=[0,0][1080,81] mVisible=true mFlags= mSideHint=TOP 
+mBoundingRects=null}, InsetsSource: {540a0000 mType=statusBars 
+mFrame=[0,0][1080,81] mVisible=true mFlags= mSideHint=TOP 
+mBoundingRects=null}, InsetsSource: {540a0005 mType=mandatorySystemGestures 
+mFrame=[0,0][1080,117] mVisible=true mFlags= mSideHint=TOP 
+mBoundingRects=null}, InsetsSource: {540a0006 mType=tappableElement 
+mFrame=[0,0][1080,81] mVisible=true mFlags= mSideHint=TOP mBoundingRects=null} 
+}
+03-25 21:14:54.842 30413 30413 I IDS_TAG : Getting Shared Preference for 
+com.ashutosh.mindfultennis.MindfulTennisApp@a945b57 uid = 10261
+03-25 21:14:54.843 30413 30413 I IDS_TAG : App 
+com.ashutosh.mindfultennis.MindfulTennisApp@a945b57 has not finished training
+03-25 21:14:54.844 30413 30413 I IDS_TAG : Getting Shared Preference for 
+com.ashutosh.mindfultennis.MindfulTennisApp@a945b57 uid = 10261
+03-25 21:14:54.844 30413 30413 I IDS_TAG : IDS count updated to 4 for 
+com.ashutosh.mindfultennis.MindfulTennisApp@a945b57
+03-25 21:14:54.844  2435  3279 D ConnectivityService: requestNetwork for 
+uid/pid:10261/30413 activeRequest: null callbackRequest: 5821 [NetworkRequest 
+[ REQUEST id=5822, [ Capabilities: 
+INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 
+10261 RequestorUid: 10261 RequestorPkg: com.ashutosh.mindfultennis 
+UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647 isUidTracked: 
+false declaredMethods: AVAIL|LOST|NC
+03-25 21:14:54.845  2435  3279 D CoreBackPreview: Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}: Setting 
+back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvoked
+Callback$Stub$Proxy@100411e, mPriority=-1, mIsAnimationCallback=false, 
+mOverrideBehavior=0}
+03-25 21:14:54.845  2435  3075 D ConnectivityService:    accepting network in 
+place of null for NetworkRequest [ REQUEST id=5822, [ Capabilities: 
+INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 
+10261 RequestorUid: 10261 RequestorPkg: com.ashutosh.mindfultennis 
+UnderlyingNetworks: Null] ]
+03-25 21:14:54.849  2435  3054 D WifiNetworkFactory: got request 
+NetworkRequest [ REQUEST id=5822, [ Capabilities: 
+INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 
+10261 RequestorUid: 10261 RequestorPkg: com.ashutosh.mindfultennis 
+UnderlyingNetworks: Null] ]
+03-25 21:14:54.850  2435  3054 D UntrustedWifiNetworkFactory: got request 
+NetworkRequest [ REQUEST id=5822, [ Capabilities: 
+INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 
+10261 RequestorUid: 10261 RequestorPkg: com.ashutosh.mindfultennis 
+UnderlyingNetworks: Null] ]
+03-25 21:14:54.851  2435  3054 D OemPaidWifiNetworkFactory: got request 
+NetworkRequest [ REQUEST id=5822, [ Capabilities: 
+INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 
+10261 RequestorUid: 10261 RequestorPkg: com.ashutosh.mindfultennis 
+UnderlyingNetworks: Null] ]
+03-25 21:14:54.851  2435  3054 D MultiInternetWifiNetworkFactory: got request 
+NetworkRequest [ REQUEST id=5822, [ Capabilities: 
+INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 
+10261 RequestorUid: 10261 RequestorPkg: com.ashutosh.mindfultennis 
+UnderlyingNetworks: Null] ]
+03-25 21:14:54.856  1647  1647 I SurfaceFlinger: RequestedLayer [ae26aa3 
+com.ashutosh.mindfultennis/c[...]osh.mindfultennis.MainActivity#17713] 
+hidden!! flag  from(1) --> to(0)
+03-25 21:14:54.896  2435  3812 I WindowManager: Relayout Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}: 
+viewVisibility=0 req=1080x2340 ty=1 d0
+03-25 21:14:54.896  1647  3915 I SurfaceFlinger: id=17714 createSurf, 
+flag=44004, 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity$_30413#17714
+03-25 21:14:54.897  2435  3812 D WindowManager: makeSurface duration=1 
+name=com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity$_30413
+03-25 21:14:54.897  2435  3812 D SurfaceComposerClient: setCornerRadius ## 
+bd02a6a Splash Screen com.ashutosh.mindfultennis#17706 cornerRadius=0.000000
+03-25 21:14:54.897  2435  3812 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:54.898  2435  3812 D SurfaceComposerClient: setCornerRadius ## 
+bd02a6a Splash Screen com.ashutosh.mindfultennis#17706 cornerRadius=0.000000
+03-25 21:14:54.898  2435  3812 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:54.898  2435  3812 D WindowManager: Changing focus from null to 
+Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity} 
+displayId=0 
+Callers=com.android.server.wm.WindowManagerService.relayoutWindow:1350 
+com.android.server.wm.Session.relayout:27 
+android.view.IWindowSession$Stub.onTransact:829 
+com.android.server.wm.Session.onTransact:1 
+03-25 21:14:54.899  2435  3812 D InsetsSourceProvider: updateControlForTarget: 
+control=InsetsSourceControl: {540a0000 mType=statusBars initiallyVisible 
+mSurfacePosition=Point(0, 0) mInsetsHint=Insets{left=0, top=81, right=0, 
+bottom=0}}, target=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, 
+from=com.android.server.wm.InsetsStateController.onControlTargetChanged:83 
+com.android.server.wm.InsetsPolicy.updateBarControlTarget:212 
+com.android.server.wm.DisplayPolicy.updateSystemBarAttributes:262 
+com.android.server.wm.WindowManagerService.updateFocusedWindowLocked:372 
+com.android.server.wm.WindowManagerService.relayoutWindow:1350 
+03-25 21:14:54.899  2435  3812 D InsetsSourceProvider: updateControlForTarget: 
+control=InsetsSourceControl: {f5de0001 mType=navigationBars initiallyVisible 
+mSurfacePosition=Point(0, 2196) mInsetsHint=Insets{left=0, top=0, right=0, 
+bottom=45}}, target=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, 
+from=com.android.server.wm.InsetsStateController.onControlTargetChanged:83 
+com.android.server.wm.InsetsPolicy.updateBarControlTarget:225 
+com.android.server.wm.DisplayPolicy.updateSystemBarAttributes:262 
+com.android.server.wm.WindowManagerService.updateFocusedWindowLocked:372 
+com.android.server.wm.WindowManagerService.relayoutWindow:1350 
+03-25 21:14:54.900  2435  3812 D WindowManager: updateSystemBarAttributes: 
+displayId=0, focusedCanBeNavColorWin=false, win=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, 
+navColorWin=Window{bd02a6a u0 Splash Screen com.ashutosh.mindfultennis}, caller
+=com.android.server.wm.WindowManagerService.updateFocusedWindowLocked:372 
+com.android.server.wm.WindowManagerService.relayoutWindow:1350 
+com.android.server.wm.Session.relayout:27 
+03-25 21:14:54.900  2435  3812 V SystemKeyManager: updateFocusedWindow() is 
+called, com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity
+03-25 21:14:54.901 30413 30413 E h.mindfultennis: Unable to open 
+libpenguin.so: dlopen failed: library "libpenguin.so" not found.
+03-25 21:14:54.906  1647  1647 I SurfaceFlinger: [com.ashutosh.mindfultennis/co
+m.ashutosh.mindfultennis.MainActivity$_30413#17714] attach to parent 
+LayerHierarchy{RequestedLayerState{ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+parentId=17705} 1 children}
+03-25 21:14:54.909  3292  3292 D NavigationBar: onSystemBarAttributesChanged() 
+-  displayId:0, appearance:16, packageName: com.ashutosh.mindfultennis 
+(APPEARANCE_LIGHT_NAVIGATION_BARS ), navbarColorManagedByIme:false
+03-25 21:14:54.922  1647  3915 I SurfaceFlinger: [com.ashutosh.mindfultennis/co
+m.ashutosh.mindfultennis.MainActivity$_30413#17714] setTransactionState with 
+the first frame. bufferData(ID: 130622840373251, frameNumber: 1)
+03-25 21:14:54.923  2435  3812 D WindowManager: finishDrawingWindow: 
+Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity} 
+mDrawState=DRAW_PENDING seqId=0
+03-25 21:14:54.924  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+bd02a6a Splash Screen com.ashutosh.mindfultennis#17706 cornerRadius=0.000000
+03-25 21:14:54.924  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:54.924  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+bd02a6a Splash Screen com.ashutosh.mindfultennis#17706 cornerRadius=0.000000
+03-25 21:14:54.924  2435  2530 V WindowManager: Finish starting 
+ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity t10768}: 
+first real window is shown, no animation
+03-25 21:14:54.924  2435  2530 V WindowManager: Schedule remove starting 
+ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity t10768} 
+startingWindow=Window{bd02a6a u0 Splash Screen com.ashutosh.mindfultennis} 
+animate=true 
+Callers=com.android.server.wm.ActivityRecord.removeStartingWindow:178 
+com.android.server.wm.WindowState.performShowLocked:155 
+com.android.server.wm.WindowStateAnimator.commitFinishDrawingLocked:73 com.andr
+oid.server.wm.DisplayContent$$ExternalSyntheticLambda1.accept$com$android$serve
+r$wm$DisplayContent$$ExternalSyntheticLambda37:23 
+com.android.server.wm.DisplayContent$$ExternalSyntheticLambda1.accept:143 
+03-25 21:14:54.924  2435  2530 D TaskOrganizerController: 
+applyStartingWindowAnimation, window=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, 
+caller=com.android.server.wm.TaskOrganizerController.removeStartingWindow:132 
+com.android.server.wm.StartingSurfaceController$StartingSurface.remove:23 
+com.android.server.wm.ActivityRecord.removeStartingWindowAnimation:171 
+03-25 21:14:54.924  2435  2530 I WindowManager: Reparenting to leash, 
+surface=Surface(name=ae26aa3 com.ashutosh.mindfultennis/com.ashutosh.mindfulten
+nis.MainActivity)/@0x147a4b8, leashParent=Surface(name=ActivityRecord{98954802 
+u0 com.ashutosh.mindfultennis/.MainActivity t10768})/@0xe016291
+03-25 21:14:54.925  1647  3915 I SurfaceFlinger: id=17717 createSurf, 
+flag=24000, Surface(name=ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity)/@0x147a4b8 
+- animation-leash of starting_reveal#17717
+03-25 21:14:54.926  2435  2530 D WindowManager: makeSurface duration=2 
+leash=Surface(name=Surface(name=ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity)/@0x147a4b8 
+- animation-leash of starting_reveal)/@0xfc555f6
+03-25 21:14:54.926  2435  2530 I ActivityTaskManager: done 
+cause=notifyWindowsDrawn timestamp=34660993274694 info=TransitionInfo{97abdf7 
+a=ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity t10768} 
+d=true}
+03-25 21:14:54.926  2435  2530 V WindowManager: performShowLocked: 
+mDrawState=HAS_DRAWN in Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}
+03-25 21:14:54.926  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:54.927  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+bd02a6a Splash Screen com.ashutosh.mindfultennis#17706 cornerRadius=0.000000
+03-25 21:14:54.927  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:54.927  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+bd02a6a Splash Screen com.ashutosh.mindfultennis#17706 cornerRadius=0.000000
+03-25 21:14:54.927  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:54.927  2435  2530 I WindowManager: notifyInsetsControlChanged, 
+removed=false, win=Window{bd02a6a u0 Splash Screen 
+com.ashutosh.mindfultennis}, caller=com.android.server.wm.InsetsStateController
+$$ExternalSyntheticLambda1.run:137 com.android.server.wm.WindowAnimator$$Extern
+alSyntheticLambda2.onTransactionCommitted:26 
+android.view.SurfaceControl$Transaction$$ExternalSyntheticLambda4.run:0 
+android.os.Handler.handleCallback:995 android.os.Handler.dispatchMessage:103 
+android.os.Looper.loopOnce:273 
+03-25 21:14:54.932  1647  1947 D SurfaceFlinger: [input] setFocusedWindow: 
+ae26aa3 com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity
+03-25 21:14:54.932  2435  3279 D InputDispatcher: Once focus requested (0): 
+ae26aa3 com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity
+03-25 21:14:54.932  2435  3279 D InputDispatcher: Focus request (0): ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity but waiting 
+because NOT_VISIBLE
+03-25 21:14:54.935  2435  2526 I PkgPredictorService-SecIpmManagerServiceImpl: 
+reportToNAP uid:10261 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity thisTime:300
+03-25 21:14:54.935 30413 30413 D WM-WorkerWrapper: Starting work for 
+com.ashutosh.mindfultennis.data.sync.SyncWorker
+03-25 21:14:54.940  1647  1647 I SurfaceFlinger: [Surface(name=ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity)/@0x147a4b8 
+- animation-leash of starting_reveal#17717] attach to parent 
+LayerHierarchy{RequestedLayerState{ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}#17705 parentId=17704} 4 
+children}
+03-25 21:14:54.942  3292  3437 I VRI[mindfultennis]@d325c: 
+onActiveControlsChanged, removed=false, mAdded=true, 
+caller=android.view.ViewRootImpl.handleInsetsControlChanged:3002 
+android.view.ViewRootImpl$ViewRootHandler.handleMessageImpl:8352 
+android.view.ViewRootImpl$ViewRootHandler.handleMessage:8301 
+android.os.Handler.dispatchMessage:110 android.os.Looper.loopOnce:273 
+03-25 21:14:54.943  3292  3489 I VRI[mindfultennis]@d325c: mWNT: 
+t=0xb4000076e114a9d0 mBlastBufferQueue=0xb4000076f143e1a0 fn= 2 HdrRenderState 
+mRenderHdrSdrRatio=1.0 caller= 
+android.view.SyncRtSurfaceTransactionApplier.applyTransaction:100 
+android.view.SyncRtSurfaceTransactionApplier.lambda$scheduleApply$0:73 android.
+view.SyncRtSurfaceTransactionApplier.$r8$lambda$afI4fXg3U3-nBZQEDQMiNy-B06s:0 
+03-25 21:14:54.943  3292  3489 I VRI[mindfultennis]@d325c: mWNT: 
+t=0xb4000076e11e5990 mBlastBufferQueue=0xb4000076f143e1a0 fn= 2 HdrRenderState 
+mRenderHdrSdrRatio=1.0 caller= 
+android.view.SyncRtSurfaceTransactionApplier.applyTransaction:100 
+android.view.SyncRtSurfaceTransactionApplier.lambda$scheduleApply$0:73 android.
+view.SyncRtSurfaceTransactionApplier.$r8$lambda$afI4fXg3U3-nBZQEDQMiNy-B06s:0 
+03-25 21:14:54.943  2435  2526 I ActivityTaskManager: Displayed 
+com.ashutosh.mindfultennis/.MainActivity for user 0: +300ms
+03-25 21:14:54.943  2435  2526 I Pageboost: Launch time gathered : pid 30413 
+com.ashutosh.mindfultennis 300
+03-25 21:14:54.956  1647  1647 I SurfaceFlinger: RequestedLayer [com.ashutosh.m
+indfultennis/com.ashut[...]dfultennis.MainActivity$_30413#17714] hidden!! flag 
+ from(1) --> to(0)
+03-25 21:14:54.957  1647  1647 I SurfaceFlinger: 
+[LayerHierarchy{RequestedLayerState{ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+parentId=17717} 1 children}] reparent to 
+LayerHierarchy{RequestedLayerState{Surface(name=ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity)/@0x147a4b8 
+- animation-leash of starting_reveal#17717 parentId=17705} 1 children}
+03-25 21:14:54.957  3292  3487 I VRI[mindfultennis]@d325c: mWNT: 
+t=0xb4000076e11b2d90 mBlastBufferQueue=0xb4000076f143e1a0 fn= 3 HdrRenderState 
+mRenderHdrSdrRatio=1.0 caller= 
+android.view.SyncRtSurfaceTransactionApplier.applyTransaction:100 
+android.view.SyncRtSurfaceTransactionApplier.lambda$scheduleApply$0:73 android.
+view.SyncRtSurfaceTransactionApplier.$r8$lambda$afI4fXg3U3-nBZQEDQMiNy-B06s:0 
+03-25 21:14:54.961  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+bd02a6a Splash Screen com.ashutosh.mindfultennis#17706 cornerRadius=0.000000
+03-25 21:14:54.961  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:54.966  1647  1647 D SurfaceFlinger:        DEVICE |          
+130622840373250 | 00002102 | RGBA_8888    |    0.0    0.0 1001.0 2280.0 |   79 
+  60 1080 2340 | 
+com.ashutosh.mindfultennis/com.ashut[...]dfultennis.MainActivity$_30413#17714 
+(2)
+03-25 21:14:54.966  1647  1647 D SurfaceFlinger:        DEVICE |           
+14139032346743 | 00002100 | RGBA_8888    |    0.0    0.0 1001.0 2340.0 |   79  
+  0 1080 2340 | Splash Screen com.ashutosh.mindfultennis$_3292#17707 (2)
+03-25 21:14:54.968  2435  3812 D InputDispatcher: Focus entered window (0): 
+ae26aa3 com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity
+03-25 21:14:54.976  3292  3489 I VRI[mindfultennis]@d325c: mWNT: 
+t=0xb4000076e11d3fd0 mBlastBufferQueue=0xb4000076f143e1a0 fn= 4 HdrRenderState 
+mRenderHdrSdrRatio=1.0 caller= 
+android.view.SyncRtSurfaceTransactionApplier.applyTransaction:100 
+android.view.SyncRtSurfaceTransactionApplier.lambda$scheduleApply$0:73 android.
+view.SyncRtSurfaceTransactionApplier.$r8$lambda$afI4fXg3U3-nBZQEDQMiNy-B06s:0 
+03-25 21:14:54.990 30413 30413 I InsetsSourceConsumer: 
+applyRequestedVisibilityToControl: visible=true, type=statusBars, 
+host=com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity
+03-25 21:14:54.990 30413 30413 I InsetsSourceConsumer: 
+applyRequestedVisibilityToControl: visible=true, type=navigationBars, 
+host=com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity
+03-25 21:14:54.993  2435  3881 I WindowManager: Relayout Window{bd02a6a u0 
+Splash Screen com.ashutosh.mindfultennis}: viewVisibility=8 req=1080x2340 ty=3 
+d0
+03-25 21:14:54.994  2435  3881 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:54.995  2435  3881 D WindowManager: updateSystemBarAttributes: 
+displayId=0, focusedCanBeNavColorWin=false, win=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, 
+navColorWin=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, 
+caller=com.android.server.wm.DisplayPolicy.finishPostLayoutPolicyLw:17 
+com.android.server.wm.RootWindowContainer.applySurfaceChangesTransaction$1:195 
+com.android.server.wm.RootWindowContainer.performSurfacePlacementNoTrace:59 
+03-25 21:14:54.995  2435  3881 D SurfaceComposerClient: setCornerRadius ## 
+bd02a6a Splash Screen com.ashutosh.mindfultennis#17706 cornerRadius=0.000000
+03-25 21:14:54.995  2435  3881 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:54.996  3292  3437 I VRI[mindfultennis]@d325c: 
+onActiveControlsChanged, removed=false, mAdded=true, 
+caller=android.view.ViewRootImpl.handleInsetsControlChanged:3002 
+android.view.ViewRootImpl.relayoutWindow:11629 
+android.view.ViewRootImpl.performTraversals:4804 
+android.view.ViewRootImpl.doTraversal:3924 
+android.view.ViewRootImpl$TraversalRunnable.run:12903 
+03-25 21:14:54.997  3292  3437 I VRI[mindfultennis]@d325c: Relayout returned: 
+old=(0,0,1080,2340) new=(0,0,1080,2340) relayoutAsync=false req=(1080,2340)8 
+dur=4 res=0x2 s={false 0x0} ch=true seqId=0
+03-25 21:14:54.997  3292  3437 D VRI[mindfultennis]@d325c: Not drawing due to 
+not visible. Reason=View.GONE
+03-25 21:14:54.997  3292  3437 I VRI[mindfultennis]@d325c: 
+dispatchDetachedFromWindow
+03-25 21:14:54.997  2435  3812 D WindowManager: Starting window removed 
+Window{bd02a6a u0 Splash Screen com.ashutosh.mindfultennis}
+03-25 21:14:54.997  2435  3812 I WindowManager: Cancelling animation 
+restarting=false, leash=Surface(name=Surface(name=ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity)/@0x147a4b8 
+- animation-leash of starting_reveal)/@0xfc555f6
+03-25 21:14:54.997  2435  3812 I WindowManager: Reparenting to original 
+parent: Surface(name=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768})/@0xe016291, destroy=false, 
+surface=Surface(name=ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity)/@0x147a4b8
+03-25 21:14:54.998  2435  3812 V WindowManager: Remove Window{bd02a6a u0 
+Splash Screen com.ashutosh.mindfultennis}: mSurfaceControl=Surface(name=Splash 
+Screen com.ashutosh.mindfultennis$_3292)/@0x94d28a6 mAnimatingExit=false 
+mRemoveOnExit=false mHasSurface=true surfaceShowing=true animating=false 
+app-animation=false callers=com.android.server.wm.Session.remove:16 
+android.view.IWindowSession$Stub.onTransact:804 
+com.android.server.wm.Session.onTransact:1 
+android.os.Binder.execTransactInternal:1457 
+android.os.Binder.execTransact:1401 <bottom of call stack> 
+03-25 21:14:54.998  2435  3812 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:54.999  2435  3812 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:55.002  3292  3292 D NavigationBar: onSystemBarAttributesChanged() 
+-  displayId:0, appearance:0, packageName: com.ashutosh.mindfultennis, 
+navbarColorManagedByIme:false
+03-25 21:14:55.009  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:55.023  1647  1647 I SurfaceFlinger: RequestedLayer [Splash Screen 
+com.ashutosh.mindfultennis$_3292#17707] hidden!! flag  from(0) --> to(1)
+03-25 21:14:55.023  1647  1647 I SurfaceFlinger: 
+[LayerHierarchy{RequestedLayerState{Surface(name=ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity)/@0x147a4b8 
+- animation-leash of starting_reveal#17717} 1 children}] reparent to 
+OffscreenRoot
+03-25 21:14:55.023  1647  1647 I SurfaceFlinger: 
+[LayerHierarchy{RequestedLayerState{Surface(name=ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity)/@0x147a4b8 
+- animation-leash of starting_reveal#17717} 1 children}] RelativeParent to null
+03-25 21:14:55.023  1647  1647 I SurfaceFlinger: 
+[LayerHierarchy{RequestedLayerState{ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+parentId=17705} 1 children}] reparent to 
+LayerHierarchy{RequestedLayerState{ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}#17705 parentId=17704} 3 
+children}
+03-25 21:14:55.032  1647  1647 D SurfaceFlinger:        DEVICE |          
+130622840373249 | 00002102 | RGBA_8888    |    0.0    0.0 1046.0 2340.0 |   34 
+   0 1080 2340 | 
+com.ashutosh.mindfultennis/com.ashut[...]dfultennis.MainActivity$_30413#17714 
+(3)
+03-25 21:14:55.035  2435  3003 I ImeTracker: 
+com.ashutosh.mindfultennis:6f5ff8f8: onRequestHide at ORIGIN_SERVER reason 
+HIDE_UNSPECIFIED_WINDOW fromUser false
+03-25 21:14:55.045  2435  3851 D InsetsSourceProvider: updateControlForTarget: 
+control=InsetsSourceControl: {3 mType=ime mSurfacePosition=Point(0, 81) 
+mInsetsHint=Insets{left=0, top=0, right=0, bottom=1026}}, 
+target=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, 
+from=com.android.server.wm.ImeInsetsSourceProvider.updateControlForTarget:17 
+com.android.server.wm.InsetsStateController.onControlTargetChanged:83 
+com.android.server.wm.DisplayContent.updateImeControlTarget:21 
+com.android.server.wm.DisplayContent.updateImeInputAndControlTarget:156 com.and
+roid.server.wm.WindowManagerService$LocalService.updateInputMethodTargetWindow:
+64 
+03-25 21:14:55.046  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:55.048 30413 30413 I ImeTracker: 
+com.ashutosh.mindfultennis:6f5ff8f8: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+03-25 21:14:55.059  2435  3211 D NetdEventListenerService: DNS Requested by 
+109, 10261(com.ashutosh.mindfultennis), SUCCESS, 53ms
+03-25 21:14:55.062  6834  6834 I HBD     : b [AiWriter] setContact : 
+com.ashutosh.mindfultennis
+03-25 21:14:55.062  6834  6834 I HBD     : a [AiWriter] setContact : 
+com.ashutosh.mindfultennis
+03-25 21:14:55.074  1647  1647 I SurfaceFlinger: 
+[LayerHierarchy{RequestedLayerState{ImeContainer#15 parentId=17705 
+relativeParentId=17705 z=3} 1 children}] reparent to 
+LayerHierarchy{RequestedLayerState{ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}#17705 parentId=17704} 4 
+children}
+03-25 21:14:55.176  2435  3851 V WindowManager:    ChangeInfo{1d54c18 
+container=ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity 
+t10768} flags=0x0}
+03-25 21:14:55.176  2435  3851 V WindowManager:    ChangeInfo{790e671 
+container=Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis} flags=0x10}
+03-25 21:14:55.176  2435  3851 D PersonaActivityHelper: token.toString()  
+Token{3e468df ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}}
+03-25 21:14:55.177  2435  3851 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:55.177  2435  3851 D WindowManager: updateSystemBarAttributes: 
+displayId=0, focusedCanBeNavColorWin=false, win=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, 
+navColorWin=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, 
+caller=com.android.server.wm.DisplayPolicy.finishPostLayoutPolicyLw:17 
+com.android.server.wm.RootWindowContainer.applySurfaceChangesTransaction$1:195 
+com.android.server.wm.RootWindowContainer.performSurfacePlacementNoTrace:59 
+03-25 21:14:55.178  2435  3851 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:55.178  2435  3851 D ChangeTransitionController:    
+ChangeInfo{1d54c18 container=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768} flags=0x0}
+03-25 21:14:55.178  2435  3851 D ChangeTransitionController:    
+ChangeInfo{790e671 container=Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis} flags=0x10}
+03-25 21:14:55.196  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:55.196  1647  1647 D SurfaceFlinger:        DEVICE |          
+130622840373248 | 00002102 | RGBA_8888    |    0.0    0.0 1080.0 2340.0 |    0 
+   0 1080 2340 | 
+com.ashutosh.mindfultennis/com.ashut[...]dfultennis.MainActivity$_30413#17714 
+(12)
+03-25 21:14:55.200  2435  3851 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:55.200  2435  3851 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:55.206  6834 20896 I HBD     : j [SKE_SPECIFIC] specific 
+model[com.ashutosh.mindfultennis] loaded, 22669323 ns
+03-25 21:14:55.207  1647  1647 I SurfaceFlinger: 
+[LayerHierarchy{RequestedLayerState{ImeContainer#15 parentId=17705 
+relativeParentId=17713 z=1} 1 children}] RelativeParent to 
+LayerHierarchy{RequestedLayerState{ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+parentId=17705} 2 children}
+03-25 21:14:55.207  1647  1647 I SurfaceFlinger: 
+[LayerHierarchy{RequestedLayerState{Splash Screen 
+com.ashutosh.mindfultennis$_3292#17707} no children}] reparent to OffscreenRoot
+03-25 21:14:55.207  1647  1647 I SurfaceFlinger: 
+[LayerHierarchy{RequestedLayerState{Splash Screen 
+com.ashutosh.mindfultennis$_3292#17707} no children}] RelativeParent to null
+03-25 21:14:55.207  1647  1647 I SurfaceFlinger: 
+[LayerHierarchy{RequestedLayerState{bd02a6a Splash Screen 
+com.ashutosh.mindfultennis#17706 z=2147483647} no children}] reparent to 
+OffscreenRoot
+03-25 21:14:55.207  1647  1647 I SurfaceFlinger: 
+[LayerHierarchy{RequestedLayerState{bd02a6a Splash Screen 
+com.ashutosh.mindfultennis#17706 z=2147483647} no children}] RelativeParent to 
+null
+03-25 21:14:55.208  1647  1647 I SurfaceFlinger: id=17706 Removed bd02a6a 
+Splash Screen com.ashutosh.mindfultennis#17706 (190)
+03-25 21:14:55.208  1647  1647 I SurfaceFlinger: id=17707 Removed Splash 
+Screen com.ashutosh.mindfultennis$_3292#17707 (190)
+03-25 21:14:55.224  1647  1647 I SurfaceFlinger: destroyed Splash Screen 
+com.ashutosh.mindfultennis$_3292#17707 form LifecycleManager
+03-25 21:14:55.224  1647  1647 I SurfaceFlinger: destroyed bd02a6a Splash 
+Screen com.ashutosh.mindfultennis#17706 form LifecycleManager
+03-25 21:14:55.224  1647  1647 I SurfaceFlinger: id=17707 onLayerDestroyed 
+from LayerHierarchyBuilder(RequestedLayerState{Splash Screen 
+com.ashutosh.mindfultennis$_3292#17707 !handle})
+03-25 21:14:55.224  1647  1647 I SurfaceFlinger: id=17706 onLayerDestroyed 
+from LayerHierarchyBuilder(RequestedLayerState{bd02a6a Splash Screen 
+com.ashutosh.mindfultennis#17706 !handle z=2147483647})
+03-25 21:14:55.226  2435  3812 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:55.226  1647  1647 I Layer   : id=17707 Destroyed Splash Screen 
+com.ashutosh.mindfultennis$_3292#17707
+03-25 21:14:55.226  1647  1647 I Layer   : id=17706 Destroyed bd02a6a Splash 
+Screen com.ashutosh.mindfultennis#17706
+03-25 21:14:55.226  2435  3812 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:14:55.232  2435  2529 D SGM:FgCheckThread: getForegroundApp(), 
+foregroundPkgName=com.ashutosh.mindfultennis
+03-25 21:14:55.232  2435  2529 D SGM:FgCheckThread: noteStopComponent(), 
+received pkgName: com.whatsapp, focusedPkgName: com.ashutosh.mindfultennis, 
+userId: 0
+03-25 21:14:55.237  2435  2527 D SGM:GameManager: identifyForegroundApp. 
+com.ashutosh.mindfultennis, mCurrentUserId: 0, callerUserId: 0
+03-25 21:14:55.239  2435  2527 D SGM:GameManager: identifyForegroundApp. 
+com.ashutosh.mindfultennis, mCurrentUserId: 0, callerUserId: 0
+03-25 21:14:55.370  2435  3088 D MdnieScenarioControlService:  packageName : 
+com.ashutosh.mindfultennis    className : 
+com.ashutosh.mindfultennis.MainActivity
+03-25 21:14:55.546  2435  2529 D SGM:GameManager: identifyForegroundApp. 
+com.ashutosh.mindfultennis, mCurrentUserId: 0, callerUserId: 0
+03-25 21:14:58.596  1135  1135 D io_stats: !@ Read_top(KB): 
+h.mindfultennis(30413) 32824 android.vending(17253) 10800 system_server(2435) 
+1012
+03-25 21:14:58.596  1135  1135 D io_stats: !@ Write_top(KB): 
+com.whatsapp(32594) 200 h.mindfultennis(30413) 140 f2fs_ckpt-254:5(1226) 120
+03-25 21:14:59.101  3292  3292 I {OngoingActivityDataHelper}: setBaseActivityCo
+mponentName:ComponentInfo{com.ashutosh.mindfultennis/com.ashutosh.mindfultennis
+.MainActivity}
+03-25 21:15:00.357 30413 30502 D ProfileInstaller: Skipping profile 
+installation for com.ashutosh.mindfultennis
+03-25 21:15:02.600  1135  1135 D io_stats: !@ Read_top(KB): 
+com.whatsapp(32594) 52 h.mindfultennis(30413) 24 system_server(2435) 16
+03-25 21:15:04.765 30413 30421 W h.mindfultennis: userfaultfd: MOVE ioctl 
+seems unsupported: Connection timed out
+03-25 21:15:08.495  1647  3543 I SurfaceFlinger: Capture layer list: 	 com.ashu
+tosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity$_30413#17714(seamles
+sTransition:0)
+03-25 21:15:08.496  1647  1792 D RenderEngine: [SEC_SF_EFFECTS] 
+drawLayersInternal,1483, Rendering layer com.ashutosh.mindfultennis/com.ashutos
+h.mindfultennis.MainActivity$_30413#17714 at index 1
+03-25 21:15:08.496  1647  1647 D TransactionCallbackInvoker: addCallbackHandle:
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity$_30413#17714
+ is not released yet
+03-25 21:15:08.832  2435  3279 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:08.833  2435  3279 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:08.893  1647  3543 I SurfaceFlinger: Capture layer list: 	 com.ashu
+tosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity$_30413#17714(seamles
+sTransition:0)
+03-25 21:15:08.895  1647  1792 D RenderEngine: [SEC_SF_EFFECTS] 
+drawLayersInternal,1483, Rendering layer com.ashutosh.mindfultennis/com.ashutos
+h.mindfultennis.MainActivity$_30413#17714 at index 1
+03-25 21:15:08.895  1647  1647 D TransactionCallbackInvoker: addCallbackHandle:
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity$_30413#17714
+ is not released yet
+03-25 21:15:08.907  2435  2577 D ActivityTaskManager: 
+scheduleTopResumedActivityChanged, onTop=false, r=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}, caller=com.android.server.wm.
+ActivityTaskSupervisor.scheduleTopResumedActivityStateLossIfNeeded:19 com.andro
+id.server.wm.ActivityTaskSupervisor.updateTopResumedActivityIfNeeded:20 
+com.android.server.wm.TaskFragment.setResumedActivity:30 
+com.android.server.wm.ActivityRecord.setState:91 
+com.android.server.wm.TaskFragment.startPausing$1:209 
+com.android.server.wm.Task$$ExternalSyntheticLambda37.accept:150 
+03-25 21:15:08.930  2435  2529 D SGM:FgCheckThread: notePauseComponent(), 
+received pkgName: com.ashutosh.mindfultennis, userId: 0
+03-25 21:15:08.932  2435  3851 D WindowManager: Changing focus from 
+Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity} to null 
+displayId=0 Callers=com.android.server.wm.ActivityRecord.commitVisibility:161 
+com.android.server.wm.ActivityRecord.setVisibility:623 
+com.android.server.wm.ActivityRecord.makeInvisible:32 
+com.android.server.wm.EnsureActivitiesVisibleHelper.process:542 
+03-25 21:15:08.933  2435  3851 V WindowManager: Setting visibility of 
+Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}: false, 
+caller=com.android.server.wm.WindowContainer.sendAppVisibilityToClients:19 
+com.android.server.wm.WindowToken.setClientVisible:48 
+com.android.server.wm.ActivityRecord.commitVisibility:186 
+com.android.server.wm.ActivityRecord.setVisibility:623 
+com.android.server.wm.ActivityRecord.makeInvisible:32 
+03-25 21:15:08.959  1647  1647 I SurfaceFlinger: RequestedLayer [com.ashutosh.m
+indfultennis/com.ashut[...]dfultennis.MainActivity$_30413#17714] hidden!! flag 
+ from(0) --> to(1)
+03-25 21:15:08.961  2435  3279 D InputDispatcher: Focus left window (0): 
+ae26aa3 com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity
+03-25 21:15:08.961 30413 30413 D VRI[MainActivity]@8ec4b6f: WindowStopped on 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity set to true
+03-25 21:15:08.993  2435  5529 I WindowManager: Relayout Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}: 
+viewVisibility=8 req=1080x2340 ty=1 d0
+03-25 21:15:09.009  2435  3812 E WindowManager: win=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity} 
+destroySurfaces: appStopped=true cleanupOnResume=false 
+win.mWindowRemovalAllowed=false win.mRemoveOnExit=false win.mViewVisibility=8 
+caller=com.android.server.wm.ActivityRecord.destroySurfaces:25 
+com.android.server.wm.ActivityRecord.activityStopped:192 
+com.android.server.wm.ActivityClientController.activityStopped:97 
+android.app.IActivityClientController$Stub.onTransact:740 
+com.android.server.wm.ActivityClientController.onTransact:1 
+android.os.Binder.execTransactInternal:1462 
+android.os.Binder.execTransact:1401 
+03-25 21:15:09.010  2435  2529 D SGM:FgCheckThread: getForegroundApp(), 
+foregroundPkgName=com.ashutosh.mindfultennis
+03-25 21:15:09.010  2435  2529 D SGM:FgCheckThread: pkgName: 
+com.ashutosh.mindfultennis is not in foreground
+03-25 21:15:09.167  1647  1647 I SurfaceFlinger: [LayerHierarchy{RequestedLayer
+State{com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity$_30413
+#17714} no children}] reparent to OffscreenRoot
+03-25 21:15:09.167  1647  1647 I SurfaceFlinger: [LayerHierarchy{RequestedLayer
+State{com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity$_30413
+#17714} no children}] RelativeParent to null
+03-25 21:15:09.182  1647  1773 I SurfaceFlinger: id=17714 Removed com.ashutosh.
+mindfultennis/com.ashutosh.mindfultennis.MainActivity$_30413#17714 (190)
+03-25 21:15:09.182  1647  1647 I SurfaceFlinger: destroyed com.ashutosh.mindful
+tennis/com.ashutosh.mindfultennis.MainActivity$_30413#17714 form 
+LifecycleManager
+03-25 21:15:09.182  1647  1647 I SurfaceFlinger: id=17714 onLayerDestroyed 
+from LayerHierarchyBuilder(RequestedLayerState{com.ashutosh.mindfultennis/com.a
+shutosh.mindfultennis.MainActivity$_30413#17714 !handle})
+03-25 21:15:09.185  1647  1647 I Layer   : id=17714 Destroyed 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity$_30413#17714
+03-25 21:15:09.522  2435  3851 D SGM:GameManager: identifyForegroundApp. 
+com.ashutosh.mindfultennis, mCurrentUserId: 0, callerUserId: 0
+03-25 21:15:09.589  2435  4777 D SGM:GameManager: identifyForegroundApp. 
+com.ashutosh.mindfultennis, mCurrentUserId: 0, callerUserId: 0
+03-25 21:15:09.590  2435  3495 D SGM:GameManager: identifyForegroundApp. 
+com.ashutosh.mindfultennis, mCurrentUserId: 0, callerUserId: 0
+03-25 21:15:09.605  2435  5529 D SGM:GameManager: identifyForegroundApp. 
+com.ashutosh.mindfultennis, mCurrentUserId: 0, callerUserId: 0
+03-25 21:15:12.675  2435  3495 V WindowManager: Collecting in transition 1350: 
+ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity t10768}, 
+caller=com.android.server.wm.TransitionController.collect:7 
+com.android.server.wm.ActivityRecord.setVisibility:132 
+com.android.server.wm.TaskFragment.resumeTopActivity:1662 
+com.android.server.wm.Task.resumeTopActivityInnerLocked:119 
+com.android.server.wm.Task.resumeTopActivityUncheckedLocked:23 
+03-25 21:15:12.675  2435  3495 D WindowManager: prepareSync 
+<SYNC_STATE_WAITING_FOR_DRAW>, mPrepareSyncSeqId=0, win=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}
+03-25 21:15:12.675  2435  3495 V WindowManager: Setting visibility of 
+Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}: true, 
+caller=com.android.server.wm.WindowContainer.sendAppVisibilityToClients:19 
+com.android.server.wm.WindowToken.setClientVisible:48 
+com.android.server.wm.ActivityRecord.setVisibility:486 
+com.android.server.wm.TaskFragment.resumeTopActivity:1662 
+com.android.server.wm.Task.resumeTopActivityInnerLocked:119 
+03-25 21:15:12.677  2435  3495 D ActivityTaskManager: 
+scheduleTopResumedActivityChanged, onTop=true, r=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}, caller=com.android.server.wm.
+ActivityTaskSupervisor.scheduleTopResumedActivityStateIfNeeded:18 com.android.s
+erver.wm.ActivityTaskSupervisor.updateTopResumedActivityIfNeeded:54 
+com.android.server.wm.TaskFragment.setResumedActivity:30 
+com.android.server.wm.ActivityRecord.setState:100 
+com.android.server.wm.TaskFragment.resumeTopActivity:1705 
+com.android.server.wm.Task.resumeTopActivityInnerLocked:119 
+03-25 21:15:12.677  2435  3495 D WindowManager: rotationForOrientation, 
+orientationSource=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}
+03-25 21:15:12.679  2435  3495 D WindowManagerServiceExt: 
+updateTaskbarTargetIfNeeded: cn=ComponentInfo{com.ashutosh.mindfultennis/com.as
+hutosh.mindfultennis.MainActivity} occludesParent=true 
+isInSplitScreenMode=false
+03-25 21:15:12.679 30413 30413 D VRI[MainActivity]@8ec4b6f: WindowStopped on 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity set to false
+03-25 21:15:12.680  2435  3495 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.684  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.684  2435  2530 D BLASTSyncEngine: SyncGroup 1350:  Unfinished 
+container: ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity 
+t10768} mSyncState=2
+03-25 21:15:12.690  2435  2527 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.690  2435  2527 D BLASTSyncEngine: SyncGroup 1350:  Unfinished 
+container: ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity 
+t10768} mSyncState=2
+03-25 21:15:12.695  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.695  2435  2530 D BLASTSyncEngine: SyncGroup 1350:  Unfinished 
+container: ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity 
+t10768} mSyncState=2
+03-25 21:15:12.708  2435  2529 D SGM:FgCheckThread: noteResumeComponent(), 
+received pkgName: com.ashutosh.mindfultennis, userId: 0
+03-25 21:15:12.708  2435  3010 D SGM:FgCheckThread: onLooperPrepared(), msg: 
+MSG_APP_RESUME, pkgName: com.ashutosh.mindfultennis, userid: 0
+03-25 21:15:12.709  2435  3010 D SGM:FgCheckThread:   handleResume(). pkgName: 
+com.ashutosh.mindfultennis, userId: 0, category: non-game
+03-25 21:15:12.709  2435  3010 D SGM:FgCheckThread: notifyFocusInOut(). of 
+pkg: com.ashutosh.mindfultennis, type: 4, isSecGameFamily: false, userId: 0
+03-25 21:15:12.712  2435  3371 I WindowManager: Relayout Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}: 
+viewVisibility=0 req=1080x2340 ty=1 d0
+03-25 21:15:12.713  1647  3915 I SurfaceFlinger: id=17727 createSurf, 
+flag=44004, 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity$_30413#17727
+03-25 21:15:12.715  2435  3371 D WindowManager: makeSurface duration=2 
+name=com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity$_30413
+03-25 21:15:12.715  2435  3371 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.716  2435  3371 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.716  2435  3371 D BLASTSyncEngine: SyncGroup 1350:  Unfinished 
+container: ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity 
+t10768} mSyncState=2
+03-25 21:15:12.717  6001 22148 I SDHMS:k : handleResumeComponent : put = 
+com.ashutosh.mindfultennis, userid = 0 instanceid =65300703
+03-25 21:15:12.719 30413 30413 I InsetsController: onStateChanged: 
+host=com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity, 
+from=android.view.ViewRootImpl.onInsetsStateChanged:3026, state=InsetsState: 
+{mDisplayFrame=Rect(0, 0 - 1080, 2340), 
+mDisplayCutout=DisplayCutout{insets=Rect(0, 81 - 0, 0) 
+waterfall=Insets{left=0, top=0, right=0, bottom=0} 
+boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(512, 0 - 568, 81), Rect(0, 0 - 
+0, 0), Rect(0, 0 - 0, 0)]} 
+cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1080 
+displayHeight=2340 physicalDisplayWidth=1080 physicalDisplayHeight=2340 
+density={3.0} cutoutSpec={M 0,0 H -9.333333333333333 V 27 H 9.333333333333333 
+V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} 
+sideOverrides={}}, 
+mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=102, 
+center=Point(102, 102)}, RoundedCorner{position=TopRight, radius=102, 
+center=Point(978, 102)}, RoundedCorner{position=BottomRight, radius=102, 
+center=Point(978, 2238)}, RoundedCorner{position=BottomLeft, radius=102, 
+center=Point(102, 2238)}]}  mRoundedCornerFrame=Rect(0, 0 - 1080, 2340), 
+mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(948, 0 - 
+1080, 81) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 
+displayWidth=1080 displayHeight=2340 physicalPixelDisplaySizeRatio=1.0 
+rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {f5de0001 
+mType=navigationBars mFrame=[0,2295][1080,2340] mVisible=false 
+mFlags=SUPPRESS_SCRIM mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: 
+{f5de0004 mType=systemGestures mFrame=[0,0][90,2340] mVisible=true mFlags= 
+mSideHint=LEFT mBoundingRects=null}, InsetsSource: {f5de0005 
+mType=mandatorySystemGestures mFrame=[0,2244][1080,2340] mVisible=true mFlags= 
+mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {f5de0006 
+mType=tappableElement mFrame=[0,0][0,0] mVisible=true mFlags= mSideHint=NONE 
+mBoundingRects=null}, InsetsSource: {f5de0024 mType=systemGestures 
+mFrame=[990,0][1080,2340] mVisible=true mFlags= mSideHint=RIGHT 
+mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] 
+mVisible=false mFlags= mSideHint=NONE mBoundingRects=null}, InsetsSource: {27 
+mType=displayCutout mFrame=[0,0][1080,81] mVisible=true mFlags= mSideHint=TOP 
+mBoundingRects=null}, InsetsSource: {540a0000 mType=statusBars 
+mFrame=[0,0][1080,81] mVisible=true mFlags= mSideHint=TOP 
+mBoundingRects=null}, InsetsSource: {540a0005 mType=mandatorySystemGestures 
+mFrame=[0,0][1080,117] mVisible=true mFlags= mSideHint=TOP 
+mBoundingRects=null}, InsetsSource: {540a0006 mType=tappableElement 
+mFrame=[0,0][1080,81] mVisible=true mFlags= mSideHint=TOP mBoundingRects=null} 
+}
+03-25 21:15:12.749  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.749  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.750  2435  2530 D BLASTSyncEngine: SyncGroup 1350:  Unfinished 
+container: ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity 
+t10768} mSyncState=2
+03-25 21:15:12.752  1647  3543 I SurfaceFlinger: [com.ashutosh.mindfultennis/co
+m.ashutosh.mindfultennis.MainActivity$_30413#17727] setTransactionState with 
+the first frame. bufferData(ID: 130622840373252, frameNumber: 1)
+03-25 21:15:12.757  2435  2475 D WindowManager: finishDrawingWindow: 
+Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity} 
+mDrawState=DRAW_PENDING seqId=0
+03-25 21:15:12.758  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.759  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.759  2435  2530 V WindowManager: performShowLocked: 
+mDrawState=HAS_DRAWN in Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}
+03-25 21:15:12.760  2435  2530 D ChangeTransitionController:    
+ChangeInfo{c1bb994 container=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768} flags=0x0}
+03-25 21:15:12.760  2435  2530 D ChangeTransitionController:    
+ChangeInfo{6d14c3d container=Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis} flags=0x0}
+03-25 21:15:12.760  2435  2530 V WindowManager: Start calculating 
+TransitionInfo based on participants: {ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}}
+03-25 21:15:12.760  2435  2530 V WindowManager:   Final targets: 
+[ChangeInfo{6d14c3d container=Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis} flags=0x10}, ChangeInfo{863c32 
+container=DefaultTaskDisplayArea_d0@245617632 flags=0x10}]
+03-25 21:15:12.763  1647  1647 I SurfaceFlinger: 
+[LayerHierarchy{RequestedLayerState{ImeContainer#15 parentId=17705 
+relativeParentId=17713 z=1} 1 children}] RelativeParent to 
+LayerHierarchy{RequestedLayerState{ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+parentId=17705} 1 children}
+03-25 21:15:12.763  1647  1647 I SurfaceFlinger: [com.ashutosh.mindfultennis/co
+m.ashutosh.mindfultennis.MainActivity$_30413#17727] attach to parent 
+LayerHierarchy{RequestedLayerState{ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+parentId=17705} 2 children}
+03-25 21:15:12.767  2435  2530 I SurfaceControlRegistry: show, 
+t=StartTransaction_SyncId<1350> sc=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}, 
+caller=android.view.SurfaceControl$Transaction.show:3557 
+com.android.server.wm.Transition.onTransactionReady:2048 
+com.android.server.wm.BLASTSyncEngine$SyncGroup.finishNow:240 
+com.android.server.wm.BLASTSyncEngine.onSurfacePlacement:263 
+com.android.server.wm.RootWindowContainer.performSurfacePlacementNoTrace:1083 
+com.android.server.wm.WindowSurfacePlacer.performSurfacePlacement:166 
+03-25 21:15:12.768  2435  2530 V WindowManager:         
+{WCT{RemoteToken{ce4833c Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis}}} m=TO_FRONT f=NONE 
+p=WCT{RemoteToken{b96d43a DefaultTaskDisplayArea_d0@245617632}} 
+leash=Surface(name=Task=10768)/@0x796c30e sb=Rect(0, 0 - 1080, 2340) 
+eb=Rect(0, 0 - 1080, 2340) epz=Point(1080, 2340) d=0 taskParent=-1 
+inset=Rect(0, 81 - 0, 45)},
+03-25 21:15:12.771  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.771  2435  2530 D InsetsSourceProvider: 
+updateFakeControlTarget: fakeControl=InsetsSourceControl: {540a0000 
+mType=statusBars mSurfacePosition=Point(0, 0) mInsetsHint=Insets{left=0, 
+top=0, right=0, bottom=0}}, fakeTarget=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}
+03-25 21:15:12.771  2435  2530 D InsetsSourceProvider: 
+updateFakeControlTarget: fakeControl=InsetsSourceControl: {f5de0001 
+mType=navigationBars mSurfacePosition=Point(0, 0) mInsetsHint=Insets{left=0, 
+top=0, right=0, bottom=0}}, fakeTarget=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}
+03-25 21:15:12.771  2435  2530 D WindowManager: updateSystemBarAttributes: 
+displayId=0, focusedCanBeNavColorWin=false, win=Window{b77df3c u0 
+NotificationShade}, navColorWin=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, 
+caller=com.android.server.wm.DisplayPolicy.finishPostLayoutPolicyLw:17 
+com.android.server.wm.RootWindowContainer.applySurfaceChangesTransaction$1:195 
+com.android.server.wm.RootWindowContainer.performSurfacePlacementNoTrace:59 
+03-25 21:15:12.772  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.772  2435  2526 V WindowManager:         
+{WCT{RemoteToken{ce4833c Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis}}} m=TO_FRONT f=NONE 
+p=WCT{RemoteToken{b96d43a DefaultTaskDisplayArea_d0@245617632}} 
+leash=Surface(name=Task=10768)/@0x796c30e sb=Rect(0, 0 - 1080, 2340) 
+eb=Rect(0, 0 - 1080, 2340) epz=Point(1080, 2340) d=0 taskParent=-1 
+inset=Rect(0, 81 - 0, 45)},
+03-25 21:15:12.778  2435  5529 V WindowManager:    ChangeInfo{c1bb994 
+container=ActivityRecord{98954802 u0 com.ashutosh.mindfultennis/.MainActivity 
+t10768} flags=0x0}
+03-25 21:15:12.778  2435  5529 V WindowManager:    ChangeInfo{6d14c3d 
+container=Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis} flags=0x10}
+03-25 21:15:12.778  2435  5529 D PersonaActivityHelper: token.toString()  
+Token{3e468df ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768}}
+03-25 21:15:12.779  2435  5529 D ChangeTransitionController:    
+ChangeInfo{c1bb994 container=ActivityRecord{98954802 u0 
+com.ashutosh.mindfultennis/.MainActivity t10768} flags=0x0}
+03-25 21:15:12.779  2435  5529 D ChangeTransitionController:    
+ChangeInfo{6d14c3d container=Task{d00bb7e #10768 type=standard 
+A=10261:com.ashutosh.mindfultennis} flags=0x10}
+03-25 21:15:12.779  1647  1647 I SurfaceFlinger: RequestedLayer [com.ashutosh.m
+indfultennis/com.ashut[...]dfultennis.MainActivity$_30413#17727] hidden!! flag 
+ from(1) --> to(0)
+03-25 21:15:12.781  1647  1647 D SurfaceFlinger:        DEVICE |          
+130622840373252 | 00002102 | RGBA_8888    |    0.0    0.0 1080.0 2340.0 |    0 
+   0 1080 2340 | 
+com.ashutosh.mindfultennis/com.ashut[...]dfultennis.MainActivity$_30413#17727 
+(1)
+03-25 21:15:12.784  2435  3495 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.784  2435  3495 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.785  2435  3812 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.785  2435  3812 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.790  2435  4777 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.791  2435  4777 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.795  2435  5529 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.796  2435  5529 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.799  1647  1647 D SurfaceFlinger:        DEVICE |          
+130622840373252 | 00002102 | RGBA_8888    |    0.0    0.0 1080.0 2340.0 |    0 
+   0 1080 2340 | 
+com.ashutosh.mindfultennis/com.ashut[...]dfultennis.MainActivity$_30413#17727 
+(1)
+03-25 21:15:12.807  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.807  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.810  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.836  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.836  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.845  6062 30682 I [+0530]oneconnect[1.8.41.23_01][CORE]: 
+RunningInfo.isQcTopProcess - false [package]com.samsung.android.oneconnect 
+[topProcess]com.ashutosh.mindfultennis
+03-25 21:15:12.846  6062 30682 I [+0530]oneconnect[1.8.41.23_01][CORE]: 
+RunningInfo.isNativePluginTopTopProcess - false 
+[package]com.samsung.android.oneconnect:PluginNative 
+[topProcess]com.ashutosh.mindfultennis
+03-25 21:15:12.853  6062 30682 I [+0530]oneconnect[1.8.41.23_01][CORE]: 
+RunningInfo.isWebPluginTopProcess - false 
+[package]com.samsung.android.oneconnect:PluginWebApplication 
+[topProcess]com.ashutosh.mindfultennis
+03-25 21:15:12.873 30413 30413 I InsetsController: onStateChanged: 
+host=com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity, 
+from=android.view.ViewRootImpl.onInsetsStateChanged:3026, state=InsetsState: 
+{mDisplayFrame=Rect(0, 0 - 1080, 2340), 
+mDisplayCutout=DisplayCutout{insets=Rect(0, 81 - 0, 0) 
+waterfall=Insets{left=0, top=0, right=0, bottom=0} 
+boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(512, 0 - 568, 81), Rect(0, 0 - 
+0, 0), Rect(0, 0 - 0, 0)]} 
+cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1080 
+displayHeight=2340 physicalDisplayWidth=1080 physicalDisplayHeight=2340 
+density={3.0} cutoutSpec={M 0,0 H -9.333333333333333 V 27 H 9.333333333333333 
+V 0 H 0 Z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} 
+sideOverrides={}}, 
+mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=102, 
+center=Point(102, 102)}, RoundedCorner{position=TopRight, radius=102, 
+center=Point(978, 102)}, RoundedCorner{position=BottomRight, radius=102, 
+center=Point(978, 2238)}, RoundedCorner{position=BottomLeft, radius=102, 
+center=Point(102, 2238)}]}  mRoundedCornerFrame=Rect(0, 0 - 1080, 2340), 
+mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(948, 0 - 
+1080, 81) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 
+displayWidth=1080 displayHeight=2340 physicalPixelDisplaySizeRatio=1.0 
+rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {f5de0001 
+mType=navigationBars mFrame=[0,2295][1080,2340] mVisible=true 
+mFlags=SUPPRESS_SCRIM mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: 
+{f5de0004 mType=systemGestures mFrame=[0,0][90,2340] mVisible=true mFlags= 
+mSideHint=LEFT mBoundingRects=null}, InsetsSource: {f5de0005 
+mType=mandatorySystemGestures mFrame=[0,2244][1080,2340] mVisible=true mFlags= 
+mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {f5de0006 
+mType=tappableElement mFrame=[0,0][0,0] mVisible=true mFlags= mSideHint=NONE 
+mBoundingRects=null}, InsetsSource: {f5de0024 mType=systemGestures 
+mFrame=[990,0][1080,2340] mVisible=true mFlags= mSideHint=RIGHT 
+mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] 
+mVisible=false mFlags= mSideHint=NONE mBoundingRects=null}, InsetsSource: {27 
+mType=displayCutout mFrame=[0,0][1080,81] mVisible=true mFlags= mSideHint=TOP 
+mBoundingRects=null}, InsetsSource: {540a0000 mType=statusBars 
+mFrame=[0,0][1080,81] mVisible=true mFlags= mSideHint=TOP 
+mBoundingRects=null}, InsetsSource: {540a0005 mType=mandatorySystemGestures 
+mFrame=[0,0][1080,117] mVisible=true mFlags= mSideHint=TOP 
+mBoundingRects=null}, InsetsSource: {540a0006 mType=tappableElement 
+mFrame=[0,0][1080,81] mVisible=true mFlags= mSideHint=TOP mBoundingRects=null} 
+}
+03-25 21:15:12.876  2435  3490 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.878  2435  3490 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.879  2435  3490 D WindowManager: Changing focus from 
+Window{b77df3c u0 NotificationShade} to Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity} 
+displayId=0 
+Callers=com.android.server.wm.WindowManagerService.relayoutWindow:1350 
+com.android.server.wm.Session.relayout:27 
+com.android.server.wm.Session.relayoutAsync:14 
+android.view.IWindowSession$Stub.onTransact:854 
+03-25 21:15:12.882  2435  3490 D InsetsSourceProvider: updateControlForTarget: 
+control=InsetsSourceControl: {540a0000 mType=statusBars initiallyVisible 
+mSurfacePosition=Point(0, 0) mInsetsHint=Insets{left=0, top=81, right=0, 
+bottom=0}}, target=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, 
+from=com.android.server.wm.InsetsStateController.onControlTargetChanged:83 
+com.android.server.wm.InsetsPolicy.updateBarControlTarget:212 
+com.android.server.wm.DisplayPolicy.updateSystemBarAttributes:262 
+com.android.server.wm.WindowManagerService.updateFocusedWindowLocked:372 
+com.android.server.wm.WindowManagerService.relayoutWindow:1350 
+03-25 21:15:12.884  2435  3490 D InsetsSourceProvider: updateControlForTarget: 
+control=InsetsSourceControl: {f5de0001 mType=navigationBars initiallyVisible 
+mSurfacePosition=Point(0, 2196) mInsetsHint=Insets{left=0, top=0, right=0, 
+bottom=45}}, target=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, 
+from=com.android.server.wm.InsetsStateController.onControlTargetChanged:83 
+com.android.server.wm.InsetsPolicy.updateBarControlTarget:225 
+com.android.server.wm.DisplayPolicy.updateSystemBarAttributes:262 
+com.android.server.wm.WindowManagerService.updateFocusedWindowLocked:372 
+com.android.server.wm.WindowManagerService.relayoutWindow:1350 
+03-25 21:15:12.884  2435  3490 D WindowManager: updateSystemBarAttributes: 
+displayId=0, focusedCanBeNavColorWin=false, win=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, 
+navColorWin=Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}, caller=com
+.android.server.wm.WindowManagerService.updateFocusedWindowLocked:372 
+com.android.server.wm.WindowManagerService.relayoutWindow:1350 
+com.android.server.wm.Session.relayout:27 
+03-25 21:15:12.884  2435  3490 V SystemKeyManager: updateFocusedWindow() is 
+called, com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity
+03-25 21:15:12.915  1647  1647 D SurfaceFlinger:        DEVICE |          
+130622840373255 | 00002102 | RGBA_8888    |    0.0    0.0 1080.0 2340.0 |    0 
+   0 1080 2340 | 
+com.ashutosh.mindfultennis/com.ashut[...]dfultennis.MainActivity$_30413#17727 
+(2)
+03-25 21:15:12.916  1647  1947 D SurfaceFlinger: [input] setFocusedWindow: 
+ae26aa3 com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity
+03-25 21:15:12.918  2435  3490 D InputDispatcher: Once focus requested (0): 
+ae26aa3 com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity
+03-25 21:15:12.918  2435  3490 D InputDispatcher: Focus entered window (0): 
+ae26aa3 com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity
+03-25 21:15:12.957  2435  2476 D WindowManager: finishDrawingWindow: 
+Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity} 
+mDrawState=HAS_DRAWN seqId=0
+03-25 21:15:12.957  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.959  2435  2530 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:12.976  2435  2476 D CoreBackPreview: Window{ae26aa3 u0 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity}: Setting 
+back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvoked
+Callback$Stub$Proxy@6360552, mPriority=0, mIsAnimationCallback=true, 
+mOverrideBehavior=0}
+03-25 21:15:13.066 30413 30413 I InsetsSourceConsumer: 
+applyRequestedVisibilityToControl: visible=true, type=statusBars, 
+host=com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity
+03-25 21:15:13.067 30413 30413 I InsetsSourceConsumer: 
+applyRequestedVisibilityToControl: visible=true, type=navigationBars, 
+host=com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity
+03-25 21:15:13.070  2435  3003 I ImeTracker: 
+com.ashutosh.mindfultennis:1f5a0404: onRequestHide at ORIGIN_SERVER reason 
+HIDE_SAME_WINDOW_FOCUSED_WITHOUT_EDITOR fromUser false
+03-25 21:15:13.184 30413 30413 I ImeTracker: 
+com.ashutosh.mindfultennis:1f5a0404: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+03-25 21:15:13.192  6834  6834 I HBD     : b [AiWriter] setContact : 
+com.ashutosh.mindfultennis
+03-25 21:15:13.256  2435  3490 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:13.257  2435  3490 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:13.266  1647  1647 D SurfaceFlinger:        DEVICE |          
+130622840373252 | 00002102 | RGBA_8888    |    0.0    0.0 1080.0 2340.0 |    0 
+   0 1080 2340 | 
+com.ashutosh.mindfultennis/com.ashut[...]dfultennis.MainActivity$_30413#17727 
+(9)
+03-25 21:15:13.577  2435  2529 D SGM:GameManager: identifyForegroundApp. 
+com.ashutosh.mindfultennis, mCurrentUserId: 0, callerUserId: 0
+03-25 21:15:14.384  1647  1647 I SurfaceFlinger: [com.ashutosh.mindfultennis/co
+m.ashutosh.mindfultennis.MainActivity$_30413#17727] setFrameRateCategory: 
+HighHint
+03-25 21:15:14.633 30413 30448 I WM-WorkerWrapper: Worker result SUCCESS for 
+Work [ id=8a9f1c53-e137-4264-acaa-617c0f8e2e81, tags={ 
+com.ashutosh.mindfultennis.data.sync.SyncWorker,mindful_tennis_sync } ]
+03-25 21:15:14.643  2435  5529 W JobScheduler: Job didn't exist in JobStore: 
+681012b {androidx.work.systemjobscheduler} #u0a261/2 @androidx.work.systemjobsc
+heduler@com.ashutosh.mindfultennis/androidx.work.impl.background.systemjob.Syst
+emJobService
+03-25 21:15:16.681  2435  5529 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:16.682  2435  5529 D SurfaceComposerClient: setCornerRadius ## 
+ae26aa3 
+com.ashutosh.mindfultennis/com.ashutosh.mindfultennis.MainActivity#17713 
+cornerRadius=0.000000
+03-25 21:15:17.793  1647  1647 I SurfaceFlinger: [com.ashutosh.mindfultennis/co
+m.ashutosh.mindfultennis.MainActivity$_30413#17727] setFrameRateCategory: 
+NoPreference
+03-25 21:15:17.810  1647  1647 I SurfaceFlinger: [com.ashutosh.mindfultennis/co
+m.ashutosh.mindfultennis.MainActivity$_30413#17727] setFrameRateCategory: 
+HighHint
+03-25 21:15:18.613  1135  1135 D io_stats: !@ Write_top(KB): 
+kworker/u16:10(23205) 792 h.mindfultennis(30413) 364 f2fs_ckpt-254:5(1226) 172
+
+

@@ -1,0 +1,138 @@
+﻿
+03-25 21:14:54.784 30413 30413 I Supabase-Core: SupabaseClient created! Please 
+03-25 21:14:54.788 30413 30435 D WM-SystemJobScheduler: Reconciling jobs
+03-25 21:14:54.818 30413 30439 I Supabase-Auth: Trying to load latest session 
+03-25 21:14:54.827 30413 30439 I Supabase-Auth: Successfully loaded session 
+03-25 21:14:54.832 30413 30435 D WM-SystemJobScheduler: Scheduling work ID 
+03-25 21:14:54.835 30413 30435 D WM-GreedyScheduler: Starting tracking for 
+03-25 21:14:54.845 30413 30450 D WM-GreedyScheduler: Constraints met: 
+03-25 21:14:54.847 30413 30450 D WM-Processor: s: processing 
+03-25 21:14:54.935 30413 30413 D WM-WorkerWrapper: Starting work for 
+com.ashutosh.mindfultennis.data.sync.SyncWorker
+03-25 21:14:54.946 30413 30440 D SyncManager: Starting sync for user 
+03-25 21:14:54.990 30413 30413 D WM-SystemJobService: onStartJob for 
+03-25 21:14:55.000 30413 30448 D WM-Processor: Work 
+03-25 21:14:55.060 30413 30413 D SyncWorker: Periodic sync worker enqueued (15 
+03-25 21:14:55.061 30413 30439 D SyncManager: Starting sync for user 
+03-25 21:14:55.062 30413 30413 D SyncWorker: Periodic sync worker enqueued (15 
+03-25 21:14:55.062 30413 30457 D SyncManager: Starting sync for user 
+03-25 21:14:55.737 30413 30473 E Supabase-Core: GET request to endpoint 
+/rest/v1/sessions was cancelled
+03-25 21:14:55.737 30413 30473 W SyncManager: Failed to pull remote sessions
+03-25 21:14:55.737 30413 30473 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+03-25 21:14:55.742 30413 30473 E Supabase-Core: GET request to endpoint 
+03-25 21:14:55.742 30413 30473 W SyncManager: Failed to pull remote focus 
+03-25 21:14:55.742 30413 30473 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+io.ktor.client.plugins.RequestError$install$1.invokeSuspend(Unknown Source:46)
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:1)
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:2)
+io.github.jan.supabase.network.KtorSupabaseHttpClient.request(Unknown 
+io.github.jan.supabase.network.SupabaseApi.rawRequest$suspendImpl(Unknown 
+io.github.jan.supabase.network.SupabaseApi.rawRequest(Unknown Source:0)
+io.github.jan.supabase.auth.AuthenticatedSupabaseApi.rawRequest(SourceFile:3)
+io.github.jan.supabase.network.SupabaseApi.request(Unknown Source:8)
+io.github.jan.supabase.postgrest.executor.RestRequestExecutor.execute(Unknown 
+03-25 21:14:55.746 30413 30473 E Supabase-Core: GET request to endpoint 
+03-25 21:14:55.746 30413 30473 W SyncManager: Failed to pull remote opponents
+03-25 21:14:55.746 30413 30473 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+io.ktor.client.plugins.RequestError$install$1.invokeSuspend(Unknown Source:46)
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:1)
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:2)
+io.github.jan.supabase.network.KtorSupabaseHttpClient.request(Unknown 
+io.github.jan.supabase.network.SupabaseApi.rawRequest$suspendImpl(Unknown 
+io.github.jan.supabase.network.SupabaseApi.rawRequest(Unknown Source:0)
+io.github.jan.supabase.auth.AuthenticatedSupabaseApi.rawRequest(SourceFile:3)
+io.github.jan.supabase.network.SupabaseApi.request(Unknown Source:8)
+io.github.jan.supabase.postgrest.executor.RestRequestExecutor.execute(Unknown 
+03-25 21:14:55.750 30413 30473 E Supabase-Core: GET request to endpoint 
+03-25 21:14:55.750 30413 30473 W SyncManager: Failed to pull remote partners
+03-25 21:14:55.750 30413 30473 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+io.ktor.client.plugins.RequestError$install$1.invokeSuspend(Unknown Source:46)
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:1)
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:2)
+io.github.jan.supabase.network.KtorSupabaseHttpClient.request(Unknown 
+io.github.jan.supabase.network.SupabaseApi.rawRequest$suspendImpl(Unknown 
+io.github.jan.supabase.network.SupabaseApi.rawRequest(Unknown Source:0)
+io.github.jan.supabase.auth.AuthenticatedSupabaseApi.rawRequest(SourceFile:3)
+io.github.jan.supabase.network.SupabaseApi.request(Unknown Source:8)
+io.github.jan.supabase.postgrest.executor.RestRequestExecutor.execute(Unknown 
+03-25 21:15:00.357 30413 30502 D ProfileInstaller: Skipping profile 
+03-25 21:15:04.765 30413 30421 W h.mindfultennis: userfaultfd: MOVE ioctl 
+03-25 21:15:10.765 30413 30457 E Supabase-Core: GET request to endpoint 
+03-25 21:15:10.765 30413 30457 W SyncManager: Failed to pull remote opponents
+03-25 21:15:10.765 30413 30457 W SyncManager: 
+io.ktor.client.plugins.HttpRequestTimeoutException: Request timeout has 
+expired [url=https://ffdybinqhqsytaomitbr.supabase.co/rest/v1/opponents?user_id
+03-25 21:15:13.085 30413 30413 D SyncWorker: Periodic sync worker enqueued (15 
+03-25 21:15:13.086 30413 30439 D SyncManager: Starting sync for user 
+03-25 21:15:13.194 30413 30413 D SyncWorker: Periodic sync worker enqueued (15 
+03-25 21:15:13.195 30413 30500 D SyncManager: Starting sync for user 
+03-25 21:15:13.196 30413 30413 D SyncWorker: Periodic sync worker enqueued (15 
+03-25 21:15:13.197 30413 30500 D SyncManager: Starting sync for user 
+03-25 21:15:14.412 30413 30458 E Supabase-Core: GET request to endpoint 
+03-25 21:15:14.412 30413 30458 W SyncManager: Failed to pull remote partners
+03-25 21:15:14.412 30413 30458 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+03-25 21:15:14.412 30413 30439 E Supabase-Core: GET request to endpoint 
+/rest/v1/sessions was cancelled
+03-25 21:15:14.413 30413 30439 W SyncManager: Failed to pull remote sessions
+03-25 21:15:14.413 30413 30439 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+03-25 21:15:14.415 30413 30439 E Supabase-Core: GET request to endpoint 
+03-25 21:15:14.415 30413 30439 W SyncManager: Failed to pull remote focus 
+03-25 21:15:14.415 30413 30439 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+io.ktor.client.plugins.RequestError$install$1.invokeSuspend(Unknown Source:46)
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:1)
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:2)
+io.github.jan.supabase.network.KtorSupabaseHttpClient.request(Unknown 
+io.github.jan.supabase.network.SupabaseApi.rawRequest$suspendImpl(Unknown 
+io.github.jan.supabase.network.SupabaseApi.rawRequest(Unknown Source:0)
+io.github.jan.supabase.auth.AuthenticatedSupabaseApi.rawRequest(SourceFile:3)
+io.github.jan.supabase.network.SupabaseApi.request(Unknown Source:8)
+io.github.jan.supabase.postgrest.executor.RestRequestExecutor.execute(Unknown 
+03-25 21:15:14.421 30413 30439 E Supabase-Core: GET request to endpoint 
+03-25 21:15:14.421 30413 30439 W SyncManager: Failed to pull remote opponents
+03-25 21:15:14.421 30413 30439 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+io.ktor.client.plugins.RequestError$install$1.invokeSuspend(Unknown Source:46)
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:1)
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:2)
+io.github.jan.supabase.network.KtorSupabaseHttpClient.request(Unknown 
+io.github.jan.supabase.network.SupabaseApi.rawRequest$suspendImpl(Unknown 
+io.github.jan.supabase.network.SupabaseApi.rawRequest(Unknown Source:0)
+io.github.jan.supabase.auth.AuthenticatedSupabaseApi.rawRequest(SourceFile:3)
+io.github.jan.supabase.network.SupabaseApi.request(Unknown Source:8)
+io.github.jan.supabase.postgrest.executor.RestRequestExecutor.execute(Unknown 
+03-25 21:15:14.423 30413 30439 E Supabase-Core: GET request to endpoint 
+03-25 21:15:14.423 30413 30439 W SyncManager: Failed to pull remote partners
+03-25 21:15:14.423 30413 30439 W SyncManager: 
+java.util.concurrent.CancellationException: Job was cancelled
+io.ktor.client.plugins.RequestError$install$1.invokeSuspend(Unknown Source:46)
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:1)
+io.ktor.client.plugins.RequestError$install$1.invoke(SourceFile:2)
+io.github.jan.supabase.network.KtorSupabaseHttpClient.request(Unknown 
+io.github.jan.supabase.network.SupabaseApi.rawRequest$suspendImpl(Unknown 
+io.github.jan.supabase.network.SupabaseApi.rawRequest(Unknown Source:0)
+io.github.jan.supabase.auth.AuthenticatedSupabaseApi.rawRequest(SourceFile:3)
+io.github.jan.supabase.network.SupabaseApi.request(Unknown Source:8)
+io.github.jan.supabase.postgrest.executor.RestRequestExecutor.execute(Unknown 
+03-25 21:15:14.631 30413 30743 D SyncManager: Sync completed for user 
+03-25 21:15:14.631 30413 30500 D SyncWorker: Sync succeeded
+03-25 21:15:14.633 30413 30448 I WM-WorkerWrapper: Worker result SUCCESS for 
+com.ashutosh.mindfultennis.data.sync.SyncWorker,mindful_tennis_sync } ]
+03-25 21:15:14.634 30413 30413 D WM-Processor: s 
+03-25 21:15:14.634 30413 30413 D WM-GreedyScheduler: Stopping tracking for 
+03-25 21:15:14.635 30413 30413 D WM-SystemJobService: 
+03-25 21:15:14.637 30413 30435 D WM-GreedyScheduler: Cancelling work ID 
+03-25 21:15:14.639 30413 30435 D WM-SystemJobScheduler: Scheduling work ID 
+03-25 21:15:14.643 30413 30413 D WM-SystemJobService: onStopJob for 
+03-25 21:15:16.470 30413 30441 D SyncManager: Sync completed for user 
+03-25 21:15:16.475 30413 30744 D SyncManager: Sync completed for user 
+03-25 21:15:22.645 30413 30744 D SyncManager: Starting sync for user 
+
+

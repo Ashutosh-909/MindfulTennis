@@ -20,6 +20,8 @@ import com.ashutosh.mindfultennis.ui.sessions.SessionDetailScreen
 import com.ashutosh.mindfultennis.ui.sessions.SessionDetailViewModel
 import com.ashutosh.mindfultennis.ui.sessions.SessionsListScreen
 import com.ashutosh.mindfultennis.ui.sessions.SessionsListViewModel
+import com.ashutosh.mindfultennis.ui.settings.SettingsScreen
+import com.ashutosh.mindfultennis.ui.settings.SettingsViewModel
 import com.ashutosh.mindfultennis.ui.startsession.StartSessionScreen
 import com.ashutosh.mindfultennis.ui.startsession.StartSessionViewModel
 
@@ -83,6 +85,9 @@ fun NavGraph(
                 },
                 onShowSessionsClicked = {
                     navController.navigate(Route.SessionsList.route)
+                },
+                onNavigateToSettings = {
+                    navController.navigate(Route.Settings.route)
                 },
             )
         }
@@ -148,6 +153,21 @@ fun NavGraph(
                 viewModel = viewModel,
                 onNavigateBack = {
                     navController.popBackStack()
+                },
+            )
+        }
+
+        composable(Route.Settings.route) {
+            val viewModel: SettingsViewModel = hiltViewModel()
+            SettingsScreen(
+                viewModel = viewModel,
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+                onLoggedOut = {
+                    navController.navigate(Route.Login.route) {
+                        popUpTo(0) { inclusive = true }
+                    }
                 },
             )
         }

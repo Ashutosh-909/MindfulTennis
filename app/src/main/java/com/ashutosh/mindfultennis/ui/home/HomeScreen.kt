@@ -17,10 +17,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.FloatingActionButton
@@ -30,10 +32,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -61,6 +61,7 @@ fun HomeScreen(
     onStartSessionClicked: () -> Unit,
     onEndSessionClicked: (sessionId: String) -> Unit,
     onShowSessionsClicked: () -> Unit,
+    onNavigateToSettings: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -74,6 +75,7 @@ fun HomeScreen(
                     uiState.activeSession?.let { onEndSessionClicked(it.id) }
                 }
                 is HomeUiEvent.ShowSessionsClicked -> onShowSessionsClicked()
+                is HomeUiEvent.NavigateToSettingsClicked -> onNavigateToSettings()
                 is HomeUiEvent.CancelSessionClicked,
                 is HomeUiEvent.CancelSessionConfirmed,
                 is HomeUiEvent.CancelSessionDismissed -> viewModel.onEvent(event)
@@ -99,10 +101,10 @@ private fun HomeScreenContent(
             TopAppBar(
                 title = { Text("Dashboard") },
                 actions = {
-                    IconButton(onClick = { onEvent(HomeUiEvent.SignOutClicked) }) {
+                    IconButton(onClick = { onEvent(HomeUiEvent.NavigateToSettingsClicked) }) {
                         Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ExitToApp,
-                            contentDescription = "Sign out",
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = "Settings",
                         )
                     }
                 },
@@ -114,16 +116,28 @@ private fun HomeScreenContent(
                 .fillMaxSize()
                 .padding(innerPadding),
         ) {
-            // Main scrollable content with pull-to-refresh
-            PullToRefreshBox(
-                isRefreshing = state.isSyncing,
-                onRefresh = { onEvent(HomeUiEvent.RefreshClicked) },
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth(),
-            ) {
+            // Initial sync loading indicator
+            if (state.isInitialSyncing) {
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator()
+                        Spacer(modifier = Modifier.height(Spacing.md))
+                        Text(
+                            text = "Syncing your data...",
+                            style = MaterialTheme.typography.bodyLarge,
+                        )
+                    }
+                }
+            } else {
+            // Main scrollable content
             LazyColumn(
                 modifier = Modifier
+                    .weight(1f)
                     .fillMaxSize(),
                 contentPadding = PaddingValues(
                     start = Spacing.md,
@@ -195,7 +209,7 @@ private fun HomeScreenContent(
                     )
                 }
             }
-            } // end PullToRefreshBox
+            } // end initial sync / content branch
 
             // Bottom button area
             BottomButtonBar(

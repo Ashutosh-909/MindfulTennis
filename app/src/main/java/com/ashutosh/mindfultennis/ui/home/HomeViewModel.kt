@@ -2,15 +2,13 @@ package com.ashutosh.mindfultennis.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import android.app.Application
 import com.ashutosh.mindfultennis.data.local.datastore.UserPreferences
 import com.ashutosh.mindfultennis.data.repository.AuthRepository
 import com.ashutosh.mindfultennis.data.repository.AuthState
 import com.ashutosh.mindfultennis.data.repository.FocusPointRepository
 import com.ashutosh.mindfultennis.data.repository.OpponentRepository
 import com.ashutosh.mindfultennis.data.repository.SessionRepository
-import com.ashutosh.mindfultennis.data.sync.SyncManager
-import com.ashutosh.mindfultennis.data.sync.SyncWorker
+import com.ashutosh.mindfultennis.data.sync.InitialSyncManager
 import com.ashutosh.mindfultennis.domain.model.DurationFilter
 import com.ashutosh.mindfultennis.domain.model.RatingType
 import com.ashutosh.mindfultennis.domain.usecase.CancelSessionUseCase
@@ -34,13 +32,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val application: Application,
     private val authRepository: AuthRepository,
     private val sessionRepository: SessionRepository,
     private val focusPointRepository: FocusPointRepository,
     private val opponentRepository: OpponentRepository,
     private val userPreferences: UserPreferences,
-    private val syncManager: SyncManager,
+    private val initialSyncManager: InitialSyncManager,
     private val cancelSessionUseCase: CancelSessionUseCase,
     private val getPerformanceTrendUseCase: GetPerformanceTrendUseCase,
     private val getWinLossRecordUseCase: GetWinLossRecordUseCase,
@@ -81,12 +78,14 @@ class HomeViewModel @Inject constructor(
                 when (authState) {
                     is AuthState.Authenticated -> {
                         currentUserId = authState.userId
-                        // Cache the user ID for SyncWorker
                         userPreferences.setCachedUserId(authState.userId)
-                        // Enqueue the periodic SyncWorker
-                        SyncWorker.enqueue(application)
-                        // Run an immediate sync to pull remote data into Room
-                        performSync(authState.userId)
+                        // Check if initial sync is needed (first login on this device)
+                        val hasInitialSync = userPreferences.getHasCompletedInitialSync()
+                        if (!hasInitialSync) {
+                            performInitialSync(authState.userId)
+                        } else {
+                            loadAllData(authState.userId)
+                        }
                     }
                     is AuthState.Unauthenticated -> {
                         currentUserId = null
@@ -107,7 +106,6 @@ class HomeViewModel @Inject constructor(
             is HomeUiEvent.AspectOpponentFilterChanged -> onAspectOpponentFilterChanged(event.ids)
             is HomeUiEvent.AspectRatingTypeChanged -> onAspectRatingTypeChanged(event.ratingType)
             is HomeUiEvent.RetryClicked -> retry()
-            is HomeUiEvent.RefreshClicked -> currentUserId?.let { performSync(it) }
             is HomeUiEvent.ErrorDismissed -> _uiState.update { it.copy(error = null) }
             is HomeUiEvent.CancelSessionClicked -> {
                 _uiState.update { it.copy(showCancelSessionDialog = true) }
@@ -116,28 +114,27 @@ class HomeViewModel @Inject constructor(
                 _uiState.update { it.copy(showCancelSessionDialog = false) }
             }
             is HomeUiEvent.CancelSessionConfirmed -> cancelActiveSession()
-            is HomeUiEvent.SignOutClicked -> signOut()
             // Navigation events handled by screen
             is HomeUiEvent.StartSessionClicked,
             is HomeUiEvent.EndSessionClicked,
-            is HomeUiEvent.ShowSessionsClicked -> { /* handled by HomeScreen */ }
-        }
-    }
-
-    private fun signOut() {
-        viewModelScope.launch {
-            authRepository.signOut()
+            is HomeUiEvent.ShowSessionsClicked,
+            is HomeUiEvent.NavigateToSettingsClicked -> { /* handled by HomeScreen */ }
         }
     }
 
     /**
-     * Triggers an immediate sync with Supabase, then loads all data from Room.
+     * Performs a full pull from Supabase on first login per device.
      */
-    private fun performSync(userId: String) {
+    private fun performInitialSync(userId: String) {
         viewModelScope.launch {
-            _uiState.update { it.copy(isSyncing = true) }
-            syncManager.sync(userId)
-            _uiState.update { it.copy(isSyncing = false) }
+            _uiState.update { it.copy(isInitialSyncing = true) }
+            val result = initialSyncManager.fullPull(userId)
+            _uiState.update { it.copy(isInitialSyncing = false) }
+            if (result.isFailure) {
+                _uiState.update {
+                    it.copy(error = "Initial sync failed: ${result.exceptionOrNull()?.message}")
+                }
+            }
             loadAllData(userId)
         }
     }
