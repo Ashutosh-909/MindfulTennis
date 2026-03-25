@@ -116,10 +116,17 @@ class HomeViewModel @Inject constructor(
                 _uiState.update { it.copy(showCancelSessionDialog = false) }
             }
             is HomeUiEvent.CancelSessionConfirmed -> cancelActiveSession()
+            is HomeUiEvent.SignOutClicked -> signOut()
             // Navigation events handled by screen
             is HomeUiEvent.StartSessionClicked,
             is HomeUiEvent.EndSessionClicked,
             is HomeUiEvent.ShowSessionsClicked -> { /* handled by HomeScreen */ }
+        }
+    }
+
+    private fun signOut() {
+        viewModelScope.launch {
+            authRepository.signOut()
         }
     }
 

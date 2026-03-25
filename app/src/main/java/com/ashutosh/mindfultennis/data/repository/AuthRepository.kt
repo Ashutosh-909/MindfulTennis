@@ -30,6 +30,12 @@ interface AuthRepository {
     /** Handle the OAuth callback URL after Google sign-in. */
     suspend fun handleAuthCallback(url: String): Result<Unit>
 
+    /** Sign up with email and password. */
+    suspend fun signUpWithEmail(email: String, password: String): Result<Unit>
+
+    /** Sign in with email and password. */
+    suspend fun signInWithEmail(email: String, password: String): Result<Unit>
+
     /** Sign out and clear local state. */
     suspend fun signOut(): Result<Unit>
 

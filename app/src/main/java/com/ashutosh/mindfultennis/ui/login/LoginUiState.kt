@@ -8,6 +8,9 @@ data class LoginUiState(
     val isSignedIn: Boolean = false,
     val displayName: String? = null,
     val error: String? = null,
+    val email: String = "",
+    val password: String = "",
+    val isSignUpMode: Boolean = true,
 )
 
 /**
@@ -17,4 +20,8 @@ sealed interface LoginUiEvent {
     data object SignInWithGoogleClicked : LoginUiEvent
     data object RetryClicked : LoginUiEvent
     data object ErrorDismissed : LoginUiEvent
+    data class EmailChanged(val email: String) : LoginUiEvent
+    data class PasswordChanged(val password: String) : LoginUiEvent
+    data object ToggleAuthMode : LoginUiEvent
+    data object EmailAuthSubmitted : LoginUiEvent
 }

@@ -33,6 +33,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -96,6 +98,14 @@ private fun HomeScreenContent(
         topBar = {
             TopAppBar(
                 title = { Text("Dashboard") },
+                actions = {
+                    IconButton(onClick = { onEvent(HomeUiEvent.SignOutClicked) }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ExitToApp,
+                            contentDescription = "Sign out",
+                        )
+                    }
+                },
             )
         },
     ) { innerPadding ->

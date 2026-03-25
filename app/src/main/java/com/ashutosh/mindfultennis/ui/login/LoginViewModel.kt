@@ -29,6 +29,12 @@ class LoginViewModel @Inject constructor(
             LoginUiEvent.SignInWithGoogleClicked -> signInWithGoogle()
             LoginUiEvent.RetryClicked -> signInWithGoogle()
             LoginUiEvent.ErrorDismissed -> _uiState.update { it.copy(error = null) }
+            is LoginUiEvent.EmailChanged -> _uiState.update { it.copy(email = event.email) }
+            is LoginUiEvent.PasswordChanged -> _uiState.update { it.copy(password = event.password) }
+            LoginUiEvent.ToggleAuthMode -> _uiState.update { it.copy(isSignUpMode = !it.isSignUpMode) }
+            LoginUiEvent.EmailAuthSubmitted -> {
+                if (_uiState.value.isSignUpMode) signUpWithEmail() else signInWithEmail()
+            }
         }
     }
 
@@ -74,7 +80,46 @@ class LoginViewModel @Inject constructor(
                     )
                 }
             }
-            // On success, the auth state observer will handle the state update
+        }
+    }
+
+    private fun signUpWithEmail() {
+        val state = _uiState.value
+        if (state.email.isBlank() || state.password.isBlank()) {
+            _uiState.update { it.copy(error = "Email and password must not be empty.") }
+            return
+        }
+        _uiState.update { it.copy(isLoading = true, error = null) }
+        viewModelScope.launch {
+            authRepository.signUpWithEmail(state.email.trim(), state.password)
+                .onFailure { exception ->
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            error = exception.message ?: "Sign-up failed. Please try again.",
+                        )
+                    }
+                }
+        }
+    }
+
+    private fun signInWithEmail() {
+        val state = _uiState.value
+        if (state.email.isBlank() || state.password.isBlank()) {
+            _uiState.update { it.copy(error = "Email and password must not be empty.") }
+            return
+        }
+        _uiState.update { it.copy(isLoading = true, error = null) }
+        viewModelScope.launch {
+            authRepository.signInWithEmail(state.email.trim(), state.password)
+                .onFailure { exception ->
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            error = exception.message ?: "Sign-in failed. Please try again.",
+                        )
+                    }
+                }
         }
     }
 }

@@ -85,6 +85,7 @@
 -dontwarn kotlinx.coroutines.**
 
 # ───── Compose ─────
-# Compose compiler handles most rules; keep @Stable/@Immutable annotated classes
--keep @androidx.compose.runtime.Stable class * { *; }
--keep @androidx.compose.runtime.Immutable class * { *; }
+# Prevent R8 from merging Compose classes whose default interface methods
+# conflict at runtime (IncompatibleClassChangeError on ModifierLocalProvider)
+-keep class androidx.compose.** { *; }
+-keep interface androidx.compose.** { *; }

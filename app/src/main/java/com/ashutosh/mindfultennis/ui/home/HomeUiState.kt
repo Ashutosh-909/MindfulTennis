@@ -54,4 +54,5 @@ sealed interface HomeUiEvent {
     data object RetryClicked : HomeUiEvent
     data object RefreshClicked : HomeUiEvent
     data object ErrorDismissed : HomeUiEvent
+    data object SignOutClicked : HomeUiEvent
 }
