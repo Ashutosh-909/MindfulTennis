@@ -8,8 +8,7 @@ import com.ashutosh.mindfultennis.data.repository.AuthState
 import com.ashutosh.mindfultennis.data.repository.FocusPointRepository
 import com.ashutosh.mindfultennis.data.repository.OpponentRepository
 import com.ashutosh.mindfultennis.data.repository.SessionRepository
-import com.ashutosh.mindfultennis.data.sync.BackgroundSyncScheduler
-import com.ashutosh.mindfultennis.data.sync.SyncManager
+import com.ashutosh.mindfultennis.data.sync.InitialSyncManager
 import com.ashutosh.mindfultennis.domain.model.DurationFilter
 import com.ashutosh.mindfultennis.domain.model.RatingType
 import com.ashutosh.mindfultennis.domain.usecase.CancelSessionUseCase
@@ -30,13 +29,12 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val backgroundSyncScheduler: BackgroundSyncScheduler,
     private val authRepository: AuthRepository,
     private val sessionRepository: SessionRepository,
     private val focusPointRepository: FocusPointRepository,
     private val opponentRepository: OpponentRepository,
     private val userPreferences: UserPreferences,
-    private val syncManager: SyncManager,
+    private val initialSyncManager: InitialSyncManager,
     private val cancelSessionUseCase: CancelSessionUseCase,
     private val getPerformanceTrendUseCase: GetPerformanceTrendUseCase,
     private val getWinLossRecordUseCase: GetWinLossRecordUseCase,
@@ -79,10 +77,12 @@ class HomeViewModel(
                         currentUserId = authState.userId
                         // Cache the user ID for SyncWorker
                         userPreferences.setCachedUserId(authState.userId)
-                        // Enqueue the periodic background sync
-                        backgroundSyncScheduler.schedulePeriodic()
-                        // Run an immediate sync to pull remote data into Room
-                        performSync(authState.userId)
+                        // Check if initial sync is needed
+                        if (!userPreferences.getHasCompletedInitialSync()) {
+                            performInitialSync(authState.userId)
+                        } else {
+                            loadAllData(authState.userId)
+                        }
                     }
                     is AuthState.Unauthenticated -> {
                         currentUserId = null
@@ -103,7 +103,6 @@ class HomeViewModel(
             is HomeUiEvent.AspectOpponentFilterChanged -> onAspectOpponentFilterChanged(event.ids)
             is HomeUiEvent.AspectRatingTypeChanged -> onAspectRatingTypeChanged(event.ratingType)
             is HomeUiEvent.RetryClicked -> retry()
-            is HomeUiEvent.RefreshClicked -> currentUserId?.let { performSync(it) }
             is HomeUiEvent.ErrorDismissed -> _uiState.update { it.copy(error = null) }
             is HomeUiEvent.CancelSessionClicked -> {
                 _uiState.update { it.copy(showCancelSessionDialog = true) }
@@ -115,18 +114,22 @@ class HomeViewModel(
             // Navigation events handled by screen
             is HomeUiEvent.StartSessionClicked,
             is HomeUiEvent.EndSessionClicked,
-            is HomeUiEvent.ShowSessionsClicked -> { /* handled by HomeScreen */ }
+            is HomeUiEvent.ShowSessionsClicked,
+            is HomeUiEvent.NavigateToSettingsClicked -> { /* handled by HomeScreen */ }
         }
     }
 
     /**
-     * Triggers an immediate sync with Supabase, then loads all data from Room.
+     * Performs the initial sync for a new user, then loads all data from Room.
      */
-    private fun performSync(userId: String) {
+    private fun performInitialSync(userId: String) {
         viewModelScope.launch {
-            _uiState.update { it.copy(isSyncing = true) }
-            syncManager.sync(userId)
-            _uiState.update { it.copy(isSyncing = false) }
+            _uiState.update { it.copy(isInitialSyncing = true) }
+            val result = initialSyncManager.performInitialSync(userId)
+            _uiState.update { it.copy(isInitialSyncing = false) }
+            result.onFailure { e ->
+                _uiState.update { it.copy(error = e.message ?: "Initial sync failed") }
+            }
             loadAllData(userId)
         }
     }

@@ -15,6 +15,7 @@ sealed class Route(val route: String) {
         }
     }
 
+    data object Settings : Route("settings")
     data object SessionsList : Route("sessions_list")
 
     data class SessionDetail(val sessionId: String) : Route("session_detail/$sessionId") {

@@ -25,10 +25,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
+import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -260,10 +263,17 @@ private fun TrendLineChart(
         val chartH = size.height - padTop - padBottom
 
         // -- Grid lines & Y-axis labels --
+        val dashEffect = PathEffect.dashPathEffect(floatArrayOf(8f, 6f), 0f)
         val yTicks = listOf(0, 25, 50, 75, 100)
         yTicks.forEach { value ->
             val y = padTop + chartH * (1f - value / 100f)
-            drawLine(gridLineColor, Offset(padLeft, y), Offset(padLeft + chartW, y), 1f)
+            drawLine(
+                color = gridLineColor.copy(alpha = 0.35f),
+                start = Offset(padLeft, y),
+                end = Offset(padLeft + chartW, y),
+                strokeWidth = 1f,
+                pathEffect = dashEffect,
+            )
 
             val label = textMeasurer.measure(
                 value.toString(),
@@ -297,6 +307,26 @@ private fun TrendLineChart(
             points.forEachIndexed { i, o -> if (i == 0) moveTo(o.x, o.y) else lineTo(o.x, o.y) }
         }
         drawPath(path, chartLineColor, style = Stroke(2.5f, cap = StrokeCap.Round, join = StrokeJoin.Round))
+
+        // -- Gradient fill under trend line --
+        val fillPath = Path().apply {
+            points.forEachIndexed { i, o -> if (i == 0) moveTo(o.x, o.y) else lineTo(o.x, o.y) }
+            lineTo(points.last().x, padTop + chartH)
+            lineTo(points.first().x, padTop + chartH)
+            close()
+        }
+        drawPath(
+            path = fillPath,
+            brush = Brush.verticalGradient(
+                colors = listOf(
+                    chartLineColor.copy(alpha = 0.2f),
+                    Color.Transparent,
+                ),
+                startY = points.minOf { it.y },
+                endY = padTop + chartH,
+            ),
+            style = Fill,
+        )
 
         // -- Draw regular dots --
         points.forEachIndexed { i, offset ->

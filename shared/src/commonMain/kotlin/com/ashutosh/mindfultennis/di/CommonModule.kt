@@ -15,6 +15,7 @@ import com.ashutosh.mindfultennis.data.repository.PartnerRepository
 import com.ashutosh.mindfultennis.data.repository.PartnerRepositoryImpl
 import com.ashutosh.mindfultennis.data.repository.SessionRepository
 import com.ashutosh.mindfultennis.data.repository.SessionRepositoryImpl
+import com.ashutosh.mindfultennis.data.sync.InitialSyncManager
 import com.ashutosh.mindfultennis.data.sync.SyncManager
 import com.ashutosh.mindfultennis.domain.usecase.CancelSessionUseCase
 import com.ashutosh.mindfultennis.domain.usecase.EndSessionUseCase
@@ -29,6 +30,7 @@ import com.ashutosh.mindfultennis.ui.home.HomeViewModel
 import com.ashutosh.mindfultennis.ui.login.LoginViewModel
 import com.ashutosh.mindfultennis.ui.sessions.SessionDetailViewModel
 import com.ashutosh.mindfultennis.ui.sessions.SessionsListViewModel
+import com.ashutosh.mindfultennis.ui.settings.SettingsViewModel
 import com.ashutosh.mindfultennis.ui.startsession.StartSessionViewModel
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
@@ -94,7 +96,6 @@ val commonModule = module {
             selfRatingDao = get(),
             partnerRatingDao = get(),
             setScoreDao = get(),
-            remoteDataSource = get(),
         )
     }
 
@@ -102,21 +103,18 @@ val commonModule = module {
         FocusPointRepositoryImpl(
             focusPointDao = get(),
             sessionDao = get(),
-            remoteDataSource = get(),
         )
     }
 
     single<OpponentRepository> {
         OpponentRepositoryImpl(
             opponentDao = get(),
-            remoteDataSource = get(),
         )
     }
 
     single<PartnerRepository> {
         PartnerRepositoryImpl(
             partnerDao = get(),
-            remoteDataSource = get(),
         )
     }
 
@@ -124,6 +122,22 @@ val commonModule = module {
 
     single {
         SyncManager(
+            sessionDao = get(),
+            selfRatingDao = get(),
+            partnerRatingDao = get(),
+            setScoreDao = get(),
+            focusPointDao = get(),
+            opponentDao = get(),
+            partnerDao = get(),
+            remoteDataSource = get(),
+            userPreferences = get(),
+        )
+    }
+
+    // ── InitialSyncManager ──────────────────────────────────────────────
+
+    single {
+        InitialSyncManager(
             sessionDao = get(),
             selfRatingDao = get(),
             partnerRatingDao = get(),
@@ -151,19 +165,20 @@ val commonModule = module {
 
     viewModel {
         HomeViewModel(
-            backgroundSyncScheduler = get(),
             authRepository = get(),
             sessionRepository = get(),
             focusPointRepository = get(),
             opponentRepository = get(),
             userPreferences = get(),
-            syncManager = get(),
+            initialSyncManager = get(),
             cancelSessionUseCase = get(),
             getPerformanceTrendUseCase = get(),
             getWinLossRecordUseCase = get(),
             getAspectAveragesUseCase = get(),
         )
     }
+
+    viewModel { SettingsViewModel(get(), get()) }
 
     viewModel {
         LoginViewModel(

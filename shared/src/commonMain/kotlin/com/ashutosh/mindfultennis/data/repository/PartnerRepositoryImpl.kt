@@ -3,9 +3,7 @@ package com.ashutosh.mindfultennis.data.repository
 import com.ashutosh.mindfultennis.data.local.db.dao.PartnerDao
 import com.ashutosh.mindfultennis.data.local.db.entity.SyncStatus
 import com.ashutosh.mindfultennis.data.local.db.entity.toDomain
-import com.ashutosh.mindfultennis.data.local.db.entity.toDto
 import com.ashutosh.mindfultennis.data.local.db.entity.toEntity
-import com.ashutosh.mindfultennis.data.remote.SupabaseSessionDataSource
 import com.ashutosh.mindfultennis.domain.model.Partner
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -14,7 +12,6 @@ import kotlinx.coroutines.withContext
 
 class PartnerRepositoryImpl(
     private val partnerDao: PartnerDao,
-    private val remoteDataSource: SupabaseSessionDataSource,
 ) : PartnerRepository {
 
     override fun observeAll(userId: String): Flow<List<Partner>> =
@@ -32,23 +29,12 @@ class PartnerRepositoryImpl(
         runCatching {
             val entity = partner.toEntity(SyncStatus.PENDING)
             partnerDao.upsert(entity)
-            try {
-                remoteDataSource.upsertPartner(entity.toDto())
-                partnerDao.updateSyncStatus(partner.id, SyncStatus.SYNCED.name)
-            } catch (_: Exception) {
-                // Will be synced later
-            }
         }
     }
 
     override suspend fun delete(partnerId: String): Result<Unit> = withContext(Dispatchers.Default) {
         runCatching {
-            partnerDao.deleteById(partnerId)
-            try {
-                remoteDataSource.deletePartner(partnerId)
-            } catch (_: Exception) {
-                // Best-effort remote delete
-            }
+            partnerDao.updateSyncStatus(partnerId, SyncStatus.PENDING_DELETE.name)
         }
     }
 

@@ -152,7 +152,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\nexport JAVA_HOME=$(/usr/libexec/java_home 2>/dev/null || echo \"\")\nif [ -z \"$JAVA_HOME\" ]; then\n  # Fallback to IntelliJ/Android Studio bundled JDK\n  for jbr in \"/Applications/IntelliJ IDEA.app/Contents/jbr/Contents/Home\" \"/Applications/Android Studio.app/Contents/jbr/Contents/Home\"; do\n    if [ -d \"$jbr\" ]; then export JAVA_HOME=\"$jbr\"; break; fi\n  done\nfi\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT/..\"\nexport JAVA_HOME=$(/usr/libexec/java_home 2>/dev/null || echo \"\")\nif [ -z \"$JAVA_HOME\" ] || [ ! -d \"$JAVA_HOME\" ]; then\n  # Fallback to Homebrew / IntelliJ / Android Studio bundled JDK\n  for jbr in \"/opt/homebrew/Cellar/openjdk@17/17.0.18/libexec/openjdk.jdk/Contents/Home\" \"/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home\" \"/Applications/IntelliJ IDEA.app/Contents/jbr/Contents/Home\" \"/Applications/Android Studio.app/Contents/jbr/Contents/Home\"; do\n    if [ -d \"$jbr\" ]; then export JAVA_HOME=\"$jbr\"; break; fi\n  done\nfi\nexport PATH=\"$JAVA_HOME/bin:$PATH\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -251,6 +251,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -311,6 +313,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

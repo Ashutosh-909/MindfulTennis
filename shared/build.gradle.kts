@@ -52,6 +52,7 @@ kotlin {
 
             // Room KMP
             implementation(libs.room.runtime)
+            implementation(libs.sqlite.bundled)
 
             // DataStore
             implementation(libs.datastore.preferences)

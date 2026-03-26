@@ -6,11 +6,9 @@ import com.ashutosh.mindfultennis.data.local.db.dao.SessionDao
 import com.ashutosh.mindfultennis.data.local.db.dao.SetScoreDao
 import com.ashutosh.mindfultennis.data.local.db.entity.SyncStatus
 import com.ashutosh.mindfultennis.data.local.db.entity.toDomain
-import com.ashutosh.mindfultennis.data.local.db.entity.toDto
 import com.ashutosh.mindfultennis.data.local.db.entity.toEntity
 import com.ashutosh.mindfultennis.data.local.db.entity.toPartnerRatingEntity
 import com.ashutosh.mindfultennis.data.local.db.entity.toSelfRatingEntity
-import com.ashutosh.mindfultennis.data.remote.SupabaseSessionDataSource
 import com.ashutosh.mindfultennis.domain.model.Rating
 import com.ashutosh.mindfultennis.domain.model.Session
 import com.ashutosh.mindfultennis.domain.model.SetScore
@@ -24,7 +22,6 @@ class SessionRepositoryImpl(
     private val selfRatingDao: SelfRatingDao,
     private val partnerRatingDao: PartnerRatingDao,
     private val setScoreDao: SetScoreDao,
-    private val remoteDataSource: SupabaseSessionDataSource,
 ) : SessionRepository {
 
     // ── Session CRUD ──────────────────────────────────────────────────
@@ -33,13 +30,6 @@ class SessionRepositoryImpl(
         runCatching {
             val entity = session.toEntity(SyncStatus.PENDING)
             sessionDao.upsert(entity)
-            // Best-effort push to Supabase
-            try {
-                remoteDataSource.upsertSession(entity.toDto())
-                sessionDao.updateSyncStatus(session.id, SyncStatus.SYNCED.name)
-            } catch (_: Exception) {
-                // Will be synced later by SyncWorker
-            }
             session
         }
     }
@@ -48,12 +38,6 @@ class SessionRepositoryImpl(
         runCatching {
             val entity = session.toEntity(SyncStatus.PENDING)
             sessionDao.upsert(entity)
-            try {
-                remoteDataSource.upsertSession(entity.toDto())
-                sessionDao.updateSyncStatus(session.id, SyncStatus.SYNCED.name)
-            } catch (_: Exception) {
-                // Will be synced later
-            }
         }
     }
 
@@ -99,23 +83,12 @@ class SessionRepositoryImpl(
                 syncStatus = SyncStatus.PENDING.name,
             )
             sessionDao.upsert(updated)
-            try {
-                remoteDataSource.upsertSession(updated.toDto())
-                sessionDao.updateSyncStatus(sessionId, SyncStatus.SYNCED.name)
-            } catch (_: Exception) {
-                // Will be synced later
-            }
         }
     }
 
     override suspend fun deleteSession(sessionId: String): Result<Unit> = withContext(Dispatchers.Default) {
         runCatching {
-            sessionDao.deleteById(sessionId)
-            try {
-                remoteDataSource.deleteSession(sessionId)
-            } catch (_: Exception) {
-                // Best-effort remote delete
-            }
+            sessionDao.updateSyncStatus(sessionId, SyncStatus.PENDING_DELETE.name)
         }
     }
 
@@ -129,13 +102,6 @@ class SessionRepositoryImpl(
             val entities = ratings.map { it.toSelfRatingEntity(SyncStatus.PENDING) }
             selfRatingDao.deleteForSession(sessionId)
             selfRatingDao.upsertAll(entities)
-            try {
-                remoteDataSource.deleteSelfRatingsForSession(sessionId)
-                remoteDataSource.upsertSelfRatings(entities.map { it.toDto() })
-                selfRatingDao.updateSyncStatusForSession(sessionId, SyncStatus.SYNCED.name)
-            } catch (_: Exception) {
-                // Will be synced later
-            }
         }
     }
 
@@ -159,13 +125,6 @@ class SessionRepositoryImpl(
             val entities = ratings.map { it.toPartnerRatingEntity(SyncStatus.PENDING) }
             partnerRatingDao.deleteForSession(sessionId)
             partnerRatingDao.upsertAll(entities)
-            try {
-                remoteDataSource.deletePartnerRatingsForSession(sessionId)
-                remoteDataSource.upsertPartnerRatings(entities.map { it.toDto() })
-                partnerRatingDao.updateSyncStatusForSession(sessionId, SyncStatus.SYNCED.name)
-            } catch (_: Exception) {
-                // Will be synced later
-            }
         }
     }
 
@@ -189,13 +148,6 @@ class SessionRepositoryImpl(
             val entities = scores.map { it.toEntity(SyncStatus.PENDING) }
             setScoreDao.deleteForSession(sessionId)
             setScoreDao.upsertAll(entities)
-            try {
-                remoteDataSource.deleteSetScoresForSession(sessionId)
-                remoteDataSource.upsertSetScores(entities.map { it.toDto() })
-                setScoreDao.updateSyncStatusForSession(sessionId, SyncStatus.SYNCED.name)
-            } catch (_: Exception) {
-                // Will be synced later
-            }
         }
     }
 

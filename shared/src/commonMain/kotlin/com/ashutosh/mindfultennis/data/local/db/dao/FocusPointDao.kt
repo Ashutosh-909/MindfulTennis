@@ -16,10 +16,10 @@ interface FocusPointDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertAll(focusPoints: List<FocusPointEntity>)
 
-    @Query("SELECT * FROM focus_points WHERE user_id = :userId ORDER BY created_at DESC")
+    @Query("SELECT * FROM focus_points WHERE user_id = :userId AND sync_status != 'PENDING_DELETE' ORDER BY created_at DESC")
     fun observeAllForUser(userId: String): Flow<List<FocusPointEntity>>
 
-    @Query("SELECT * FROM focus_points WHERE user_id = :userId ORDER BY created_at DESC")
+    @Query("SELECT * FROM focus_points WHERE user_id = :userId AND sync_status != 'PENDING_DELETE' ORDER BY created_at DESC")
     suspend fun getAllForUser(userId: String): List<FocusPointEntity>
 
     @Query("SELECT * FROM focus_points WHERE id = :id")

@@ -31,16 +31,16 @@ interface SessionDao {
     @Query("SELECT * FROM sessions WHERE id = :sessionId")
     fun observeById(sessionId: String): Flow<SessionEntity?>
 
-    @Query("SELECT * FROM sessions WHERE user_id = :userId ORDER BY started_at DESC")
+    @Query("SELECT * FROM sessions WHERE user_id = :userId AND sync_status != 'PENDING_DELETE' ORDER BY started_at DESC")
     fun observeAllForUser(userId: String): Flow<List<SessionEntity>>
 
-    @Query("SELECT * FROM sessions WHERE user_id = :userId ORDER BY started_at DESC")
+    @Query("SELECT * FROM sessions WHERE user_id = :userId AND sync_status != 'PENDING_DELETE' ORDER BY started_at DESC")
     suspend fun getAllForUser(userId: String): List<SessionEntity>
 
-    @Query("SELECT * FROM sessions WHERE user_id = :userId AND is_active = 1 LIMIT 1")
+    @Query("SELECT * FROM sessions WHERE user_id = :userId AND is_active = 1 AND sync_status != 'PENDING_DELETE' LIMIT 1")
     suspend fun getActiveSession(userId: String): SessionEntity?
 
-    @Query("SELECT * FROM sessions WHERE user_id = :userId AND is_active = 1 LIMIT 1")
+    @Query("SELECT * FROM sessions WHERE user_id = :userId AND is_active = 1 AND sync_status != 'PENDING_DELETE' LIMIT 1")
     fun observeActiveSession(userId: String): Flow<SessionEntity?>
 
     @Query(
@@ -49,6 +49,7 @@ interface SessionDao {
         WHERE user_id = :userId
           AND started_at >= :fromMs
           AND started_at <= :toMs
+          AND sync_status != 'PENDING_DELETE'
         ORDER BY started_at DESC
         """
     )
@@ -60,6 +61,7 @@ interface SessionDao {
         WHERE user_id = :userId
           AND started_at >= :fromMs
           AND started_at <= :toMs
+          AND sync_status != 'PENDING_DELETE'
         ORDER BY started_at DESC
         """
     )

@@ -16,10 +16,10 @@ interface OpponentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertAll(opponents: List<OpponentEntity>)
 
-    @Query("SELECT * FROM opponents WHERE user_id = :userId ORDER BY name ASC")
+    @Query("SELECT * FROM opponents WHERE user_id = :userId AND sync_status != 'PENDING_DELETE' ORDER BY name ASC")
     fun observeAllForUser(userId: String): Flow<List<OpponentEntity>>
 
-    @Query("SELECT * FROM opponents WHERE user_id = :userId ORDER BY name ASC")
+    @Query("SELECT * FROM opponents WHERE user_id = :userId AND sync_status != 'PENDING_DELETE' ORDER BY name ASC")
     suspend fun getAllForUser(userId: String): List<OpponentEntity>
 
     @Query("SELECT * FROM opponents WHERE id = :id")
