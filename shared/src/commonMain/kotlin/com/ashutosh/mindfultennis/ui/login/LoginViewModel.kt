@@ -66,10 +66,17 @@ class LoginViewModel(
         viewModelScope.launch {
             val result = authRepository.signInWithGoogle()
             result.onFailure { exception ->
+                val friendlyMessage = when {
+                    exception.message?.contains("timeout", ignoreCase = true) == true ->
+                        "Connection timed out. Please check your internet and try again."
+                    exception.message?.contains("network", ignoreCase = true) == true ->
+                        "Network error. Please check your connection and try again."
+                    else -> "Google sign-in failed. Please try again."
+                }
                 _uiState.update {
                     it.copy(
                         isLoading = false,
-                        error = exception.message ?: "Sign-in failed. Please try again.",
+                        error = friendlyMessage,
                     )
                 }
             }
@@ -111,10 +118,22 @@ class LoginViewModel(
                 // For sign-in, the auth state observer handles the transition
             }
             result.onFailure { exception ->
+                val friendlyMessage = when {
+                    exception.message?.contains("timeout", ignoreCase = true) == true ->
+                        "Connection timed out. Please check your internet and try again."
+                    exception.message?.contains("Invalid login credentials", ignoreCase = true) == true ->
+                        "Invalid email or password. Please try again."
+                    exception.message?.contains("Email not confirmed", ignoreCase = true) == true ->
+                        "Please verify your email before signing in."
+                    exception.message?.contains("network", ignoreCase = true) == true ->
+                        "Network error. Please check your connection and try again."
+                    isSignUp -> "Sign-up failed. Please try again."
+                    else -> "Sign-in failed. Please try again."
+                }
                 _uiState.update {
                     it.copy(
                         isLoading = false,
-                        error = exception.message ?: if (isSignUp) "Sign-up failed." else "Sign-in failed.",
+                        error = friendlyMessage,
                     )
                 }
             }

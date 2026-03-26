@@ -35,6 +35,7 @@ class HomeViewModel(
     private val opponentRepository: OpponentRepository,
     private val userPreferences: UserPreferences,
     private val initialSyncManager: InitialSyncManager,
+    private val syncManager: com.ashutosh.mindfultennis.data.sync.SyncManager,
     private val cancelSessionUseCase: CancelSessionUseCase,
     private val getPerformanceTrendUseCase: GetPerformanceTrendUseCase,
     private val getWinLossRecordUseCase: GetWinLossRecordUseCase,
@@ -81,6 +82,8 @@ class HomeViewModel(
                         if (!userPreferences.getHasCompletedInitialSync()) {
                             performInitialSync(authState.userId)
                         } else {
+                            // Push any pending local changes, then load
+                            syncManager.sync(authState.userId)
                             loadAllData(authState.userId)
                         }
                     }

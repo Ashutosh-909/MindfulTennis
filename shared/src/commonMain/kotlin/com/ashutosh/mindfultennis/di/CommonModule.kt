@@ -51,7 +51,7 @@ val commonModule = module {
             supabaseKey = config.supabaseAnonKey,
         ) {
             install(Auth) {
-                scheme = "com.ashutosh.mindfultennis"
+                scheme = "com.nextjedi.mindful-tennis"
                 host = "callback"
             }
             install(Postgrest)
@@ -171,6 +171,7 @@ val commonModule = module {
             opponentRepository = get(),
             userPreferences = get(),
             initialSyncManager = get(),
+            syncManager = get(),
             cancelSessionUseCase = get(),
             getPerformanceTrendUseCase = get(),
             getWinLossRecordUseCase = get(),

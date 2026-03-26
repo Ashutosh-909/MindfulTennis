@@ -15,9 +15,9 @@
     <key>CFBundlePackageType</key>
     <string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.1</string>
+    <string>1.4</string>
     <key>CFBundleVersion</key>
-    <string>2</string>
+    <string>5</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>UIApplicationSceneManifest</key>
@@ -38,7 +38,7 @@
         <dict>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.ashutosh.mindfultennis</string>
+                <string>com.nextjedi.mindful-tennis</string>
             </array>
         </dict>
     </array>
@@ -48,7 +48,7 @@
     <string>$(SUPABASE_ANON_KEY)</string>
     <key>BGTaskSchedulerPermittedIdentifiers</key>
     <array>
-        <string>com.ashutosh.mindfultennis.sync</string>
+        <string>com.nextjedi.mindful-tennis.sync</string>
     </array>
 </dict>
 </plist>
