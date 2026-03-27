@@ -130,6 +130,8 @@ val commonModule = module {
             opponentDao = get(),
             partnerDao = get(),
             remoteDataSource = get(),
+            userDataSource = get(),
+            supabaseClient = get(),
             userPreferences = get(),
         )
     }
@@ -179,7 +181,7 @@ val commonModule = module {
         )
     }
 
-    viewModel { SettingsViewModel(get(), get()) }
+    viewModel { SettingsViewModel(get(), get(), get()) }
 
     viewModel {
         LoginViewModel(

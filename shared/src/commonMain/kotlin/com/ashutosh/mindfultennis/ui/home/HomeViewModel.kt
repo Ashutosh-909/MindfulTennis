@@ -72,7 +72,8 @@ class HomeViewModel(
             }
 
             // Observe auth state to get user ID
-            authRepository.authState.collectLatest { authState ->
+            authRepository.authState
+                .collectLatest { authState ->
                 when (authState) {
                     is AuthState.Authenticated -> {
                         currentUserId = authState.userId

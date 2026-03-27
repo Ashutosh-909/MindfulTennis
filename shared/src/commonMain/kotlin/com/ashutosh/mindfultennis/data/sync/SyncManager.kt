@@ -13,8 +13,14 @@ import com.ashutosh.mindfultennis.data.local.db.entity.SyncStatus
 import com.ashutosh.mindfultennis.data.local.db.entity.toDto
 import com.ashutosh.mindfultennis.data.local.db.entity.toEntity
 import com.ashutosh.mindfultennis.data.remote.SupabaseSessionDataSource
+import com.ashutosh.mindfultennis.data.remote.SupabaseUserDataSource
+import com.ashutosh.mindfultennis.data.remote.model.UserDto
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
 /**
@@ -34,20 +40,33 @@ class SyncManager(
     private val opponentDao: OpponentDao,
     private val partnerDao: PartnerDao,
     private val remoteDataSource: SupabaseSessionDataSource,
+    private val userDataSource: SupabaseUserDataSource,
+    private val supabaseClient: SupabaseClient,
     private val userPreferences: UserPreferences,
 ) {
     companion object {
         private const val TAG = "SyncManager"
     }
 
+    private val syncMutex = Mutex()
+
     /**
      * Runs a full sync cycle: push pending local changes, then pull remote updates.
+     * Guarded by a Mutex to prevent concurrent sync runs.
      * @param userId The current user's ID.
      * @return Result indicating success or the first failure encountered.
      */
     suspend fun sync(userId: String): Result<Unit> = withContext(Dispatchers.Default) {
-        runCatching {
+        if (!syncMutex.tryLock()) {
+            Logger.d(TAG) { "Sync already in progress, skipping" }
+            return@withContext Result.success(Unit)
+        }
+        try {
+            runCatching {
             Logger.d(TAG) { "Starting sync for user $userId" }
+
+            // Ensure user record exists in Supabase before pushing FK-dependent data
+            ensureUserExists(userId)
 
             // Push entities with no FK dependencies first
             pushPendingFocusPoints()
@@ -77,6 +96,45 @@ class SyncManager(
             userPreferences.setLastSyncTimestamp(kotlinx.datetime.Clock.System.now().toEpochMilliseconds())
             Logger.d(TAG) { "Sync completed for user $userId" }
             Unit
+            }
+        } finally {
+            syncMutex.unlock()
+        }
+    }
+
+    // ── Ensure User Record ────────────────────────────────────────────
+
+    /**
+     * Ensures the user has a row in the Supabase `users` table.
+     * All other tables (sessions, opponents, partners, focus_points, etc.) have
+     * FK references to users(id), so this must succeed before any push.
+     */
+    private suspend fun ensureUserExists(userId: String) {
+        try {
+            val existing = userDataSource.getUser(userId)
+            if (existing != null) return
+
+            val authUser = supabaseClient.auth.currentSessionOrNull()?.user
+            val email = authUser?.email ?: ""
+            val displayName = authUser?.userMetadata?.get("full_name")?.toString()
+                ?.removeSurrounding("\"")
+            val photoUrl = authUser?.userMetadata?.get("avatar_url")?.toString()
+                ?.removeSurrounding("\"")
+
+            userDataSource.upsertUser(
+                UserDto(
+                    id = userId,
+                    email = email,
+                    displayName = displayName,
+                    photoUrl = photoUrl,
+                    createdAt = kotlinx.datetime.Clock.System.now().toEpochMilliseconds(),
+                    timeZone = kotlinx.datetime.TimeZone.currentSystemDefault().id,
+                )
+            )
+            Logger.d(TAG) { "Created user record for $userId" }
+        } catch (e: Exception) {
+            Logger.e(TAG, e) { "Failed to ensure user record exists for $userId" }
+            throw e // Sync cannot proceed without the user row
         }
     }
 
