@@ -76,4 +76,6 @@ dependencies {
     implementation(project(":shared"))
     implementation(libs.koin.android)
     implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.supabase.bom))
+    implementation(libs.supabase.auth)
 }

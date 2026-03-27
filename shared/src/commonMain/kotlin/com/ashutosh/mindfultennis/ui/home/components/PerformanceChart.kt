@@ -262,22 +262,22 @@ private fun TrendLineChart(
         val chartW = size.width - padLeft - padRight
         val chartH = size.height - padTop - padBottom
 
-        // -- Grid lines & Y-axis labels --
-        val dashEffect = PathEffect.dashPathEffect(floatArrayOf(8f, 6f), 0f)
+        // -- Grid lines & Y-axis labels (dashed, subtle) --
         val yTicks = listOf(0, 25, 50, 75, 100)
+        val dashEffect = PathEffect.dashPathEffect(floatArrayOf(8f, 6f), 0f)
         yTicks.forEach { value ->
             val y = padTop + chartH * (1f - value / 100f)
             drawLine(
                 color = gridLineColor.copy(alpha = 0.35f),
                 start = Offset(padLeft, y),
                 end = Offset(padLeft + chartW, y),
-                strokeWidth = 1f,
+                strokeWidth = 0.7f,
                 pathEffect = dashEffect,
             )
 
             val label = textMeasurer.measure(
                 value.toString(),
-                TextStyle(fontSize = 10.sp, color = axisLabelColor),
+                TextStyle(fontSize = 10.sp, color = axisLabelColor.copy(alpha = 0.6f)),
             )
             drawText(label, topLeft = Offset(padLeft - label.size.width - 6f, y - label.size.height / 2f))
         }
@@ -302,24 +302,34 @@ private fun TrendLineChart(
             )
         }
 
-        // -- Draw line path --
+        // -- Build smooth cubic-bezier path --
         val path = Path().apply {
-            points.forEachIndexed { i, o -> if (i == 0) moveTo(o.x, o.y) else lineTo(o.x, o.y) }
+            moveTo(points.first().x, points.first().y)
+            for (i in 0 until points.size - 1) {
+                val p0 = points[i]
+                val p1 = points[i + 1]
+                val dx = p1.x - p0.x
+                cubicTo(
+                    p0.x + dx * 0.35f, p0.y,
+                    p1.x - dx * 0.35f, p1.y,
+                    p1.x, p1.y,
+                )
+            }
         }
-        drawPath(path, chartLineColor, style = Stroke(2.5f, cap = StrokeCap.Round, join = StrokeJoin.Round))
 
-        // -- Gradient fill under trend line --
+        // -- Gradient fill under curve --
         val fillPath = Path().apply {
-            points.forEachIndexed { i, o -> if (i == 0) moveTo(o.x, o.y) else lineTo(o.x, o.y) }
+            addPath(path)
             lineTo(points.last().x, padTop + chartH)
             lineTo(points.first().x, padTop + chartH)
             close()
         }
         drawPath(
-            path = fillPath,
+            fillPath,
             brush = Brush.verticalGradient(
                 colors = listOf(
-                    chartLineColor.copy(alpha = 0.2f),
+                    chartLineColor.copy(alpha = 0.22f),
+                    chartLineColor.copy(alpha = 0.06f),
                     Color.Transparent,
                 ),
                 startY = points.minOf { it.y },
@@ -328,66 +338,74 @@ private fun TrendLineChart(
             style = Fill,
         )
 
-        // -- Draw regular dots --
-        points.forEachIndexed { i, offset ->
-            val isBest = i == kpi.bestIndex
-            val isLow = i == kpi.lowIndex
-            val isLast = i == points.lastIndex
-            if (!isBest && !isLow && !isLast) {
-                drawCircle(onSurfaceColor, 4.5f, offset)
-                drawCircle(chartLineColor, 3.5f, offset)
-            }
-        }
+        // -- Draw smooth line on top --
+        drawPath(
+            path,
+            chartLineColor,
+            style = Stroke(2.8f, cap = StrokeCap.Round, join = StrokeJoin.Round),
+        )
 
         // -- Best annotation --
         if (kpi.bestIndex in points.indices && kpi.bestScore != null) {
             val bp = points[kpi.bestIndex]
-            drawCircle(BestColor, 6f, bp)
+            // Soft glow + solid dot
+            drawCircle(BestColor.copy(alpha = 0.18f), 10f, bp)
+            drawCircle(BestColor, 5.5f, bp)
+            drawCircle(surfaceColor, 2.5f, bp)
 
             val bestLabel = textMeasurer.measure(
                 "Best ${kpi.bestScore}",
-                TextStyle(fontSize = 11.sp, color = BestColor, fontWeight = FontWeight.SemiBold),
+                TextStyle(fontSize = 11.sp, color = Color.White, fontWeight = FontWeight.Bold),
             )
-            // Position label above-right, clamped inside chart
-            val lx = (bp.x + 8f).coerceAtMost(padLeft + chartW - bestLabel.size.width)
-            val ly = (bp.y - bestLabel.size.height - 6f).coerceAtLeast(padTop)
-            // Background pill
+            val pillW = bestLabel.size.width + 14f
+            val pillH = bestLabel.size.height + 8f
+            // Position label above-center, clamped inside chart
+            val lx = (bp.x - pillW / 2f).coerceIn(padLeft, padLeft + chartW - pillW)
+            val ly = (bp.y - pillH - 10f).coerceAtLeast(padTop)
+            // Solid pill background
             drawRoundRect(
-                color = BestColor.copy(alpha = 0.15f),
-                topLeft = Offset(lx - 4f, ly - 2f),
-                size = Size(bestLabel.size.width + 8f, bestLabel.size.height + 4f),
-                cornerRadius = CornerRadius(6f),
+                color = BestColor.copy(alpha = 0.85f),
+                topLeft = Offset(lx, ly),
+                size = Size(pillW, pillH),
+                cornerRadius = CornerRadius(pillH / 2f),
             )
-            drawText(bestLabel, topLeft = Offset(lx, ly))
+            drawText(bestLabel, topLeft = Offset(lx + 7f, ly + 4f))
         }
 
         // -- Low annotation --
         if (kpi.lowIndex in points.indices && kpi.lowScore != null && kpi.lowIndex != kpi.bestIndex) {
             val lp = points[kpi.lowIndex]
-            drawCircle(LowColor, 6f, lp)
+            // Soft glow + solid dot
+            drawCircle(LowColor.copy(alpha = 0.18f), 10f, lp)
+            drawCircle(LowColor, 5.5f, lp)
+            drawCircle(surfaceColor, 2.5f, lp)
 
             val lowLabel = textMeasurer.measure(
                 "Low ${kpi.lowScore}",
-                TextStyle(fontSize = 11.sp, color = LowColor, fontWeight = FontWeight.SemiBold),
+                TextStyle(fontSize = 11.sp, color = Color.White, fontWeight = FontWeight.Bold),
             )
-            val lx = (lp.x + 8f).coerceAtMost(padLeft + chartW - lowLabel.size.width)
-            val ly = (lp.y + 8f).coerceAtMost(padTop + chartH - lowLabel.size.height)
+            val pillW = lowLabel.size.width + 14f
+            val pillH = lowLabel.size.height + 8f
+            val lx = (lp.x - pillW / 2f).coerceIn(padLeft, padLeft + chartW - pillW)
+            val ly = (lp.y + 12f).coerceAtMost(padTop + chartH - pillH)
+            // Solid pill background
             drawRoundRect(
-                color = LowColor.copy(alpha = 0.15f),
-                topLeft = Offset(lx - 4f, ly - 2f),
-                size = Size(lowLabel.size.width + 8f, lowLabel.size.height + 4f),
-                cornerRadius = CornerRadius(6f),
+                color = LowColor.copy(alpha = 0.85f),
+                topLeft = Offset(lx, ly),
+                size = Size(pillW, pillH),
+                cornerRadius = CornerRadius(pillH / 2f),
             )
-            drawText(lowLabel, topLeft = Offset(lx, ly))
+            drawText(lowLabel, topLeft = Offset(lx + 7f, ly + 4f))
         }
 
         // -- Last-point emphasis --
         val lastPt = points.last()
         val lastScore = trend.last().overallScore
-        // Outer glow ring
-        drawCircle(onSurfaceColor.copy(alpha = 0.18f), 12f, lastPt)
-        drawCircle(onSurfaceColor, 7f, lastPt)
-        drawCircle(chartLineColor, 5f, lastPt)
+        // Layered glow ring for a polished look
+        drawCircle(onSurfaceColor.copy(alpha = 0.10f), 16f, lastPt)
+        drawCircle(onSurfaceColor.copy(alpha = 0.20f), 10f, lastPt)
+        drawCircle(onSurfaceColor, 6f, lastPt)
+        drawCircle(surfaceColor, 3f, lastPt)
 
         // Value label to the right
         val lastLabel = textMeasurer.measure(
