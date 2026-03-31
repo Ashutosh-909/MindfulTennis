@@ -3,6 +3,8 @@ package com.ashutosh.mindfultennis.ui.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ashutosh.mindfultennis.data.local.datastore.UserPreferences
+import com.ashutosh.mindfultennis.data.local.db.MindfulDatabase
+import com.ashutosh.mindfultennis.data.remote.SupabaseUserDataSource
 import com.ashutosh.mindfultennis.data.repository.AuthRepository
 import com.ashutosh.mindfultennis.data.repository.AuthState
 import com.ashutosh.mindfultennis.data.sync.SyncManager
@@ -17,6 +19,8 @@ class SettingsViewModel(
     private val authRepository: AuthRepository,
     private val userPreferences: UserPreferences,
     private val syncManager: SyncManager,
+    private val supabaseUserDataSource: SupabaseUserDataSource,
+    private val mindfulDatabase: MindfulDatabase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SettingsUiState())
@@ -55,6 +59,16 @@ class SettingsViewModel(
             is SettingsUiEvent.SyncResultDismissed -> {
                 _uiState.update { it.copy(syncResult = null) }
             }
+            is SettingsUiEvent.DeleteAccountClicked -> {
+                _uiState.update { it.copy(showDeleteAccountDialog = true) }
+            }
+            is SettingsUiEvent.DeleteAccountDialogDismissed -> {
+                _uiState.update { it.copy(showDeleteAccountDialog = false) }
+            }
+            is SettingsUiEvent.DeleteAccountConfirmed -> deleteAccount()
+            is SettingsUiEvent.DeleteAccountErrorDismissed -> {
+                _uiState.update { it.copy(deleteAccountError = null) }
+            }
         }
     }
 
@@ -84,6 +98,35 @@ class SettingsViewModel(
             userPreferences.clearAll()
             authRepository.signOut()
             _uiState.update { it.copy(isSigningOut = false, isSignedOut = true) }
+        }
+    }
+
+    private fun deleteAccount() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isDeletingAccount = true, showDeleteAccountDialog = false) }
+            try {
+                val userId = userPreferences.cachedUserId.first()
+                if (userId == null) {
+                    _uiState.update { it.copy(isDeletingAccount = false, deleteAccountError = "Not signed in") }
+                    return@launch
+                }
+                // Delete all user data from Supabase (FK cascade removes all related rows)
+                supabaseUserDataSource.deleteUser(userId)
+                // Clear all local Room tables
+                mindfulDatabase.clearAllTables()
+                // Clear preferences
+                userPreferences.clearAll()
+                // Sign out from Supabase auth
+                authRepository.signOut()
+                _uiState.update { it.copy(isDeletingAccount = false, isAccountDeleted = true) }
+            } catch (e: Exception) {
+                _uiState.update {
+                    it.copy(
+                        isDeletingAccount = false,
+                        deleteAccountError = "Failed to delete account: ${e.message}",
+                    )
+                }
+            }
         }
     }
 }
