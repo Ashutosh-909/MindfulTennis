@@ -83,6 +83,11 @@ class LoginViewModel(
         }
     }
 
+    private fun isValidEmail(email: String): Boolean {
+        val pattern = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
+        return pattern.matches(email)
+    }
+
     private fun signInWithEmail() {
         val email = _uiState.value.email.trim()
         val password = _uiState.value.password
@@ -90,6 +95,10 @@ class LoginViewModel(
 
         if (email.isBlank() || password.isBlank()) {
             _uiState.update { it.copy(error = "Please enter both email and password.") }
+            return
+        }
+        if (!isValidEmail(email)) {
+            _uiState.update { it.copy(error = "Please enter a valid email address.") }
             return
         }
         if (password.length < 6) {
@@ -118,17 +127,27 @@ class LoginViewModel(
                 // For sign-in, the auth state observer handles the transition
             }
             result.onFailure { exception ->
+                val msg = exception.message.orEmpty()
                 val friendlyMessage = when {
-                    exception.message?.contains("timeout", ignoreCase = true) == true ->
+                    msg.contains("rate limit", ignoreCase = true) ||
+                        msg.contains("429", ignoreCase = true) ->
+                        "Too many attempts. Please wait a few minutes and try again."
+                    msg.contains("timeout", ignoreCase = true) ->
                         "Connection timed out. Please check your internet and try again."
-                    exception.message?.contains("Invalid login credentials", ignoreCase = true) == true ->
+                    msg.contains("Invalid login credentials", ignoreCase = true) ->
                         "Invalid email or password. Please try again."
-                    exception.message?.contains("Email not confirmed", ignoreCase = true) == true ->
+                    msg.contains("Email not confirmed", ignoreCase = true) ->
                         "Please verify your email before signing in."
-                    exception.message?.contains("network", ignoreCase = true) == true ->
+                    msg.contains("email_address_invalid", ignoreCase = true) ||
+                        msg.contains("invalid.*email", ignoreCase = true).let { false } ||
+                        msg.contains("email address", ignoreCase = true) && msg.contains("invalid", ignoreCase = true) ->
+                        "Please enter a valid email address."
+                    msg.contains("User already registered", ignoreCase = true) ->
+                        "An account with this email already exists. Try signing in instead."
+                    msg.contains("network", ignoreCase = true) ->
                         "Network error. Please check your connection and try again."
-                    isSignUp -> "Sign-up failed. Please try again."
-                    else -> "Sign-in failed. Please try again."
+                    isSignUp -> "Sign-up failed: ${msg.take(100)}"
+                    else -> "Sign-in failed: ${msg.take(100)}"
                 }
                 _uiState.update {
                     it.copy(

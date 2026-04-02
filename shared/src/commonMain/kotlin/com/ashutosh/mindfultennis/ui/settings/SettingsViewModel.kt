@@ -112,18 +112,32 @@ class SettingsViewModel(
                 }
                 // Delete all user data from Supabase (FK cascade removes all related rows)
                 supabaseUserDataSource.deleteUser(userId)
+                // Delete auth user — this invalidates the session
+                supabaseUserDataSource.deleteAuthUser()
+                // From here on, server-side ops may fail since session is dead — that's expected
                 // Clear all local Room tables
-                mindfulDatabase.clearAllTables()
+                mindfulDatabase.sessionDao().deleteAllForUser(userId)
+                mindfulDatabase.focusPointDao().deleteAllForUser(userId)
+                mindfulDatabase.opponentDao().deleteAllForUser(userId)
+                mindfulDatabase.partnerDao().deleteAllForUser(userId)
                 // Clear preferences
                 userPreferences.clearAll()
-                // Sign out from Supabase auth
-                authRepository.signOut()
+                // Clear local session (will fail server-side since user is gone, but clears local state)
+                try { authRepository.signOut() } catch (_: Exception) {}
                 _uiState.update { it.copy(isDeletingAccount = false, isAccountDeleted = true) }
             } catch (e: Exception) {
+                val msg = e.message.orEmpty()
+                val friendlyMessage = when {
+                    msg.contains("timeout", ignoreCase = true) ->
+                        "Connection timed out. Please check your internet and try again."
+                    msg.contains("network", ignoreCase = true) ->
+                        "Network error. Please check your connection and try again."
+                    else -> "Failed to delete account: ${msg.take(100)}"
+                }
                 _uiState.update {
                     it.copy(
                         isDeletingAccount = false,
-                        deleteAccountError = "Failed to delete account: ${e.message}",
+                        deleteAccountError = friendlyMessage,
                     )
                 }
             }
