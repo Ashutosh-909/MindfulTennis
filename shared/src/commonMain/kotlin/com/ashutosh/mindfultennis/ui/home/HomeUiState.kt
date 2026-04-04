@@ -8,6 +8,7 @@ import com.ashutosh.mindfultennis.domain.model.Opponent
 import com.ashutosh.mindfultennis.domain.model.PerformanceTrend
 import com.ashutosh.mindfultennis.domain.model.RatingType
 import com.ashutosh.mindfultennis.domain.model.Session
+import com.ashutosh.mindfultennis.domain.model.WinLossMode
 import com.ashutosh.mindfultennis.domain.model.WinLossRecord
 
 /**
@@ -20,6 +21,7 @@ data class HomeUiState(
     val performanceTrend: List<PerformanceTrend> = emptyList(),
     val selectedDuration: DurationFilter = DurationFilter.ONE_MONTH,
     val winLossRecord: WinLossRecord? = null,
+    val winLossMode: WinLossMode = WinLossMode.MATCHES,
     val focusPoints: List<FocusPoint> = emptyList(),
     val selfAspectAverages: Map<Aspect, Float> = emptyMap(),
     val partnerAspectAverages: Map<Aspect, Float> = emptyMap(),
@@ -43,6 +45,7 @@ data class HomeUiState(
 sealed interface HomeUiEvent {
     data class DurationChanged(val duration: DurationFilter) : HomeUiEvent
     data class WinLossOpponentFilterChanged(val ids: Set<String>) : HomeUiEvent
+    data class WinLossModeChanged(val mode: WinLossMode) : HomeUiEvent
     data class AspectOpponentFilterChanged(val ids: Set<String>) : HomeUiEvent
     data class AspectRatingTypeChanged(val ratingType: RatingType) : HomeUiEvent
     data object StartSessionClicked : HomeUiEvent

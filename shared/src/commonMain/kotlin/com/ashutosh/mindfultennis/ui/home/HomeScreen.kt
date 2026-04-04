@@ -186,6 +186,10 @@ private fun HomeScreenContent(
                         onOpponentFilterChanged = {
                             onEvent(HomeUiEvent.WinLossOpponentFilterChanged(it))
                         },
+                        mode = state.winLossMode,
+                        onModeChanged = {
+                            onEvent(HomeUiEvent.WinLossModeChanged(it))
+                        },
                         isLoading = state.isLoading,
                         error = state.winLossError,
                         onRetry = { onEvent(HomeUiEvent.RetryClicked) },

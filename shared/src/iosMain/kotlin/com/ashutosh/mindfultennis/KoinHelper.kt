@@ -12,7 +12,7 @@ fun initKoin(supabaseUrl: String, supabaseAnonKey: String) {
             commonModule,
             platformModule,
             module {
-                single { AppConfig(supabaseUrl = supabaseUrl, supabaseAnonKey = supabaseAnonKey) }
+                single { AppConfig(supabaseUrl = supabaseUrl, supabaseAnonKey = supabaseAnonKey, deepLinkScheme = "com.nextjedi.mindful-tennis") }
             }
         )
     }

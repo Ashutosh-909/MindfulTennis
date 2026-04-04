@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.ashutosh.mindfultennis.domain.model.GameResult
 import com.ashutosh.mindfultennis.domain.model.Opponent
+import com.ashutosh.mindfultennis.domain.model.WinLossMode
 import com.ashutosh.mindfultennis.domain.model.WinLossRecord
 import com.ashutosh.mindfultennis.ui.components.ErrorRetryCard
 import com.ashutosh.mindfultennis.ui.components.LoadingShimmer
@@ -54,6 +55,8 @@ fun WinLossCard(
     opponents: List<Opponent>,
     selectedOpponentIds: Set<String>,
     onOpponentFilterChanged: (Set<String>) -> Unit,
+    mode: WinLossMode,
+    onModeChanged: (WinLossMode) -> Unit,
     isLoading: Boolean,
     error: String?,
     onRetry: () -> Unit,
@@ -71,11 +74,27 @@ fun WinLossCard(
                     text = "Win / Loss",
                     style = MaterialTheme.typography.titleSmall,
                 )
-                if (opponents.isNotEmpty()) {
-                    OpponentFilterButton(
-                        opponents = opponents,
-                        selectedIds = selectedOpponentIds,
-                        onSelectionChanged = onOpponentFilterChanged,
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (opponents.isNotEmpty()) {
+                        OpponentFilterButton(
+                            opponents = opponents,
+                            selectedIds = selectedOpponentIds,
+                            onSelectionChanged = onOpponentFilterChanged,
+                        )
+                    }
+                }
+            }
+
+            // Matches / Sets toggle
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.xs),
+            ) {
+                WinLossMode.entries.forEach { entry ->
+                    FilterChip(
+                        selected = mode == entry,
+                        onClick = { onModeChanged(entry) },
+                        label = { Text(entry.label) },
                     )
                 }
             }

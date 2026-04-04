@@ -104,6 +104,7 @@ class HomeViewModel(
         when (event) {
             is HomeUiEvent.DurationChanged -> onDurationChanged(event.duration)
             is HomeUiEvent.WinLossOpponentFilterChanged -> onWinLossOpponentFilterChanged(event.ids)
+            is HomeUiEvent.WinLossModeChanged -> onWinLossModeChanged(event.mode)
             is HomeUiEvent.AspectOpponentFilterChanged -> onAspectOpponentFilterChanged(event.ids)
             is HomeUiEvent.AspectRatingTypeChanged -> onAspectRatingTypeChanged(event.ratingType)
             is HomeUiEvent.RetryClicked -> retry()
@@ -217,6 +218,7 @@ class HomeViewModel(
                 userId,
                 _uiState.value.selectedDuration,
                 _uiState.value.selectedWinLossOpponentIds,
+                _uiState.value.winLossMode,
             )
                 .catch { e ->
                     _uiState.update { it.copy(winLossError = e.message ?: "Failed to load W/L") }
@@ -275,6 +277,11 @@ class HomeViewModel(
         viewModelScope.launch {
             userPreferences.setSelectedOpponentIds(ids)
         }
+        currentUserId?.let { refreshWinLoss(it) }
+    }
+
+    private fun onWinLossModeChanged(mode: com.ashutosh.mindfultennis.domain.model.WinLossMode) {
+        _uiState.update { it.copy(winLossMode = mode) }
         currentUserId?.let { refreshWinLoss(it) }
     }
 

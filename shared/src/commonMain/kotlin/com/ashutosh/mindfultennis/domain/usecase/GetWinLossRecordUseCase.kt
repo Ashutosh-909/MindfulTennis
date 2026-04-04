@@ -4,6 +4,7 @@ import com.ashutosh.mindfultennis.data.repository.SessionRepository
 import com.ashutosh.mindfultennis.domain.model.DurationFilter
 import com.ashutosh.mindfultennis.domain.model.GameResult
 import com.ashutosh.mindfultennis.domain.model.Session
+import com.ashutosh.mindfultennis.domain.model.WinLossMode
 import com.ashutosh.mindfultennis.domain.model.WinLossRecord
 import com.ashutosh.mindfultennis.util.ScoreCalculator
 import kotlinx.coroutines.flow.Flow
@@ -24,17 +25,21 @@ class GetWinLossRecordUseCase(
         userId: String,
         durationFilter: DurationFilter,
         opponentIds: Set<String> = emptySet(),
+        mode: WinLossMode = WinLossMode.MATCHES,
     ): Flow<WinLossRecord> {
         val fromMs = durationFilter.startEpochMs()
         val toMs = Clock.System.now().toEpochMilliseconds()
         return sessionRepository.observeSessionsInRange(userId, fromMs, toMs).map { sessions ->
             val filtered = filterByOpponents(sessions, opponentIds)
                 .filter { !it.isActive }
-            computeWinLoss(filtered)
+            when (mode) {
+                WinLossMode.MATCHES -> computeMatchWinLoss(filtered)
+                WinLossMode.SETS -> computeSetWinLoss(filtered)
+            }
         }
     }
 
-    private suspend fun computeWinLoss(sessions: List<Session>): WinLossRecord {
+    private suspend fun computeMatchWinLoss(sessions: List<Session>): WinLossRecord {
         if (sessions.isEmpty()) return WinLossRecord(wins = 0, losses = 0)
 
         val sessionIds = sessions.map { it.id }
@@ -72,6 +77,53 @@ class GetWinLossRecordUseCase(
                 GameResult.DRAW -> draws++
             }
             orderedResults.add(result)
+        }
+
+        return WinLossRecord(
+            wins = wins,
+            losses = losses,
+            draws = draws,
+            recentResults = orderedResults.takeLast(RECENT_GAMES_COUNT),
+        )
+    }
+
+    /**
+     * Counts individual sets won / lost / drawn across all sessions.
+     * Recent results show per-set results from the most recent sessions.
+     */
+    private suspend fun computeSetWinLoss(sessions: List<Session>): WinLossRecord {
+        if (sessions.isEmpty()) return WinLossRecord(wins = 0, losses = 0)
+
+        val sessionIds = sessions.map { it.id }
+        val allSetScores = sessionRepository.getSetScoresForSessions(sessionIds)
+            .getOrDefault(emptyList())
+
+        if (allSetScores.isEmpty()) return WinLossRecord(wins = 0, losses = 0)
+
+        val scoresBySession = allSetScores.groupBy { it.sessionId }
+
+        var wins = 0
+        var losses = 0
+        var draws = 0
+        val orderedResults = mutableListOf<GameResult>()
+
+        // Walk sessions chronologically, then sets in order
+        val sorted = sessions.sortedBy { it.startedAt }
+        for (session in sorted) {
+            val scores = scoresBySession[session.id] ?: continue
+            for (set in scores.sortedBy { it.setNumber }) {
+                val result = when {
+                    set.userScore > set.opponentScore -> GameResult.WIN
+                    set.opponentScore > set.userScore -> GameResult.LOSS
+                    else -> GameResult.DRAW
+                }
+                when (result) {
+                    GameResult.WIN -> wins++
+                    GameResult.LOSS -> losses++
+                    GameResult.DRAW -> draws++
+                }
+                orderedResults.add(result)
+            }
         }
 
         return WinLossRecord(

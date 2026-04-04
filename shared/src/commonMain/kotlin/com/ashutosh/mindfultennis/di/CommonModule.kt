@@ -51,7 +51,7 @@ val commonModule = module {
             supabaseKey = config.supabaseAnonKey,
         ) {
             install(Auth) {
-                scheme = "com.nextjedi.mindful-tennis"
+                scheme = config.deepLinkScheme
                 host = "callback"
             }
             install(Postgrest)
