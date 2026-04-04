@@ -202,14 +202,15 @@ class EndSessionViewModel(
                         setNumber = index + 1,
                         userScore = row.userScore.toIntOrNull() ?: 0,
                         opponentScore = row.opponentScore.toIntOrNull() ?: 0,
-                        opponentId = row.opponent?.id,
+                        opponentId = row.opponent1?.id,
                     )
                 } ?: emptyList()
 
-            val matchType = setScoreData?.matchType ?: MatchType.SINGLES
-            val opponent1Id = setScores.firstOrNull { it.opponentId != null }?.opponentId
-            val opponent2Id = if (matchType == MatchType.DOUBLES) setScoreData?.opponent2?.id else null
-            val partnerId = if (matchType == MatchType.DOUBLES) setScoreData?.partner?.id else null
+            val firstSet = setScoreData?.sets?.firstOrNull()
+            val matchType = firstSet?.matchType ?: MatchType.SINGLES
+            val opponent1Id = firstSet?.opponent1?.id
+            val opponent2Id = if (matchType == MatchType.DOUBLES) firstSet?.opponent2?.id else null
+            val partnerId = if (matchType == MatchType.DOUBLES) firstSet?.partner?.id else null
 
             val result = submitRatingsUseCase(
                 sessionId = sessionId,

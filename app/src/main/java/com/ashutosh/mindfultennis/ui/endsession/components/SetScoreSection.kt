@@ -2,15 +2,15 @@ package com.ashutosh.mindfultennis.ui.endsession.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
@@ -33,7 +33,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -53,16 +52,21 @@ import com.ashutosh.mindfultennis.ui.theme.Spacing
  * Data class holding set score dialog state.
  */
 data class SetScoreInputData(
-    val matchType: MatchType = MatchType.SINGLES,
-    val opponent2: Opponent? = null,
-    val partner: Partner? = null,
     val sets: List<SetScoreRow> = listOf(SetScoreRow()),
-)
+) {
+    /** Convenience: match type of the first set (for backward compat). */
+    val matchType: MatchType get() = sets.firstOrNull()?.matchType ?: MatchType.SINGLES
+    val opponent2: Opponent? get() = sets.firstOrNull()?.opponent2
+    val partner: Partner? get() = sets.firstOrNull()?.partner
+}
 
 data class SetScoreRow(
+    val matchType: MatchType = MatchType.SINGLES,
+    val opponent1: Opponent? = null,
+    val opponent2: Opponent? = null,
+    val partner: Partner? = null,
     val userScore: String = "",
     val opponentScore: String = "",
-    val opponent: Opponent? = null,
 )
 
 /**
@@ -146,8 +150,7 @@ private fun SetScoreSummaryCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = data.matchType.name.lowercase()
-                        .replaceFirstChar { it.uppercase() },
+                    text = "Set Scores",
                     style = MaterialTheme.typography.titleSmall,
                 )
                 Row {
@@ -158,41 +161,24 @@ private fun SetScoreSummaryCard(
                 }
             }
 
-            // Opponent info
-            val opp2Name = data.opponent2?.name
-            if (data.matchType == MatchType.DOUBLES && opp2Name != null) {
-                Text(
-                    text = "vs. Opponent 2: $opp2Name",
-                    style = MaterialTheme.typography.bodyMedium,
-                )
-            }
-
-            // Partner info (doubles)
-            if (data.matchType == MatchType.DOUBLES && data.partner != null) {
-                Text(
-                    text = "w/ Partner: ${data.partner.name}",
-                    style = MaterialTheme.typography.bodyMedium,
-                )
-            }
-
             Spacer(modifier = Modifier.height(Spacing.xs))
 
-            // Set scores
-            val scoresText = data.sets
+            // Set scores summary
+            data.sets
                 .filter { it.userScore.isNotBlank() && it.opponentScore.isNotBlank() }
-                .mapIndexed { index, row ->
-                    val oppLabel = row.opponent?.name?.let { " vs $it" } ?: ""
-                    "Set ${index + 1}: ${row.userScore}-${row.opponentScore}$oppLabel"
+                .forEachIndexed { index, row ->
+                    val typeLabel = row.matchType.name.lowercase().replaceFirstChar { it.uppercase() }
+                    val oppLabel = row.opponent1?.name?.let { " vs $it" } ?: ""
+                    Text(
+                        text = "Set ${index + 1} ($typeLabel): ${row.userScore}-${row.opponentScore}$oppLabel",
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
                 }
-                .joinToString("  ")
-            if (scoresText.isNotBlank()) {
-                Text(text = scoresText, style = MaterialTheme.typography.bodyMedium)
-            }
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SetScoreDialog(
     initialData: SetScoreInputData,
@@ -203,9 +189,6 @@ private fun SetScoreDialog(
     onCreateOpponent: (String) -> Unit,
     onCreatePartner: (String) -> Unit,
 ) {
-    var matchType by rememberSaveable { mutableStateOf(initialData.matchType) }
-    var opponent2 by remember { mutableStateOf(initialData.opponent2) }
-    var partner by remember { mutableStateOf(initialData.partner) }
     var sets by remember { mutableStateOf(initialData.sets.ifEmpty { listOf(SetScoreRow()) }) }
 
     AlertDialog(
@@ -214,14 +197,7 @@ private fun SetScoreDialog(
         confirmButton = {
             Button(
                 onClick = {
-                    onSave(
-                        SetScoreInputData(
-                            matchType = matchType,
-                            opponent2 = if (matchType == MatchType.DOUBLES) opponent2 else null,
-                            partner = if (matchType == MatchType.DOUBLES) partner else null,
-                            sets = sets,
-                        )
-                    )
+                    onSave(SetScoreInputData(sets = sets))
                 },
             ) {
                 Text("Save")
@@ -232,97 +208,46 @@ private fun SetScoreDialog(
         },
         text = {
             Column(
-                modifier = Modifier.semantics {
-                    contentDescription = "Set Scores dialog"
-                },
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .semantics {
+                        contentDescription = "Set Scores dialog"
+                    },
             ) {
-                // Match Type
-                Text("Match Type:", style = MaterialTheme.typography.labelLarge)
-                Spacer(Modifier.height(Spacing.xs))
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    RadioButton(
-                        selected = matchType == MatchType.SINGLES,
-                        onClick = { matchType = MatchType.SINGLES },
-                    )
-                    Text("Singles", modifier = Modifier.padding(end = Spacing.md))
-                    RadioButton(
-                        selected = matchType == MatchType.DOUBLES,
-                        onClick = { matchType = MatchType.DOUBLES },
-                    )
-                    Text("Doubles")
-                }
-
-                Spacer(Modifier.height(Spacing.md))
-
-                // Doubles-only fields (Opponent 2 and Partner stay at dialog level)
-                if (matchType == MatchType.DOUBLES) {
-                    Text("Opponent 2:", style = MaterialTheme.typography.labelLarge)
-                    Spacer(Modifier.height(Spacing.xs))
-                    OpponentDropdown(
-                        selectedOpponent = opponent2,
-                        opponents = opponents,
-                        onSelected = { opponent2 = it },
-                        onCreateNew = onCreateOpponent,
-                        label = "Opponent 2",
-                    )
-
-                    Spacer(Modifier.height(Spacing.sm))
-
-                    Text("Partner:", style = MaterialTheme.typography.labelLarge)
-                    Spacer(Modifier.height(Spacing.xs))
-                    PartnerDropdown(
-                        selectedPartner = partner,
-                        partners = partners,
-                        onSelected = { partner = it },
-                        onCreateNew = onCreatePartner,
-                        label = "Partner",
-                    )
-                }
-
-                Spacer(Modifier.height(Spacing.md))
-
-                // Sets
-                Text("Sets:", style = MaterialTheme.typography.labelLarge)
-                Spacer(Modifier.height(Spacing.sm))
-
                 sets.forEachIndexed { index, setRow ->
-                    SetScoreRowInput(
+                    if (index > 0) {
+                        Spacer(Modifier.height(Spacing.md))
+                    }
+
+                    SetScoreBlockInput(
                         setNumber = index + 1,
-                        userScore = setRow.userScore,
-                        opponentScore = setRow.opponentScore,
-                        selectedOpponent = setRow.opponent,
+                        setRow = setRow,
                         opponents = opponents,
-                        onUserScoreChanged = { value ->
-                            sets = sets.toMutableList().also {
-                                it[index] = it[index].copy(userScore = value.filter { c -> c.isDigit() }.take(2))
-                            }
-                        },
-                        onOpponentScoreChanged = { value ->
-                            sets = sets.toMutableList().also {
-                                it[index] = it[index].copy(opponentScore = value.filter { c -> c.isDigit() }.take(2))
-                            }
-                        },
-                        onOpponentSelected = { opponent ->
-                            sets = sets.toMutableList().also {
-                                it[index] = it[index].copy(opponent = opponent)
-                            }
+                        partners = partners,
+                        onSetRowChanged = { updated ->
+                            sets = sets.toMutableList().also { it[index] = updated }
                         },
                         onCreateOpponent = onCreateOpponent,
+                        onCreatePartner = onCreatePartner,
                         canRemove = index > 0,
                         onRemove = {
                             sets = sets.toMutableList().also { it.removeAt(index) }
                         },
                     )
-                    if (index < sets.lastIndex) {
-                        Spacer(Modifier.height(Spacing.sm))
-                    }
                 }
 
                 Spacer(Modifier.height(Spacing.sm))
 
                 TextButton(
                     onClick = {
-                        sets = sets + SetScoreRow()
+                        // Copy match type & players from the last set as defaults
+                        val lastSet = sets.lastOrNull() ?: SetScoreRow()
+                        sets = sets + SetScoreRow(
+                            matchType = lastSet.matchType,
+                            opponent1 = lastSet.opponent1,
+                            opponent2 = lastSet.opponent2,
+                            partner = lastSet.partner,
+                        )
                     },
                 ) {
                     Icon(Icons.Default.Add, contentDescription = null)
@@ -334,48 +259,32 @@ private fun SetScoreDialog(
     )
 }
 
+/**
+ * A single set block: match type selector, player dropdowns, and score input.
+ */
 @Composable
-private fun SetScoreRowInput(
+private fun SetScoreBlockInput(
     setNumber: Int,
-    userScore: String,
-    opponentScore: String,
-    selectedOpponent: Opponent?,
+    setRow: SetScoreRow,
     opponents: List<Opponent>,
-    onUserScoreChanged: (String) -> Unit,
-    onOpponentScoreChanged: (String) -> Unit,
-    onOpponentSelected: (Opponent?) -> Unit,
+    partners: List<Partner>,
+    onSetRowChanged: (SetScoreRow) -> Unit,
     onCreateOpponent: (String) -> Unit,
+    onCreatePartner: (String) -> Unit,
     canRemove: Boolean,
     onRemove: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
+        // Header row
         Row(
             modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
         ) {
             Text(
-                text = "Set $setNumber:",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.width(48.dp),
-            )
-            OutlinedTextField(
-                value = userScore,
-                onValueChange = onUserScoreChanged,
-                modifier = Modifier.width(56.dp),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                singleLine = true,
-                label = { Text("You") },
-            )
-            Text("–", style = MaterialTheme.typography.titleMedium)
-            OutlinedTextField(
-                value = opponentScore,
-                onValueChange = onOpponentScoreChanged,
-                modifier = Modifier.width(56.dp),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                singleLine = true,
-                label = { Text("Opp") },
+                text = "Set $setNumber",
+                style = MaterialTheme.typography.titleSmall,
             )
             if (canRemove) {
                 IconButton(onClick = onRemove) {
@@ -383,14 +292,103 @@ private fun SetScoreRowInput(
                 }
             }
         }
+
+        // Match Type
+        Text("Match Type:", style = MaterialTheme.typography.labelLarge)
+        Spacer(Modifier.height(Spacing.xs))
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            RadioButton(
+                selected = setRow.matchType == MatchType.SINGLES,
+                onClick = {
+                    onSetRowChanged(
+                        setRow.copy(
+                            matchType = MatchType.SINGLES,
+                            opponent2 = null,
+                            partner = null,
+                        ),
+                    )
+                },
+            )
+            Text("Singles", modifier = Modifier.padding(end = Spacing.md))
+            RadioButton(
+                selected = setRow.matchType == MatchType.DOUBLES,
+                onClick = { onSetRowChanged(setRow.copy(matchType = MatchType.DOUBLES)) },
+            )
+            Text("Doubles")
+        }
+
+        Spacer(Modifier.height(Spacing.sm))
+
+        // Doubles-only: Partner
+        if (setRow.matchType == MatchType.DOUBLES) {
+            Text("Partner:", style = MaterialTheme.typography.labelLarge)
+            Spacer(Modifier.height(Spacing.xs))
+            PartnerDropdown(
+                selectedPartner = setRow.partner,
+                partners = partners,
+                onSelected = { onSetRowChanged(setRow.copy(partner = it)) },
+                onCreateNew = onCreatePartner,
+                label = "Partner",
+            )
+            Spacer(Modifier.height(Spacing.sm))
+        }
+
+        // Opponent 1 (always)
+        Text("Opponent 1:", style = MaterialTheme.typography.labelLarge)
         Spacer(Modifier.height(Spacing.xs))
         OpponentDropdown(
-            selectedOpponent = selectedOpponent,
+            selectedOpponent = setRow.opponent1,
             opponents = opponents,
-            onSelected = onOpponentSelected,
+            onSelected = { onSetRowChanged(setRow.copy(opponent1 = it)) },
             onCreateNew = onCreateOpponent,
-            label = "Opponent (Set $setNumber)",
+            label = "Opponent 1",
         )
+
+        // Doubles-only: Opponent 2
+        if (setRow.matchType == MatchType.DOUBLES) {
+            Spacer(Modifier.height(Spacing.sm))
+            Text("Opponent 2:", style = MaterialTheme.typography.labelLarge)
+            Spacer(Modifier.height(Spacing.xs))
+            OpponentDropdown(
+                selectedOpponent = setRow.opponent2,
+                opponents = opponents,
+                onSelected = { onSetRowChanged(setRow.copy(opponent2 = it)) },
+                onCreateNew = onCreateOpponent,
+                label = "Opponent 2",
+            )
+        }
+
+        Spacer(Modifier.height(Spacing.sm))
+
+        // Score row
+        Text("Score:", style = MaterialTheme.typography.labelLarge)
+        Spacer(Modifier.height(Spacing.xs))
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+        ) {
+            OutlinedTextField(
+                value = setRow.userScore,
+                onValueChange = {
+                    onSetRowChanged(setRow.copy(userScore = it.filter { c -> c.isDigit() }.take(2)))
+                },
+                modifier = Modifier.width(64.dp),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                singleLine = true,
+                label = { Text("You", maxLines = 1) },
+            )
+            Text("\u2013", style = MaterialTheme.typography.titleMedium)
+            OutlinedTextField(
+                value = setRow.opponentScore,
+                onValueChange = {
+                    onSetRowChanged(setRow.copy(opponentScore = it.filter { c -> c.isDigit() }.take(2)))
+                },
+                modifier = Modifier.width(64.dp),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                singleLine = true,
+                label = { Text("Opp", maxLines = 1) },
+            )
+        }
     }
 }
 
