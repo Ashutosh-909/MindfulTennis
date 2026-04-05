@@ -27,6 +27,9 @@ interface AuthRepository {
     /** Sign in with Google OAuth via Supabase Auth. Returns the redirect URL to open in browser. */
     suspend fun signInWithGoogle(): Result<String>
 
+    /** Sign in with Apple via Supabase Auth (iOS only). */
+    suspend fun signInWithApple(): Result<Unit>
+
     /** Sign in with email and password. */
     suspend fun signInWithEmail(email: String, password: String): Result<Unit>
 

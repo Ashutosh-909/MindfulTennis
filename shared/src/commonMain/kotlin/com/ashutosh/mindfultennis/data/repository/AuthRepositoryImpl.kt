@@ -2,6 +2,7 @@ package com.ashutosh.mindfultennis.data.repository
 
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.auth.providers.Apple
 import io.github.jan.supabase.auth.providers.Google
 import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.auth.status.SessionStatus
@@ -38,6 +39,15 @@ class AuthRepositoryImpl(
             // The Supabase SDK handles the OAuth flow via a redirect.
             supabaseClient.auth.signInWith(Google)
             Result.success("")
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun signInWithApple(): Result<Unit> {
+        return try {
+            supabaseClient.auth.signInWith(Apple)
+            Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
         }

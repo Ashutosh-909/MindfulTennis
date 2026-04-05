@@ -24,6 +24,7 @@ class LoginViewModel(
     fun onEvent(event: LoginUiEvent) {
         when (event) {
             LoginUiEvent.SignInWithGoogleClicked -> signInWithGoogle()
+            LoginUiEvent.SignInWithAppleClicked -> signInWithApple()
             is LoginUiEvent.EmailChanged -> _uiState.update { it.copy(email = event.email) }
             is LoginUiEvent.PasswordChanged -> _uiState.update { it.copy(password = event.password) }
             LoginUiEvent.SignInWithEmailClicked -> signInWithEmail()
@@ -72,6 +73,28 @@ class LoginViewModel(
                     exception.message?.contains("network", ignoreCase = true) == true ->
                         "Network error. Please check your connection and try again."
                     else -> "Google sign-in failed. Please try again."
+                }
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        error = friendlyMessage,
+                    )
+                }
+            }
+        }
+    }
+
+    private fun signInWithApple() {
+        _uiState.update { it.copy(isLoading = true, error = null) }
+        viewModelScope.launch {
+            val result = authRepository.signInWithApple()
+            result.onFailure { exception ->
+                val friendlyMessage = when {
+                    exception.message?.contains("timeout", ignoreCase = true) == true ->
+                        "Connection timed out. Please check your internet and try again."
+                    exception.message?.contains("network", ignoreCase = true) == true ->
+                        "Network error. Please check your connection and try again."
+                    else -> "Apple sign-in failed. Please try again."
                 }
                 _uiState.update {
                     it.copy(

@@ -58,6 +58,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ashutosh.mindfultennis.ui.theme.DarkNavy
 import com.ashutosh.mindfultennis.ui.theme.Spacing
+import com.ashutosh.mindfultennis.util.isAppleSignInAvailable
 
 @Composable
 fun LoginScreen(
@@ -175,6 +176,26 @@ fun LoginScreen(
                     CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
                 } else {
                     Text(text = "Sign in with Google", style = MaterialTheme.typography.labelLarge)
+                }
+            }
+
+            // Apple Sign-In button (iOS only)
+            if (isAppleSignInAvailable()) {
+                Spacer(modifier = Modifier.height(Spacing.sm))
+
+                OutlinedButton(
+                    onClick = { viewModel.onEvent(LoginUiEvent.SignInWithAppleClicked) },
+                    enabled = !uiState.isLoading,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp)
+                        .semantics { contentDescription = "Sign in with Apple" },
+                ) {
+                    if (uiState.isLoading) {
+                        CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
+                    } else {
+                        Text(text = "Sign in with Apple", style = MaterialTheme.typography.labelLarge)
+                    }
                 }
             }
 

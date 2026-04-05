@@ -13,6 +13,7 @@ data class LoginUiState(
 
 sealed interface LoginUiEvent {
     data object SignInWithGoogleClicked : LoginUiEvent
+    data object SignInWithAppleClicked : LoginUiEvent
     data class EmailChanged(val email: String) : LoginUiEvent
     data class PasswordChanged(val password: String) : LoginUiEvent
     data object SignInWithEmailClicked : LoginUiEvent
