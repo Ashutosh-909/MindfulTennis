@@ -21,6 +21,7 @@ class MindfulTennisApp : Application() {
                         AppConfig(
                             supabaseUrl = BuildConfig.SUPABASE_URL,
                             supabaseAnonKey = BuildConfig.SUPABASE_ANON_KEY,
+                            deepLinkScheme = "com.ashutosh.mindfultennis",
                         )
                     }
                 }
