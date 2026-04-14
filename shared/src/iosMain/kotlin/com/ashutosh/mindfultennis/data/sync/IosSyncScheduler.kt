@@ -10,7 +10,8 @@ import platform.Foundation.dateByAddingTimeInterval
 class IosSyncScheduler : BackgroundSyncScheduler {
 
     companion object {
-        const val TASK_IDENTIFIER = "com.ashutosh.mindfultennis.sync"
+        // Must exactly match BGTaskSchedulerPermittedIdentifiers in Info.plist
+        const val TASK_IDENTIFIER = "com.nextjedi.mindful-tennis.sync"
     }
 
     override fun schedulePeriodic() {
