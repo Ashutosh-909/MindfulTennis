@@ -46,6 +46,7 @@ class SettingsViewModel(
                         }
                     }
                     is AuthState.Unauthenticated,
+                    is AuthState.SessionExpired,
                     is AuthState.Loading -> { /* no-op */ }
                 }
             }
@@ -95,8 +96,15 @@ class SettingsViewModel(
     private fun signOut() {
         viewModelScope.launch {
             _uiState.update { it.copy(isSigningOut = true) }
-            userPreferences.clearAll()
-            authRepository.signOut()
+            // Sign out from server first; only clear local data once the server call succeeds
+            // (or at minimum attempted). Clearing first risks a broken half-state if signOut throws.
+            try {
+                authRepository.signOut()
+            } finally {
+                // Always clear local data — even if server signout fails the user
+                // should not be stuck in a broken auth state locally.
+                userPreferences.clearAll()
+            }
             _uiState.update { it.copy(isSigningOut = false, isSignedOut = true) }
         }
     }

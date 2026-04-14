@@ -29,7 +29,9 @@ class AuthRepositoryImpl(
                 }
                 is SessionStatus.NotAuthenticated -> AuthState.Unauthenticated
                 is SessionStatus.Initializing -> AuthState.Loading
-                is SessionStatus.RefreshFailure -> AuthState.Unauthenticated
+                // Emit SessionExpired so the UI can explain why the user is being signed out,
+                // rather than silently dropping them on the login screen with no context.
+                is SessionStatus.RefreshFailure -> AuthState.SessionExpired
             }
         }
 

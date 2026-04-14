@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material3.AlertDialog
@@ -116,25 +117,12 @@ private fun HomeScreenContent(
                 .fillMaxSize()
                 .padding(innerPadding),
         ) {
-            // Initial sync loading state
+            // Non-blocking sync indicator — sits at the top so content is always visible.
+            // First-time users see empty cards loading in rather than a locked spinner.
             if (state.isInitialSyncing) {
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        CircularProgressIndicator()
-                        Spacer(Modifier.height(Spacing.md))
-                        Text(
-                            text = "Syncing your data...",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
-                }
-            } else {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            }
+
             // Main scrollable content
             LazyColumn(
                 modifier = Modifier
@@ -214,7 +202,6 @@ private fun HomeScreenContent(
                     FocusPointsRow(focusPoints = state.focusPoints)
                 }
             }
-            } // end initial sync check
 
             // Bottom button area
             BottomButtonBar(

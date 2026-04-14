@@ -14,6 +14,8 @@ sealed interface AuthState {
         val photoUrl: String?,
     ) : AuthState
     data object Unauthenticated : AuthState
+    /** Token refresh failed due to network issues. User should re-authenticate. */
+    data object SessionExpired : AuthState
 }
 
 /**

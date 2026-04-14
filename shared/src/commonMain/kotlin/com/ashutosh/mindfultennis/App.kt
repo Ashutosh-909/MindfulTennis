@@ -1,9 +1,16 @@
 package com.ashutosh.mindfultennis
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.collectAsState
 import androidx.navigation.compose.rememberNavController
@@ -11,6 +18,9 @@ import com.ashutosh.mindfultennis.data.repository.AuthRepository
 import com.ashutosh.mindfultennis.data.repository.AuthState
 import com.ashutosh.mindfultennis.navigation.NavGraph
 import com.ashutosh.mindfultennis.ui.theme.MindfulTennisTheme
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.timeout
+import kotlin.time.Duration.Companion.seconds
 import org.koin.compose.koinInject
 
 @Composable
@@ -18,16 +28,43 @@ fun App() {
     MindfulTennisTheme {
         val navController = rememberNavController()
         val authRepository = koinInject<AuthRepository>()
-        val authState by authRepository.authState.collectAsState(
-            initial = AuthState.Loading
-        )
+        val snackbarHostState = remember { SnackbarHostState() }
+
+        // Timeout guards against the app being stuck on Loading forever (e.g. no network
+        // on cold start). After 10 s with no state change we fall through to Unauthenticated.
+        val authState by authRepository.authState
+            .timeout(10.seconds)
+            .catch { emit(AuthState.Unauthenticated) }
+            .collectAsState(initial = AuthState.Loading)
+
+        // Tell the user why they're being sent to the login screen instead of
+        // silently dropping them there with no context.
+        LaunchedEffect(authState) {
+            if (authState is AuthState.SessionExpired) {
+                snackbarHostState.currentSnackbarData?.dismiss()
+                snackbarHostState.showSnackbar(
+                    message = "Your session expired. Please sign in again.",
+                    duration = SnackbarDuration.Long,
+                )
+            }
+        }
+
+        // SessionExpired → treat as unauthenticated so NavGraph redirects to Login.
+        // The snackbar above fires on the same frame and stays visible on the Login screen.
         val isAuthenticated = authState is AuthState.Authenticated
 
-        Surface(modifier = Modifier.fillMaxSize()) {
-            NavGraph(
-                navController = navController,
-                isAuthenticated = isAuthenticated,
-                pendingCancelSessionId = null,
+        Box(modifier = Modifier.fillMaxSize()) {
+            Surface(modifier = Modifier.fillMaxSize()) {
+                NavGraph(
+                    navController = navController,
+                    isAuthenticated = isAuthenticated,
+                    pendingCancelSessionId = null,
+                )
+            }
+            // Global snackbar overlay — sits above NavGraph so it's visible on any screen
+            SnackbarHost(
+                hostState = snackbarHostState,
+                modifier = Modifier.align(Alignment.BottomCenter),
             )
         }
     }

@@ -88,7 +88,8 @@ class HomeViewModel(
                             loadAllData(authState.userId)
                         }
                     }
-                    is AuthState.Unauthenticated -> {
+                    is AuthState.Unauthenticated,
+                    is AuthState.SessionExpired -> {
                         currentUserId = null
                         _uiState.update { HomeUiState(isLoading = false) }
                     }

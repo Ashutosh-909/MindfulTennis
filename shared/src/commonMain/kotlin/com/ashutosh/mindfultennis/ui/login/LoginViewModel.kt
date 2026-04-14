@@ -54,6 +54,11 @@ class LoginViewModel(
                             it.copy(isLoading = false, isSignedIn = false)
                         }
                     }
+                    is AuthState.SessionExpired -> {
+                        _uiState.update {
+                            it.copy(isLoading = false, isSignedIn = false)
+                        }
+                    }
                     is AuthState.Loading -> {
                         _uiState.update { it.copy(isLoading = true) }
                     }
